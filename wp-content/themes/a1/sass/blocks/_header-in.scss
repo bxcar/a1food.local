@@ -1,0 +1,30 @@
+.header-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-bottom: 17px;
+}
+
+.header-in__inner-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.header-in__back {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 15px;
+  }
+}
+
+.header-in__title {
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 30px;
+  color: #FFFFFF;
+}

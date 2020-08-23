@@ -1,0 +1,344 @@
+.payment__price-title {
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  text-align: center;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.payment__price-subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #C1C1C1;
+  display: block;
+  margin-bottom: 19px;
+}
+
+.payment__methods-title {
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.payment__methods {
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #1E1E1E;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 39px;
+  margin-bottom: 19px;
+}
+
+.payment__methods a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment__methods a:nth-child(2) {
+  margin-left: 23px;
+  margin-right: 23px;
+}
+
+.payment__card-title {
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  text-align: center;
+  display: block;
+  margin-bottom: 11px;
+}
+
+.payment__card {
+  background: #1E1E1E;
+  border-radius: 10px;
+  padding: 20px 33px;
+  box-sizing: border-box;
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.payment__card-number-title {
+  font-size: 12px;
+  line-height: 15px;
+  color: #A0A0A0;
+  display: block;
+  margin-bottom: 9px;
+}
+
+.payment__card-example-numbers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  input {
+    width: 59px;
+    height: 24px;
+    border: 1px solid #676767;
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #FFFFFF;
+    background: transparent;
+
+    &:focus,
+    &:active {
+      border: 2px solid #FFC000;
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+}
+
+.payment__card-terms {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+
+.payment__card-terms-title {
+  font-size: 12px;
+  line-height: 15px;
+  color: #A0A0A0;
+}
+
+.payment__card-terms-values-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment__card-terms-value {
+  width: 40px;
+  height: 24px;
+  border: 1px solid #676767;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #FFFFFF;
+  background: transparent;
+
+  &:focus,
+  &:active {
+    border: 2px solid #FFC000;
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+}
+
+.payment__card-terms-slash {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.payment__card-holder-label {
+  display: block;
+  font-size: 12px;
+  line-height: 15px;
+  color: #A0A0A0;
+  margin-bottom: 8px;
+}
+
+.payment__card-holder-name {
+  width: 100%;
+  height: 24px;
+  border: 1px solid #676767;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #FFFFFF;
+  background: transparent;
+  margin-bottom: 15px;
+
+  &:focus,
+  &:active {
+    border: 2px solid #FFC000;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+.payment__card-bottom-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+
+.payment__card-bottom-block-1 {
+  width: 129px;
+}
+
+.payment__card-bottom-block-1 span,
+.payment__card-bottom-block-2 span {
+  font-size: 12px;
+  line-height: 15px;
+  color: #A0A0A0;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.payment__card-bottom-block-2 span {
+  margin-bottom: 8px;
+}
+
+.payment__card-bottom-block-1 div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment__card-bottom-block-2 input {
+  width: 100px;
+  height: 24px;
+  border: 1px solid #676767;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  outline: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  background: transparent;
+  vertical-align:sub;
+
+  &:focus,
+  &:active {
+    border: 2px solid #FFC000;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* Customize the label (the container) */
+.payment__card-save-card-container {
+  display: block;
+  position: relative;
+  padding-left: 23px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 12px;
+  line-height: 15px;
+  color: #A0A0A0;
+}
+
+/* Hide the browser's default checkbox */
+.payment__card-save-card-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: #000;
+}
+
+/* On mouse-over, add a grey background color */
+.payment__card-save-card-container:hover input ~ .checkmark {
+  background-color: #000;
+}
+
+/* When the checkbox is checked, add a blue background */
+.payment__card-save-card-container input:checked ~ .checkmark {
+  background-color: #000;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.payment__card-save-card-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.payment__card-save-card-container .checkmark:after {
+  /*left: 9px;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border: solid #B8B8B8;
+  border-width: 0 1px 1px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);*/
+  background-image: url('../img/check-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 6px;
+  height: 6px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

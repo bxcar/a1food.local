@@ -1,0 +1,66 @@
+.address__title {
+  font-size: 12px;
+  line-height: 15px;
+  color: #B3B3B3;
+  display: block;
+  padding-left: 40px;
+  margin-bottom: 25px;
+}
+
+.address__form {
+  margin-top: 20px;
+}
+
+.address__form-inner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.address__form input {
+  background: #1E1E1E;
+  border-radius: 100px;
+  min-width: 155px;
+  width: 48%;
+  height: 43px;
+  box-sizing: border-box;
+  padding-left: 42px;
+  padding-right: 15px;
+  display: block;
+  font-size: 12px;
+  line-height: 15px;
+  color: #fff;
+  border: none;
+  outline: none;
+
+  background-position-y: center;
+  background-position-x: 20px;
+  background-repeat: no-repeat;
+  background-image: url('../img/address-form-icon-entrance.svg');
+
+  &[name="street"],
+  &[name="house"] {
+    background-image: url('../img/address-form-icon-street.svg');
+  }
+}
+
+.address__form button {
+  background: #FFC000;
+  box-shadow: 0px 4px 5px #5F4700;
+  border-radius: 100px;
+  width: 100%;
+  height: 43px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #333333;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

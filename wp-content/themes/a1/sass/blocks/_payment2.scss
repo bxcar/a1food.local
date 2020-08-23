@@ -1,0 +1,97 @@
+.payment2__owl-carousel-cards {
+  overflow: hidden;
+}
+
+.payment2__owl-carousel-cards .owl-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment2__owl-carousel-cards .owl-nav {
+  display: none;
+}
+
+
+.payment2__owl-carousel-cards .owl-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 17px;
+
+  button {
+    width: 8px;
+    height: 9px;
+    background: #595959;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    padding: 0;
+
+    &.active {
+      width: 12px;
+      height: 13px;
+      background: #FFC000;
+    }
+  }
+
+  button:first-child {
+    margin-right: 8px;
+  }
+}
+
+.payment2__owl-carousel-card-1,
+.payment2__owl-carousel-card-2 {
+  background: #1E1E1E;
+  border-radius: 10px;
+  padding-left: 28px;
+  padding-right: 26px;
+  padding-bottom: 17px;
+  width: 210px;
+  height: 126px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.payment2__owl-carousel-card-2 {
+  padding-right: 68px;
+  padding-top: 22px;
+}
+
+.payment2__owl-carousel-card-1-block-1,
+.payment2__owl-carousel-card-2-block-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment2__owl-carousel-card-2-block-1 {
+  margin-bottom: 12px;
+}
+
+.payment2__owl-carousel-card-1-block-2 span {
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 7px;
+}
+
+.payment2__owl-carousel-card-1-block-3 span {
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #808080;
+}
+
+.payment2__owl-carousel-card-2-block-2 span {
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FFFFFF;
+}

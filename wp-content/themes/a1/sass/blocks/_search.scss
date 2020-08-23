@@ -1,0 +1,33 @@
+#search {
+  width: 100%;
+  border-radius: 100px;
+  background: #1E1E1E;
+  border: none;
+  outline: none;
+  height: 43px;
+  padding-left: 32px;
+  padding-right: 50px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 17px;
+
+}
+
+.search {
+  margin-bottom: 15px;
+}
+
+.search__form {
+  position: relative;
+}
+
+.search__form button {
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  top: 50%;
+  transform: translateY(-50%);
+  outline: none;
+  cursor: pointer;
+}

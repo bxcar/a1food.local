@@ -1,0 +1,182 @@
+.products {
+  display: flex;
+  //justify-content: space-between;
+  //flex-flow: row wrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+
+ /* &::after {
+    content: "";
+    flex: auto;
+  }*/
+}
+
+.product-item {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 155px;
+  height: 245px;
+  background: #1E1E1E;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.product-item-img {
+  display: block;
+  margin-bottom: 15px;
+}
+
+
+.product-item-bottom-i-wrapper {
+  position: relative;
+}
+
+.product-item-bottom-i {
+  cursor: pointer;
+}
+
+.product-item-bottom-i-wrapper::before {
+  content: '';
+  position: absolute;
+  background: url('../img/bottom-arrow.svg');
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 14px;
+  top: -17px;
+  left: -2px;
+  display: none;
+}
+
+.product-item-bottom-i-wrapper.active::before {
+  display: block;
+}
+
+.product-item-bottom-i-desc {
+  padding-left: 17px;
+  padding-top: 10px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  color: #333;
+  width: 129px;
+  box-sizing: border-box;
+  height: auto;
+  position: absolute;
+  top: -156px;
+  left: -8px;
+  display: none;
+}
+
+.product-item-bottom-i-wrapper.active .product-item-bottom-i-desc {
+  display: block;
+}
+
+.product-item-bottom-i-list li {
+  height: 15px;
+  display: flex;
+}
+
+.product-item-bottom-i-list-title {
+  font-size: 10px;
+  line-height: 15px;
+  color: #666666;
+  width: 54px;
+  margin-right: 9px;
+  display: inline-block;
+}
+
+.product-item-bottom-i-list-text {
+  font-size: 10px;
+  line-height: 15px;
+  color: #333333;
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+}
+
+.product-item-bottom-i-desc-bottom-text {
+  font-size: 10px;
+  line-height: 12px;
+  color: #333333;
+  display: block;
+  margin-top: 7px;
+  padding-bottom: 15px;
+}
+
+.product-item-title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin: 0;
+  margin-bottom: 3px;
+  padding-left: 15px;
+  font-family: "Proxima Nova Lt", sans-serif;
+}
+
+.product-item-desc {
+  font-size: 10px;
+  line-height: 13px;
+  color: #B1B1B1;
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 20px;
+  margin-bottom: 12px;
+}
+
+.product-item-bottom {
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.product-item-price-crossed-out {
+  margin-left: 10px;
+  font-size: 10px;
+  line-height: 12px;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.product-item-price-wrapper {
+  position: relative;
+}
+
+.product-item-price-main {
+  background: #FFC000;
+  box-shadow: 0px 4px 5px #5F4700;
+  border-radius: 100px;
+  width: 68px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: bold;
+  color: #333333;
+  cursor: pointer;
+}
+
+.product-item-amount {
+  position: absolute;
+  top: -7px;
+  right: -3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 9px;
+  line-height: 11px;
+  color: #FFFFFF;
+  background: #FF0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 370px) {
+  .product-item:nth-child(2n) {
+    margin-right: 0;
+  }
+}

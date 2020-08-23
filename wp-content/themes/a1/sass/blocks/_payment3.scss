@@ -1,0 +1,46 @@
+.payment3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.payment3__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment3__title {
+  margin-top: 17px;
+  margin-bottom: 22px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+.payment3__text1 {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: #C1C1C1;
+  margin-bottom: 15px;
+  white-space: nowrap;
+}
+
+.payment3__text2 {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: #C1C1C1;
+  white-space: nowrap;
+}

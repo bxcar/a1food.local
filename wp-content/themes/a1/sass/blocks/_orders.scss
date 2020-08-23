@@ -1,0 +1,250 @@
+.orders__item {
+  background: #1E1E1E;
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px 33px;
+  box-sizing: border-box;
+  margin-bottom: 13px;
+}
+
+.orders__item-top-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.orders__item-number {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+
+.orders__item-top-line-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orders__item-price {
+  display: block;
+  margin-right: 14px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+
+.orders__item-close {
+  position: relative;
+  top: -1px;
+  cursor: pointer;
+}
+
+.orders__item-address {
+  font-size: 10px;
+  line-height: 12px;
+  color: #BFBFBF;
+  display: block;
+  margin-bottom: 27px;
+}
+
+.orders__item-bottom-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-success .orders__item-bottom-line {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #3E3E3E;
+  margin-bottom: 13px;
+}
+
+.orders__item-date {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FFFFFF;
+}
+
+.orders__item-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.orders__item-check span {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+  text-decoration-line: underline;
+  color: #FFFFFF;
+  margin-left: 7px;
+}
+
+.orders__item-status {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: right;
+  color: #fff;
+
+  &.green {
+    color: #45D880;
+  }
+
+  &.yellow {
+    color: #FFC000;
+  }
+
+  &.red {
+    color: #ED3838;
+  }
+}
+
+.orders__item-rating {
+  align-items: center;
+  justify-content: space-between;
+  display: none;
+}
+
+.order-success .orders__item-rating {
+  display: flex;
+}
+
+.orders__item-rating-title {
+  font-size: 10px;
+  line-height: 13px;
+  color: #B1B1B1;
+}
+
+.orders__item-rating-stars span {
+  cursor: pointer;
+}
+
+.orders__item-feedback {
+  margin-top: 14px;
+  position: relative;
+  display: none;
+}
+
+.orders__item-feedback textarea {
+  background: #151515;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: calc(100% - 38px);
+  height: 90px;
+  display: block;
+  padding-left: 39px;
+  padding-right: 30px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FFFFFF;
+  resize: none;
+}
+
+.orders__item-feedback #file {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.orders__item-feedback-file-image {
+  cursor: pointer;
+  width: 38px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border-radius: 0px 10px 10px 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.orders__item-feedback-icon {
+  position: absolute;
+  top: 14px;
+  left: 17px;
+}
+
+.orders__get-check-popup {
+  display: none;
+  background: #1E1E1E;
+  border-radius: 10px;
+  padding: 29px 26px 37px 26px;
+  box-sizing: border-box;
+  width: 320px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.orders__get-check-popup-title {
+  display: block;
+  text-align: center;
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  margin-bottom: 19px;
+}
+
+.orders__get-check-popup-form-email-wrapper {
+  position: relative;
+
+  #email {
+    background: #000000;
+    border-radius: 100px;
+    width: 100%;
+    height: 43px;
+    box-sizing: border-box;
+    padding-left: 47px;
+    padding-right: 15px;
+    border: none;
+    outline: none;
+    color: #fff;
+  }
+}
+
+.orders__get-check-popup-email-image {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.orders__get-check-popup-form button {
+  background: #FFC000;
+  box-shadow: 0px 4px 5px #5F4700;
+  border-radius: 100px;
+  width: 100%;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Proxima Nova Lt", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #333333;
+  margin-top: 13px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
