@@ -11,6 +11,7 @@ $(document).ready(function () {
             $(this).parent().addClass('active')
         }*/
         $(this).parent().toggleClass('active');
+        $(this).parent().parent().parent().find('.product-item-bottom-i-desc').toggleClass('active');
     });
 
     $('.filter-item').on('click', function () {

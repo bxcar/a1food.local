@@ -51,7 +51,7 @@ msgstr "https://wordpress.org/support/article/nginx/"
 msgid "Y/m/d g:i:s a"
 msgstr "d.m.Y H:i:s"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:278
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:321
 msgid "No themes are currently available."
 msgstr "Пока нет доступных тем."
 
@@ -114,7 +114,7 @@ msgid "<a href=\"https://wordpress.org/support/article/network-admin/\">Document
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin\">Документация по управлению сетью</a>"
 
 #. translators: %s: Number of themes.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:363
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:406
 msgctxt "themes"
 msgid "Update Available <span class=\"count\">(%s)</span>"
 msgid_plural "Update Available <span class=\"count\">(%s)</span>"
@@ -164,7 +164,7 @@ msgstr "Установка на поддомен"
 msgid "Sub-directory Installation"
 msgstr "Установка в подкаталог"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:849
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:909
 msgid "Active Child Theme"
 msgstr "Активная дочерняя тема"
 
@@ -183,7 +183,7 @@ msgid "%s Sites"
 msgstr "Сайты %s"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:581
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:624
 msgctxt "theme"
 msgid "Delete %s"
 msgstr "Удалить %s"
@@ -334,56 +334,56 @@ msgctxt "user"
 msgid "Mark as spam"
 msgstr "Отметить как спамера"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:684
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:727
 msgid "Visit Theme Site"
 msgstr "Перейти на сайт темы"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:678
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:721
 msgid "Visit %s homepage"
 msgstr "Перейти на страницу %s"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:647
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:690
 msgid "Broken Theme:"
 msgstr "Повреждённая тема:"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:553
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:596
 msgid "Network Disable %s"
 msgstr "Запретить %s для сети"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:550
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:593
 msgid "Disable %s"
 msgstr "Запретить %s"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:527
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:570
 msgid "Network Enable %s"
 msgstr "Разрешить %s для сети"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:524
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:567
 msgid "Enable %s"
 msgstr "Разрешить %s"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:429
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:560
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:472
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:603
 msgid "Network Disable"
 msgstr "Запретить для сети"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:429
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:560
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:472
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:603
 msgid "Disable"
 msgstr "Запретить"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:426
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:534
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:469
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:577
 msgid "Enable"
 msgstr "Разрешить"
 
 #. translators: %s: Number of themes.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:372
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:415
 msgctxt "themes"
 msgid "Broken <span class=\"count\">(%s)</span>"
 msgid_plural "Broken <span class=\"count\">(%s)</span>"
@@ -392,7 +392,7 @@ msgstr[1] "Повреждённые <span class=\"count\">(%s)</span>"
 msgstr[2] "Повреждённые <span class=\"count\">(%s)</span>"
 
 #. translators: %s: Number of themes.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:354
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:397
 msgctxt "themes"
 msgid "Disabled <span class=\"count\">(%s)</span>"
 msgid_plural "Disabled <span class=\"count\">(%s)</span>"
@@ -401,7 +401,7 @@ msgstr[1] "Запрещённые <span class=\"count\">(%s)</span>"
 msgstr[2] "Запрещённые <span class=\"count\">(%s)</span>"
 
 #. translators: %s: Number of themes.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:345
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:388
 msgctxt "themes"
 msgid "Enabled <span class=\"count\">(%s)</span>"
 msgid_plural "Enabled <span class=\"count\">(%s)</span>"
@@ -410,7 +410,7 @@ msgstr[1] "Разрешённые <span class=\"count\">(%s)</span>"
 msgstr[2] "Разрешённые <span class=\"count\">(%s)</span>"
 
 #. translators: %s: Number of themes.
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:336
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:379
 msgctxt "themes"
 msgid "All <span class=\"count\">(%s)</span>"
 msgid_plural "All <span class=\"count\">(%s)</span>"
@@ -418,11 +418,11 @@ msgstr[0] "Все <span class=\"count\">(%s)</span>"
 msgstr[1] "Все <span class=\"count\">(%s)</span>"
 msgstr[2] "Все <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:288
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:331
 msgid "Theme"
 msgstr "Тема"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:276
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:319
 msgid "No themes found."
 msgstr "Тем не найдено."
 

@@ -11,24 +11,28 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'a1' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'a1' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'a1' ), 'a1', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
-
+<div class="footer">
+    <div class="footer__container">
+        <div class="footer__wrapper1">
+            <img src="<?= get_template_directory_uri(); ?>/img/logo.svg">
+            <span>(с) Все права защищены</span>
+            <span>Построено в MOS-DIGITAL</span>
+        </div>
+        <div class="footer__wrapper2">
+            <a href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
+            <a href="#"><?php include "img/agreement.svg" ?> пользовательское соглашение</a>
+        </div>
+    </div>
+</div>
+<!--footer scripts start-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+<script src="<?= get_template_directory_uri(); ?>/js/common.js"></script>
+<script>
+    $("#phone").mask("(999) 999-99-99");
+    $("#phone-cabinet").mask("+7 (999) 999-99-99");
+    $("#birth-date").mask("99.99.9999");
+</script>
+<!--footer scripts end-->
 <?php wp_footer(); ?>
-
 </body>
 </html>

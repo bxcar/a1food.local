@@ -1,42 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="img/favicon.png"/>
-    <title>Личный кабинет - A1</title>
+<?php
+/* Template Name: address-desk */
+get_header();
 
-    <!--header styles start-->
-    <link rel="stylesheet" href="css/main-desk.css">
-    <!--header styles end-->
-</head>
-<body>
-<div class="main container" style="padding-bottom: 30px;">
-    <header class="header">
-        <div class="header_inner_wrapper">
-            <!--            <img class="header__menu-button" src="img/burger-menu-icon.svg">-->
-            <img class="header__logo" src="img/logo.svg">
-        </div>
-        <div class="header__login-and-cart-wrapper">
-            <div class="header__login-button">
-                <img class="header__login-img" src="img/user-icon.svg">
-                <span class="header__login-text">Войти</span>
-            </div>
-            <a href="#" class="header__cart-button">
-                <img src="img/cart-icon.svg">
-                <span>1095 ₽</span>
-            </a>
-        </div>
-        <!--<div class="header__login-button" style="width: 170px;">
-            <img class="header__login-img" src="img/user-icon.svg">
-            <span class="header__login-text">+7 (515) 525-66-55</span>
-        </div>-->
-    </header>
-
+?>
     <div class="address__form-wrapper">
-        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A811e43364244823ad05b88ab5a68bccea0563d12872bbb2b14edf88640a228fb&amp;source=constructor" width="100%" height="288" frameborder="0"></iframe>
+        <!--<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A811e43364244823ad05b88ab5a68bccea0563d12872bbb2b14edf88640a228fb&amp;source=constructor" width="100%" height="288" frameborder="0"></iframe>-->
+        <div id="map" style="width: 100%; height: 288px"></div>
 
         <form action="#" method="post" class="address__form">
             <div class="address__form-inner-wrapper">
@@ -54,23 +23,46 @@
 
 </div>
 
-<div class="footer">
-    <div class="footer__container">
-        <div class="footer__wrapper1">
-            <img src="img/logo.svg">
-            <span>(с) Все права защищены</span>
-            <span>Построено в MOS-DIGITAL</span>
-        </div>
-        <div class="footer__wrapper2">
-            <a href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
-            <a href="#"><?php include "img/agreement.svg" ?> пользовательское соглашение</a>
-        </div>
-    </div>
-</div>
-<!--footer scripts start-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="js/common.js"></script>
-<!--footer scripts end-->
-</body>
-</html>
+<script type="text/javascript">
+    // Функция ymaps.ready() будет вызвана, когда
+    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+    ymaps.ready(init);
+    function init(){
+        // Создание карты.
+        var myMap = new ymaps.Map("map", {
+            // Координаты центра карты.
+            // Порядок по умолчанию: «широта, долгота».
+            // Чтобы не определять координаты центра карты вручную,
+            // воспользуйтесь инструментом Определение координат.
+            center: [54.98386611, 73.36664216],
+            // Уровень масштабирования. Допустимые значения:
+            // от 0 (весь мир) до 19.
+            zoom: 12,
+            controls: []
+        });
+
+        var searchControl = new ymaps.control.SearchControl({
+            options: {
+                provider: 'yandex#search',
+                // noPopup: true,
+                noSuggestPanel: true,
+            }
+        });
+
+        myMap.controls.add(searchControl);
+
+
+
+        $("input[name='street']").on('input',function(e){
+            searchControl.search('Россия, Омск, ' + $(this).val() + ', ' + $("input[name='house']").val());
+        });
+
+        $("input[name='house']").on('input',function(e){
+            searchControl.search('Россия, Омск, ' + $("input[name='street']").val() + ', ' + $(this).val());
+        });
+
+        $('input.ymaps-2-1-77-searchbox-input__input').attr('readonly');
+    }
+</script>
+
+<?php get_footer() ?>
