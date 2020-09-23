@@ -56,17 +56,20 @@
             <a href="/"><img class="header__logo" src="<?= get_template_directory_uri(); ?>/img/logo.svg"></a>
         </div>
         <div class="header__login-and-cart-wrapper">
-            <a href="/login" class="header__login-button">
-                <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
-                <span class="header__login-text">Войти</span>
-            </a>
+            <?php if(is_user_logged_in()) { ?>
+                <a href="/cabinet" class="header__login-button" style="width: 170px;">
+                    <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
+                    <span class="header__login-text"><?= get_field('user_phone_field', 'user_'.get_current_user_id()); ?></span>
+                </a>
+            <?php } else { ?>
+                <a href="/login" class="header__login-button">
+                    <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
+                    <span class="header__login-text">Войти</span>
+                </a>
+            <?php } ?>
             <a href="#" class="header__cart-button">
                 <img src="<?= get_template_directory_uri(); ?>/img/cart-icon.svg">
                 <span>0 ₽</span>
             </a>
         </div>
-        <!--<div class="header__login-button" style="width: 170px;">
-            <img class="header__login-img" src="img/user-icon.svg">
-            <span class="header__login-text">+7 (515) 525-66-55</span>
-        </div>-->
     </header>
