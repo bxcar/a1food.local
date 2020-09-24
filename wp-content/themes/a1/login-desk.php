@@ -54,7 +54,26 @@ if(is_user_logged_in()) { ?>
     $('.login__form1').on('submit', function (e) {
         e.preventDefault();
         $('.login__form1 button').text('Ожидайте смс').prop('disabled', true);
-        setCookie('authcode', Math.floor(Math.random()*(999-100+1)+100), 10);
+        var random_code = Math.floor(Math.random()*(999-100+1)+100);
+        setCookie('authcode', random_code, 10);
+        var phone_mask = $("#phone");
+        var phone_format = '7'+phone_mask.val().replace(/[^0-9]/g, '');
+        $.ajax({
+            type: 'post',
+            url: '/wp-content/themes/a1/smpptest.php',
+            dataType: 'json',
+            data:
+                {
+                    'code': random_code,
+                    'phone': phone_format
+                },
+            success: function (data) {//success callback
+                console.log('success');
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
     });
 
     $('.login__form2').on('submit', function (e) {
