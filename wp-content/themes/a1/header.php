@@ -67,7 +67,7 @@
                     <span class="header__login-text">Войти</span>
                 </a>
             <?php } ?>
-            <a href="#" class="header__cart-button">
+            <a href="/cart" class="header__cart-button">
                 <img src="<?= get_template_directory_uri(); ?>/img/cart-icon.svg">
                 <span>0 ₽</span>
             </a>

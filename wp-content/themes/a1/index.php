@@ -102,7 +102,13 @@
                         <span class="product-item-price-crossed-out">350 ₽</span>
                         <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
                             <span class="product-item-price-main">249 ₽</span>
-                            <span class="product-item-amount">15</span>
+                            <?php
+                            // Usage as a condition in an if statement
+                            if( 0 < woo_is_in_cart(get_the_ID()) ){ ?>
+                                <span class="product-item-amount"><?= woo_is_in_cart(get_the_ID()) ?></span>
+                            <?php } else { ?>
+                                <span class="product-item-amount" style="display: none;"></span>
+                            <?php } ?>
                         </a>
                     </div>
                     <div class="product-item-bottom-i-desc">
@@ -191,31 +197,4 @@
     </div>
 </div>
 <!--<div class="hiddenDiv" style="visibility: hidden; height: 0; width: 0; opacity: 0; overflow: hidden;"></div>-->
-<script>
-    $('.product-item-price-wrapper').on('click', function (e) {
-        e.preventDefault();
-        /*$('.hiddenDiv').load($(this).attr('href')).html('');
-        console.log('hello');*/
-
-        var $this = $(this);
-
-        $.ajax({
-            type: 'post',
-            url: '/wp-content/themes/a1/custom_files_dm/add_to_cart.php',
-            dataType: 'json',
-            data:
-                {
-                    'product_id': $(this).attr('data-id')
-                },
-            success: function (data) {//success callback
-                // console.log('success');
-                var items_amount = $this.find('.product-item-amount').text();
-                $this.find('.product-item-amount').text(parseInt(items_amount) + 1);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    })
-</script>
 <?php get_footer(); ?>

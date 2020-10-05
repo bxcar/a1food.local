@@ -230,3 +230,14 @@ function my_user_new_form($form_type) {
     <?php
 }
 
+function woo_is_in_cart($product_id) {
+    global $woocommerce;
+    foreach($woocommerce->cart->get_cart() as $key => $val ) {
+        $_product = $val['data'];
+        if($product_id == $_product->get_id() ) {
+            return $val['quantity'];
+        }
+    }
+    return 0;
+}
+

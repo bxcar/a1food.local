@@ -1,7 +1,7 @@
 <?php
 /* Template Name: cart-desk */
 get_header();
-the_content();
+//the_content();
 ?>
     <div class="cart-products">
         <?php
@@ -76,11 +76,18 @@ the_content();
     <div class="cart-promo">
         <div class="cart-promo__title">Введите промокод если есть:</div>
         <form method="post" action="#" class="cart-promo-form">
-            <input type="text" name="promo" id="promo" placeholder="6136316136136">
+            <input type="text" name="promo" id="promo" placeholder="6136316136136" maxlength="13">
+            <span class="promo-error">Промокод введен неверно</span>
+            <span class="promo-success">Промокод активирован</span>
             <input type="submit">
         </form>
     </div>
-    <div class="cart-button-desktop">
+    <button class="cart-button-desktop"
+        <?php
+        if(($cart_total_price + $delivery) < get_field('min_order_price', 'option')) {
+            echo 'disabled';
+        }
+        ?>>
         <div class="cart-button-desktop-left">
             <img src="<?= get_template_directory_uri(); ?>/img/cart-icon.svg">
             <span>Оформить заказ</span>
@@ -88,10 +95,26 @@ the_content();
         <div class="cart-button-desktop-right">
             <span><?= (int)$cart_total_price + (int)$delivery ?> ₽</span>
         </div>
-    </div>
-    <div class="cart-minimum-order-price">
-        <span><img src="<?= get_template_directory_uri(); ?>/img/cart-i.svg">Минимальная сумма заказа 500р</span>
-    </div>
+    </button>
+    <?php
+    if(($cart_total_price + $delivery) < get_field('min_order_price', 'option')) { ?>
+        <div class="cart-minimum-order-price" style="display: flex">
+            <span><img src="<?= get_template_directory_uri(); ?>/img/cart-i.svg">Минимальная сумма заказа <?= get_field('min_order_price', 'option'); ?>р</span>
+        </div>
+    <?php } else { ?>
+        <div class="cart-minimum-order-price" style="display: none;">
+            <span><img src="<?= get_template_directory_uri(); ?>/img/cart-i.svg">Минимальная сумма заказа <?= get_field('min_order_price', 'option'); ?>р</span>
+        </div>
+    <?php }
+    ?>
+
+<?php if(get_field('rec_products', 'option')) {
+    $myarray = array();
+    foreach (get_field('rec_products', 'option') as $item) {
+        array_push($myarray, $item['product_item']);
+    }
+
+    ?>
     <div class="cart-recommend">
         <span>Рекомендуем</span>
     </div>
@@ -100,7 +123,9 @@ the_content();
         <?php
         $args = array(
             'posts_per_page' => -1,
-            'post_type' => 'product'
+            'post_type' => 'product',
+            'post__in' => $myarray,
+            'orderby' => 'post__in'
         );
 
         $i = 1;
@@ -125,7 +150,13 @@ the_content();
                         <span class="product-item-price-crossed-out">350 ₽</span>
                         <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
                             <span class="product-item-price-main">249 ₽</span>
-                            <span class="product-item-amount">15</span>
+                            <?php
+                            // Usage as a condition in an if statement
+                            if( 0 < woo_is_in_cart(get_the_ID()) ){ ?>
+                                <span class="product-item-amount"><?= woo_is_in_cart(get_the_ID()) ?></span>
+                            <?php } else { ?>
+                                <span class="product-item-amount" style="display: none;"></span>
+                            <?php } ?>
                         </a>
                     </div>
                     <div class="product-item-bottom-i-desc">
@@ -189,13 +220,18 @@ the_content();
         ?>
 
     </div>
+<?php }?>
+
+
+
 </div>
 <script>
-    function calculateDelivery() {
-        var cart_total = 0;
+    function calculateDelivery(cartTotal) {
+        var cart_total = cartTotal;
+        /*var cart_total = 0;
         $(".cart-products__item").each(function( index ) {
             cart_total +=  parseInt($(this).find('.cart-products__item-price span').text());
-        });
+        });*/
 
         if(cart_total >= <?= get_field('free_delivery_min_price', 'option') ?>) {
             $('.cart-delivery__title-bottom').css('display', 'none');
@@ -232,6 +268,15 @@ the_content();
                 },
             success: function (data) {//success callback
                 $('.cart-button-desktop-right span').text(data.cart_total + ' ₽');
+                $('.header__cart-button span').text(data.cart_total + ' ₽');
+                if(data.cart_total < <?= get_field('min_order_price', 'option'); ?>) {
+                    $('.cart-minimum-order-price').css('display', 'flex');
+                    $('.cart-button-desktop').attr("disabled", true);
+                } else {
+                    $('.cart-minimum-order-price').css('display', 'none');
+                    $('.cart-button-desktop').removeAttr('disabled');
+                }
+                calculateDelivery(data.cart_total_without_delivery);
             },
             error: function (data) {
                 console.log(data);
@@ -248,8 +293,8 @@ the_content();
             calculateTotalItemPrice('less', product_quantity, $(this));
         }
 
-        calculateDelivery();
         updateQuantityInCartDatabase($(this));
+        // calculateDelivery();
 
     });
     $('.more').on('click', function (e) {
@@ -258,9 +303,49 @@ the_content();
         $(this).parent().parent().parent().parent().find('.cart-products__item-title-bottom span').text(product_quantity+1);
 
         calculateTotalItemPrice('more', product_quantity, $(this));
-        calculateDelivery();
         updateQuantityInCartDatabase($(this));
+        // calculateDelivery();
 
     });
+
+    var is_input_was_full = false;
+
+    $('#promo').on('input', function() {
+        if (this.value.length == 13) {
+            $.ajax({
+                type: 'post',
+                url: '/wp-content/themes/a1/custom_files_dm/check_coupon_is_valid.php',
+                dataType: 'json',
+                data:
+                    {
+                        'coupon': $(this).val(),
+                    },
+                success: function (data) {//success callback
+                    console.log(data);
+                    if(data.coupon == 'valid') {
+                        $('#promo').css('border', '1px solid #3F9B48');
+                        $('.promo-success').css('display', 'block');
+                        $('.promo-error').css('display', 'none');
+                        $('.cart-button-desktop-right span').text(data.cart_total + ' ₽');
+                        $('.header__cart-button span').text(data.cart_total + ' ₽');
+                    } else {
+                        $('#promo').css('border', '1px solid #FF0303');
+                        $('.promo-success').css('display', 'none');
+                        $('.promo-error').css('display', 'block');
+                    }
+                    calculateDelivery(data.cart_total_without_delivery);
+                },
+                error: function (data) {
+                    console.log('error');
+                }
+            });
+            is_input_was_full = true;
+        } else if(is_input_was_full) {
+            $('#promo').css('border', '1px solid #FF0303');
+            $('.promo-success').css('display', 'none');
+            $('.promo-error').css('display', 'block');
+        }
+    });
+
 </script>
 <?php get_footer(); ?>

@@ -4,7 +4,10 @@ require_once("../../../../wp-load.php");
 $user_name = $_POST['user_phone'];
 $user_phone_format = $_POST['user_phone_format'];
 
-wp_create_user( $user_name, 'standard_user');
+if(!username_exists( $user_name )) {
+    wp_create_user( $user_name, 'standard_user');
+}
+
 $user = get_user_by('login', $user_name );
 update_field('user_phone_field', $user_phone_format, 'user_'.$user->ID);
 

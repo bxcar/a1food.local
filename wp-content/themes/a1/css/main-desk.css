@@ -179,6 +179,16 @@ ol, ul {
     cursor: pointer
 }
 
+.address__form-delivery-city {
+    display: none;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
 .burger-menu {
     position: fixed;
     top: 0;
@@ -452,7 +462,8 @@ ol, ul {
     font-weight: 600;
     font-size: 16px;
     line-height: 16px;
-    color: #333
+    color: #333;
+    text-decoration: none;
 }
 
 .main {
@@ -702,6 +713,11 @@ ol, ul {
     align-items: center;
 }
 
+.cart-promo-form {
+    display: flex;
+    align-items: center;
+}
+
 .cart-promo-form input[type=submit] {
     display: none
 }
@@ -733,6 +749,22 @@ ol, ul {
     padding-left: 61px;
     color: #fff;
     padding-right: 20px
+}
+
+.promo-error,
+.promo-success {
+    margin-left: 23px;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FF0303;
+    display: none;
+}
+
+.promo-success {
+    color: #3F9B48;
 }
 
 .cart-minimum-order-price {
@@ -871,6 +903,11 @@ ol, ul {
 .delivery-form__date,
 .delivery-form__time {
     width: 48.7%;
+}
+
+.delivery-form__time .delivery-form__date-subfields {
+    max-height: 245px;
+    overflow-y: scroll;
 }
 
 .delivery-form__date__title {
@@ -2381,6 +2418,8 @@ input[type=number] {
     box-sizing: border-box;
     cursor: pointer;
     margin-bottom: 33px;
+    border: none;
+    outline: none;
 }
 
 .cart-button-desktop-left {
@@ -2551,6 +2590,7 @@ input[type=number] {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-bottom: 40px;
 }
 
 .checkout-desk-bottom-submit {
@@ -2576,4 +2616,16 @@ input[type=number] {
     font-size: 14px;
     line-height: 18px;
     color: #B3B3B3;
+}
+
+.delivery-form__date-subfields::-webkit-scrollbar {
+    width: 5px;
+}
+
+.delivery-form__date-subfields::-webkit-scrollbar-track {
+    background:#252527;
+}
+
+.delivery-form__date-subfields::-webkit-scrollbar-thumb {
+    background:#F8F8F8;
 }
