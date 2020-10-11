@@ -8,7 +8,7 @@ get_header();
         <h1 class="cabinet__title">Оформление заказа</h1>
     </div>
 
-    <form action="#" method="post" class="delivery-form" id="delivery-form">
+    <form method="post" class="delivery-form" id="delivery-form">
         <div class="delivery-form__address">
             <span class="delivery-address__title">Выберите адрес доставки</span>
             <?php
@@ -172,7 +172,7 @@ get_header();
                 <span>Итого к оплате:</span>
                 <span>1 095 ₽</span>
             </div>
-            <form action="#" method="post" class="payment__card">
+            <form method="post" class="payment__card">
                 <span class="payment__card-number-title">Номер карты:</span>
                 <div class="payment__card-example-numbers">
                     <input type="number" name="card_number_1" placeholder="5469" maxlength="4"
@@ -214,12 +214,12 @@ get_header();
                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                     </div>
                 </div>
-                <!--<div class="payment__card-save-card">
+                <div class="payment__card-save-card">
                     <label class="payment__card-save-card-container">Сохранить карту
                         <input type="checkbox" checked="checked" name="save_card">
                         <span class="checkmark"></span>
                     </label>
-                </div>-->
+                </div>
             </form>
         </div>
         <div class="checkout-cards-right">
@@ -264,5 +264,24 @@ get_header();
 
     today = mm + '/' + dd + '/' + yyyy;
     console.log(today);*/
+
+
+    $('.checkout-desk-bottom-submit').on('click', function (e) {
+        e.preventDefault();
+        var formData = $('.payment__card').serialize();
+        $.ajax({
+            'method': 'POST',
+            'dataType': 'json',
+            'url': '/wp-content/themes/a1/custom_files_dm/add_card.php',
+            'data':  formData,
+            success: function (data) {//success callback
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
 </script>
 <?php get_footer() ?>

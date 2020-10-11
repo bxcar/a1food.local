@@ -1991,6 +1991,7 @@ input[type=number] {
     width: 555px;
     height: 284px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .payment2__owl-carousel-card-2 {
