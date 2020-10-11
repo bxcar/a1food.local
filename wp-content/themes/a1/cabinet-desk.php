@@ -68,7 +68,10 @@ if (isset($_POST['addresses-amount'])) {
                                                               if ($item['floor']) {
                                                                   echo ', эт. ' . $item['floor'];
                                                               }
-                                                              echo ', кв./офис ' . $item['apartment']; ?>" readonly><span class="remove_address"></span></div>
+                                                              if ($item['apartment']) {
+                                                                  echo ', кв./офис ' . $item['apartment'];
+                                                              }
+                                                              ?>" readonly><span class="remove_address"></span></div>
             <?php $address_counter++;
         }
     } ?>
@@ -83,7 +86,7 @@ if (isset($_POST['addresses-amount'])) {
 <script>
     $('.remove_address').on('click', function (e) {
         $(this).parent().remove();
-        $.ajax({
+        /*$.ajax({
             type: 'post',
             url: '/wp-content/themes/a1/custom_files_dm/remove_address.php',
             dataType: 'json',
@@ -97,8 +100,12 @@ if (isset($_POST['addresses-amount'])) {
             error: function (data) {
                 console.log(data);
             }
-        });
-    })
+        });*/
+    });
+
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 </script>
 
 <?php get_footer() ?>

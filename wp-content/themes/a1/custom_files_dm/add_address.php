@@ -1,6 +1,18 @@
 <?php
 require_once("../../../../wp-load.php");
 
+if(!$_POST['entrance']) {
+    $_POST['entrance'] = 0;
+}
+
+if(!$_POST['floor']) {
+    $_POST['floor'] = 0;
+}
+
+if(!$_POST['apartment']) {
+    $_POST['apartment'] = 0;
+}
+
 $row = array(
     'street' => $_POST['street'],
     'building'   => $_POST['house'],

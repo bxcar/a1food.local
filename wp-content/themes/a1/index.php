@@ -1,10 +1,14 @@
 <?php get_header(); ?>
+<?php
+if(get_field('search_line', 'option')) { ?>
     <div class="search">
         <form role="search" method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="search__form searchform">
             <input autocomplete="off" type="search" name="s" id="search" placeholder="Поиск">
             <button type="submit"><img src="<?= get_template_directory_uri(); ?>/img/search-icon.svg"></button>
         </form>
     </div>
+<?php }
+?>
     <div class="filters">
         <?php
         $categories = get_categories([
@@ -99,9 +103,18 @@
 
 
                         </div>
-                        <span class="product-item-price-crossed-out">350 ₽</span>
+                        <?php
+                        $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
+                        if(get_post_meta(get_the_ID(), '_sale_price', true)) {
+                            $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
+                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <?php } else {
+                            $sale_price = $regular_price; ?>
+                            <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <?php }
+                        ?>
                         <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
-                            <span class="product-item-price-main">249 ₽</span>
+                            <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
                             <?php
                             // Usage as a condition in an if statement
                             if( 0 < woo_is_in_cart(get_the_ID()) ){ ?>

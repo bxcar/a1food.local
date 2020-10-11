@@ -11,7 +11,26 @@ get_header();
     <form action="#" method="post" class="delivery-form" id="delivery-form">
         <div class="delivery-form__address">
             <span class="delivery-address__title">Выберите адрес доставки</span>
-            <input type="text" name="address" id="address" placeholder="ул. Фрунзе 38, офис 401">
+            <?php
+            $i = 1;
+            if(get_field('user_addresses_list_field', 'user_' . get_current_user_id())) {
+                foreach (get_field('user_addresses_list_field', 'user_' . get_current_user_id()) as $item) { ?>
+                    <input class="delivery-form__address-input <?php if($i == 1) {echo 'active'; } ?>" type="text" name="address-<?= $i; ?>" id="address-<?= $i; ?>" placeholder="ул. Фрунзе 38, офис 401" value="<?= 'ул. ' . $item['street'] . ' ' . $item['building'] ?>
+<?php if ($item['entrance']) {
+                        echo ', под. ' . $item['entrance'];
+                    }
+                    if ($item['floor']) {
+                        echo ', эт. ' . $item['floor'];
+                    }
+                    if ($item['apartment']) {
+                        echo ', кв./офис ' . $item['apartment'];
+                    }
+                    ?>" readonly data-street="<?= $item['street'] ?>" data-building="<?= $item['building'] ?>" data-entrance="<?= $item['entrance'] ?>" data-foor="<?= $item['floor'] ?>" data-apartment="<?= $item['apartment'] ?>">
+                <?php $i++; }
+            } else { ?>
+                <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address">Добавить адрес</a>
+            <?php }
+            ?>
         </div>
         <div class="delivery-form__date-time-wrapper">
             <div class="delivery-form__date">

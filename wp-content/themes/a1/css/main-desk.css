@@ -897,7 +897,15 @@ ol, ul {
     background-image: url(../img/checkout-address-icon.svg);
     background-repeat: no-repeat;
     background-position: 24px;
-    padding-right: 20px
+    padding-right: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.delivery-form__address input.active {
+    border: 2px solid #3F9B48;
+    margin-left: -2px;
+    box-sizing: border-box;
 }
 
 .delivery-form__date,
@@ -975,7 +983,8 @@ ol, ul {
 }
 
 .delivery-form__date-fields-wrapper {
-    position: relative
+    position: relative;
+    height: 330px;
 }
 
 .delivery-form__date-subfields {

@@ -34,6 +34,35 @@ $(document).ready(function () {
     $('.delivery-form__date .delivery-form__date-subfield').on('click', function () {
         $('.delivery-form__date .delivery-form__date-main-field-text').text($(this).text());
         $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
+
+        if($(this).text() != 'Сегодня') {
+            if($('.delivery-form__time .delivery-form__date-main-field-text').text() == 'Ближайшее') {
+                $('.delivery-form__time .delivery-form__date-main-field-text').text('12:00');
+            }
+            $('.delivery-form__time .delivery-form__date-subfields').empty();
+            var hour = 12;
+            var min = 0;
+            var current_min = 0;
+            for(var i = 0; i < 23; i++) {
+                if(min === 0) {
+                    current_min = '00';
+                } else {
+                    current_min = '30';
+                    min = -30;
+                }
+                $('.delivery-form__time .delivery-form__date-subfields').append('<span class="delivery-form__date-subfield" data-time="' + parseInt(hour) + ':' + current_min + '">' + parseInt(hour) + ':' + current_min + '</span>');
+            hour += 0.5;
+            min += 30;
+            }
+
+            $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
+                $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
+                $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
+            });
+        } else {
+            location.reload();
+        }
+
     });
 
     $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
@@ -73,5 +102,10 @@ $(document).ready(function () {
         var scrollPosition = html.data('scroll-position');
         html.css('overflow', html.data('previous-overflow'));
         window.scrollTo(scrollPosition[0], scrollPosition[1])*/
-    })
+    });
+
+    $('.delivery-form__address-input').on('click', function (e) {
+        $('.delivery-form__address-input').removeClass('active');
+        $(this).addClass('active');
+    });
 });

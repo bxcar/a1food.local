@@ -10,8 +10,8 @@ get_header();
     <form action="#" method="post" class="address__form">
         <span class="address__form-delivery-city">Доставка товаров осуществляется только по г.Омск</span>
         <div class="address__form-inner-wrapper">
-            <input type="text" name="street" placeholder="Улица">
-            <input type="text" name="house" placeholder="Дом">
+            <input type="text" name="street" placeholder="Улица" required>
+            <input type="text" name="house" placeholder="Дом" required>
             <input type="text" name="entrance" placeholder="Подъезд">
         </div>
         <div class="address__form-inner-wrapper" style="margin-bottom: 0">
@@ -95,9 +95,12 @@ get_header();
                 dataType: 'jsonp',
                 success: function (dataWeGotViaJsonp) {
                     // console.log(dataWeGotViaJsonp);
-                    // console.log(dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[3].name);
                     if (dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[3].name !== 'Омск') {
                         $('.address__form-delivery-city').css('display', 'block');
+                    } else {
+                        $('input[name="street"').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[4].name);
+                        $('input[name="house"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[5].name);
+                        searchControl.search('Россия, Омск, ' + $("input[name='street']").val() + ', ' + $("input[name='house']").val());
                     }
                 }
             });
@@ -156,7 +159,15 @@ get_header();
             success: function (data) {//success callback
                 // console.log(data);
                 $('.address__form button[type="submit"]').text('Адрес успешно добавлен');
-                setTimeout(function(){  window.location.href = '/cabinet'; }, 1000);
+                var url_string = window.location.href;
+                var url = new URL(url_string);
+                var checkout = url.searchParams.get("checkout");
+                if(checkout) {
+                    setTimeout(function(){  window.location.href = '/checkout'; }, 1000);
+                } else {
+                    setTimeout(function(){  window.location.href = '/cabinet'; }, 1000);
+                }
+
             },
             error: function (data) {
                 console.log(data);

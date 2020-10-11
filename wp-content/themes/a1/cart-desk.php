@@ -5,6 +5,32 @@ get_header();
 ?>
     <div class="cart-products">
         <?php
+        date_default_timezone_set('Asia/Omsk');
+        $day = date('w', strtotime(date('m/d/Y', time())));
+        $hour = date('G', time());
+
+        if($day == 1) {
+            $day = 0;
+        } else if($day == 2) {
+            $day = 1;
+        } else if($day == 3) {
+            $day = 2;
+        } else if($day == 4) {
+            $day = 3;
+        } else if($day == 5) {
+            $day = 4;
+        } else if($day == 6) {
+            $day = 5;
+        } else if($day == 0) {
+            $day = 6;
+        }
+
+        if($hour < 12) {
+            $hour = 12;
+        }
+
+        $delivery_current_time_price = get_field('delivery_price_by_hours', 'option')['body'][$day][$hour]['c'];
+
         global $woocommerce;
         $items = $woocommerce->cart->get_cart();
         $cart_total_price = 0;
@@ -22,17 +48,21 @@ get_header();
             /*Regular Price and Sale Price*/
 //            echo "Regular Price: " . get_post_meta($values['product_id'], '_regular_price', true) . "<br>";
 //            echo "Sale Price: " . get_post_meta($values['product_id'], '_sale_price', true) . "<br>";
-            $total_price = get_post_meta($values['product_id'], '_sale_price', true) * $values['quantity'];
+            if(get_post_meta($values['product_id'], '_sale_price', true)) {
+                $total_price = get_post_meta($values['product_id'], '_sale_price', true) * $values['quantity'];
+            } else {
+                $total_price = get_post_meta($values['product_id'], '_regular_price', true) * $values['quantity'];
+            }
             $cart_item_remove_url = wc_get_cart_remove_url( $item );
             $cart_total_price =  WC()->cart->cart_contents_total;
 
             $delivery = 0;
-            if($cart_total_price < get_field('free_delivery_min_price', 'option')) {
-                $delivery = (int)get_field('delivery_price', 'option');
+            if(($cart_total_price < get_field('free_delivery_min_price', 'option')) || !get_field('free_delivery_min_price_logic', 'option')) {
+                $delivery = (int)$delivery_current_time_price;
             }
 
             ?>
-            <div class="cart-products__item" data-key="<?= $item ?>">
+            <div class="cart-products__item" data-key="<?= $item ?>" data-id="<?= $values['product_id'] ?>">
                 <div class="cart-products__item-wrapper1">
                     <a href="<?= $cart_item_remove_url ?>" class="cart-products__item-remove"><img src="<?= get_template_directory_uri(); ?>/img/cart-product-remove.svg"></a>
                     <img src="<?= get_the_post_thumbnail_url($values['product_id']) ?>" class="cart-products__item-image">
@@ -60,15 +90,15 @@ get_header();
     <div class="cart-delivery">
         <div class="cart-delivery__left-wrapper">
             <span class="cart-delivery__title">Доставка</span>
-            <?php if($cart_total_price < get_field('free_delivery_min_price', 'option')) {
+            <?php if(($cart_total_price < get_field('free_delivery_min_price', 'option')) && get_field('free_delivery_min_price_logic', 'option')) {
                 $difference = get_field('free_delivery_min_price', 'option') - $cart_total_price; ?>
                 <span class="cart-delivery__title-bottom">Закажите еще на <span><?= $difference ?></span>р для бесплатной доставки</span>
-            <?php } else { ?>
+            <?php } else if(get_field('free_delivery_min_price_logic', 'option')) { ?>
                 <span class="cart-delivery__title-bottom" style="display: none;">Закажите еще на <span></span>р для бесплатной доставки</span>
             <?php } ?>
         </div>
-        <?php if($cart_total_price < get_field('free_delivery_min_price', 'option')) { ?>
-            <span class="cart-delivery__price"><?= get_field('delivery_price', 'option'); ?> ₽</span>
+        <?php if(($cart_total_price < get_field('free_delivery_min_price', 'option')) || !get_field('free_delivery_min_price_logic', 'option')) { ?>
+            <span class="cart-delivery__price"><?= $delivery_current_time_price; ?> ₽</span>
         <?php } else { ?>
             <span class="cart-delivery__price">Бесплатно</span>
         <?php } ?>
@@ -82,10 +112,12 @@ get_header();
             <input type="submit">
         </form>
     </div>
-    <button class="cart-button-desktop"
+    <a style="text-decoration: none;" class="cart-button-desktop"
         <?php
-        if(($cart_total_price + $delivery) < get_field('min_order_price', 'option')) {
-            echo 'disabled';
+        if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
+            echo 'href=""';
+        } else {
+            echo 'href="/checkout"';
         }
         ?>>
         <div class="cart-button-desktop-left">
@@ -93,15 +125,15 @@ get_header();
             <span>Оформить заказ</span>
         </div>
         <div class="cart-button-desktop-right">
-            <span><?= (int)$cart_total_price + (int)$delivery ?> ₽</span>
+            <span><?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?> ₽</span>
         </div>
-    </button>
+    </a>
     <?php
-    if(($cart_total_price + $delivery) < get_field('min_order_price', 'option')) { ?>
+    if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) { ?>
         <div class="cart-minimum-order-price" style="display: flex">
             <span><img src="<?= get_template_directory_uri(); ?>/img/cart-i.svg">Минимальная сумма заказа <?= get_field('min_order_price', 'option'); ?>р</span>
         </div>
-    <?php } else { ?>
+    <?php } else if(get_field('min_order_price_logic', 'option')) { ?>
         <div class="cart-minimum-order-price" style="display: none;">
             <span><img src="<?= get_template_directory_uri(); ?>/img/cart-i.svg">Минимальная сумма заказа <?= get_field('min_order_price', 'option'); ?>р</span>
         </div>
@@ -147,9 +179,18 @@ get_header();
 
 
                         </div>
-                        <span class="product-item-price-crossed-out">350 ₽</span>
+                        <?php
+                        $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
+                        if(get_post_meta(get_the_ID(), '_sale_price', true)) {
+                            $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
+                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <?php } else {
+                            $sale_price = $regular_price; ?>
+                            <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <?php }
+                        ?>
                         <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
-                            <span class="product-item-price-main">249 ₽</span>
+                            <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
                             <?php
                             // Usage as a condition in an if statement
                             if( 0 < woo_is_in_cart(get_the_ID()) ){ ?>
@@ -226,6 +267,12 @@ get_header();
 
 </div>
 <script>
+    function numberWithSpaces(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return parts.join(".");
+    }
+
     function calculateDelivery(cartTotal) {
         var cart_total = cartTotal;
         /*var cart_total = 0;
@@ -233,14 +280,14 @@ get_header();
             cart_total +=  parseInt($(this).find('.cart-products__item-price span').text());
         });*/
 
-        if(cart_total >= <?= get_field('free_delivery_min_price', 'option') ?>) {
+        if((cart_total >= <?= get_field('free_delivery_min_price', 'option') ?>) && '<?= get_field('free_delivery_min_price_logic', 'option') ?>') {
             $('.cart-delivery__title-bottom').css('display', 'none');
             $('.cart-delivery__price').text('Бесплатно');
         } else {
             var difference_delivery_price = <?= get_field('free_delivery_min_price', 'option') ?> - cart_total;
             $('.cart-delivery__title-bottom').css('display', 'block');
             $('.cart-delivery__title-bottom span').text(difference_delivery_price);
-            $('.cart-delivery__price').text("<?= get_field('delivery_price', 'option'); ?> ₽");
+            $('.cart-delivery__price').text("<?= $delivery_current_time_price; ?> ₽");
         }
     }
 
@@ -267,14 +314,14 @@ get_header();
                     'quantity': parseInt($this.parent().find('.amount').text())
                 },
             success: function (data) {//success callback
-                $('.cart-button-desktop-right span').text(data.cart_total + ' ₽');
-                $('.header__cart-button span').text(data.cart_total + ' ₽');
-                if(data.cart_total < <?= get_field('min_order_price', 'option'); ?>) {
+                $('.cart-button-desktop-right span').text(numberWithSpaces(data.cart_total) + ' ₽');
+                $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + ' ₽');
+                if((data.cart_total < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
                     $('.cart-minimum-order-price').css('display', 'flex');
-                    $('.cart-button-desktop').attr("disabled", true);
+                    $('.cart-button-desktop').attr('href', '');
                 } else {
                     $('.cart-minimum-order-price').css('display', 'none');
-                    $('.cart-button-desktop').removeAttr('disabled');
+                    $('.cart-button-desktop').attr('href', '/checkout');
                 }
                 calculateDelivery(data.cart_total_without_delivery);
             },
@@ -294,6 +341,7 @@ get_header();
         }
 
         updateQuantityInCartDatabase($(this));
+        $('.product-item-price-wrapper[data-id="' + $(this).parent().parent().parent().parent().data('id') + '"]').find('.product-item-amount').text($(this).parent().find('.amount').text());
         // calculateDelivery();
 
     });
@@ -304,6 +352,8 @@ get_header();
 
         calculateTotalItemPrice('more', product_quantity, $(this));
         updateQuantityInCartDatabase($(this));
+
+        $('.product-item-price-wrapper[data-id="' + $(this).parent().parent().parent().parent().data('id') + '"]').find('.product-item-amount').text(parseInt($(this).parent().find('.amount').text()));
         // calculateDelivery();
 
     });
@@ -326,14 +376,21 @@ get_header();
                         $('#promo').css('border', '1px solid #3F9B48');
                         $('.promo-success').css('display', 'block');
                         $('.promo-error').css('display', 'none');
-                        $('.cart-button-desktop-right span').text(data.cart_total + ' ₽');
-                        $('.header__cart-button span').text(data.cart_total + ' ₽');
+                        $('.cart-button-desktop-right span').text(numberWithSpaces(data.cart_total) + ' ₽');
+                        $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + ' ₽');
                     } else {
                         $('#promo').css('border', '1px solid #FF0303');
                         $('.promo-success').css('display', 'none');
                         $('.promo-error').css('display', 'block');
                     }
                     calculateDelivery(data.cart_total_without_delivery);
+                    if((data.cart_total < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
+                        $('.cart-minimum-order-price').css('display', 'flex');
+                        $('.cart-button-desktop').attr('href', '');
+                    } else {
+                        $('.cart-minimum-order-price').css('display', 'none');
+                        $('.cart-button-desktop').attr('href', '/checkout');
+                    }
                 },
                 error: function (data) {
                     console.log('error');

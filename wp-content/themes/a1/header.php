@@ -32,7 +32,7 @@
         // console.log(window.mobileAndTabletCheck());
 
         if (window.mobileAndTabletCheck()) {
-            window.location.href = '/m';
+            // window.location.href = '/m';
         }
     </script>
 
@@ -53,7 +53,7 @@
     <header class="header">
         <div class="header_inner_wrapper">
             <!--            <img class="header__menu-button" src="img/burger-menu-icon.svg">-->
-            <a href="/"><img class="header__logo" src="<?= get_template_directory_uri(); ?>/img/logo.svg"></a>
+            <a href="/"><img class="header__logo" src="<?= get_field('logo_field', 'option') ?>"></a>
         </div>
         <div class="header__login-and-cart-wrapper">
             <?php if(is_user_logged_in()) { ?>
