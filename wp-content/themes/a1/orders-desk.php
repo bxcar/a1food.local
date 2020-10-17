@@ -1,48 +1,57 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="img/favicon.png"/>
-    <title>Личный кабинет - A1</title>
-
-    <!--header styles start-->
-    <link rel="stylesheet" href="css/main-desk.css">
-    <!--header styles end-->
-</head>
-<body>
-<div class="main container" style="padding-bottom: 30px;">
-    <header class="header">
-        <div class="header_inner_wrapper">
-            <!--            <img class="header__menu-button" src="img/burger-menu-icon.svg">-->
-            <img class="header__logo" src="img/logo.svg">
-        </div>
-        <div class="header__login-and-cart-wrapper">
-            <div class="header__login-button">
-                <img class="header__login-img" src="img/user-icon.svg">
-                <span class="header__login-text">Войти</span>
-            </div>
-            <a href="#" class="header__cart-button">
-                <img src="img/cart-icon.svg">
-                <span>1095 ₽</span>
-            </a>
-        </div>
-        <!--<div class="header__login-button" style="width: 170px;">
-            <img class="header__login-img" src="img/user-icon.svg">
-            <span class="header__login-text">+7 (515) 525-66-55</span>
-        </div>-->
-    </header>
+<?php
+/* Template Name: orders-desk */
+get_header();
+?>
 
     <div class="cabinet__title-wrapper">
         <h1 class="cabinet__title">Личный кабинет</h1>
     </div>
 
     <div class="cabinet__top-buttons">
-        <a href="./cabinet-desk.php" class="cabinet__top-buttons-profile inactive"><?php include "img/cabinet-profile-icon.svg"?>Профиль</a>
-        <a href="./orders-desk.php" class="cabinet__top-buttons-orders"><?php include "img/cabinet-cart-icon.svg"?>Заказы</a>
+        <a href="/cabinet" class="cabinet__top-buttons-profile inactive"><?php include "img/cabinet-profile-icon.svg"?>Профиль</a>
+        <a href="/orders" class="cabinet__top-buttons-orders"><?php include "img/cabinet-cart-icon.svg"?>Заказы</a>
     </div>
+
+<?php
+$loop = new WP_Query( array(
+    'post_type'         => 'shop_order',
+    'post_status'       =>  array_keys( wc_get_order_statuses() ),
+    'posts_per_page'    => -1,
+) );
+
+// The Wordpress post loop
+if ( $loop->have_posts() ):
+    while ( $loop->have_posts() ) : $loop->the_post();
+
+// The order ID
+        $order_id = $loop->post->ID;
+        $order = wc_get_order( $order_id );
+        $order_data = $order->get_data();
+
+        $user_phone = get_field('user_phone_field', 'user_' . get_current_user_id());
+        $user_phone = preg_replace('/[^0-9]/', '', $user_phone);
+        $user_phone = substr($user_phone, 1);
+        $order_number = $user_phone . '-' . $order_data['id'];
+        $order_address = $order_data['billing']['address_1'];
+
+
+        $date_number = $order_data['date_created']->date('j', time());
+        $date_month =  get_month_title($order_data['date_created']->date('m', time()));
+        $date_year = $order_data['date_created']->date('Y', time());
+        $order_date = $date_number . ' ' . $date_month . ' ' . $date_year . ' г.';
+
+
+        $order_status = get_order_status_title($order_data['status']);
+        $order_total = (int)$order_data['total'];
+
+        print_r($order_number . '<br>' . $order_address . '<br>' . $order_date . '<br>' . $order_status . '<br>' . $order_total);
+
+    endwhile;
+
+    wp_reset_postdata();
+
+endif;
+?>
 
     <div class="orders">
         <div class="orders__item order-success">
@@ -50,14 +59,14 @@
                 <span class="orders__item-number">Заказ #9235555-01</span>
                 <div class="orders__item-top-line-right">
                     <span class="orders__item-price">2249 ₽</span>
-                    <img class="orders__item-close" src="img/order-close.svg">
+                    <img class="orders__item-close" src="<?= get_template_directory_uri(); ?>/img/order-close.svg">
                 </div>
             </div>
             <span class="orders__item-address">ул. Фрунзе 308, офис 401</span>
             <div class="orders__item-bottom-line">
                 <div class="orders__item-bottom-line-inner-wrapper">
                     <span class="orders__item-date">25 мая 2020 г.</span>
-                    <span class="orders__item-check"><img src="img/get-check-icon.svg"><span>Получить чек</span></span>
+                    <span class="orders__item-check"><img src="<?= get_template_directory_uri(); ?>/img/get-check-icon.svg"><span>Получить чек</span></span>
                 </div>
                 <span class="orders__item-status green">Доставлен</span>
             </div>
@@ -73,9 +82,9 @@
             </div>
             <form action="#" method="post" class="orders__item-feedback">
                 <textarea name="feedback" placeholder="Вы можете оставить отзыв"></textarea>
-                <img src="img/feedback-icon.svg" class="orders__item-feedback-icon">
+                <img src="<?= get_template_directory_uri(); ?>/img/feedback-icon.svg" class="orders__item-feedback-icon">
                 <div class="orders__item-feedback-file-wrapper">
-                    <label class="orders__item-feedback-file-image" for="file"><img src="img/input-file-img.svg"></label>
+                    <label class="orders__item-feedback-file-image" for="file"><img src="<?= get_template_directory_uri(); ?>/img/input-file-img.svg"></label>
                     <input type="file" name="file" id="file">
                 </div>
             </form>
@@ -85,14 +94,14 @@
                 <span class="orders__item-number">Заказ #9235555-01</span>
                 <div class="orders__item-top-line-right">
                     <span class="orders__item-price">2249 ₽</span>
-                    <img class="orders__item-close" src="img/order-close.svg">
+                    <img class="orders__item-close" src="<?= get_template_directory_uri(); ?>/img/order-close.svg">
                 </div>
             </div>
             <span class="orders__item-address">ул. Фрунзе 308, офис 401</span>
             <div class="orders__item-bottom-line">
                 <div class="orders__item-bottom-line-inner-wrapper">
                     <span class="orders__item-date">25 мая 2020 г.</span>
-                    <span class="orders__item-check"><img src="img/get-check-icon.svg"><span>Получить чек</span></span>
+                    <span class="orders__item-check"><img src="<?= get_template_directory_uri(); ?>/img/get-check-icon.svg"><span>Получить чек</span></span>
                 </div>
                 <span class="orders__item-status yellow">Доставляется</span>
             </div>
@@ -102,14 +111,14 @@
                 <span class="orders__item-number">Заказ #9235555-01</span>
                 <div class="orders__item-top-line-right">
                     <span class="orders__item-price">2249 ₽</span>
-                    <img class="orders__item-close" src="img/order-close.svg">
+                    <img class="orders__item-close" src="<?= get_template_directory_uri(); ?>/img/order-close.svg">
                 </div>
             </div>
             <span class="orders__item-address">ул. Фрунзе 308, офис 401</span>
             <div class="orders__item-bottom-line">
                 <div class="orders__item-bottom-line-inner-wrapper">
                     <span class="orders__item-date">25 мая 2020 г.</span>
-                    <span class="orders__item-check"><img src="img/get-check-icon.svg"><span>Получить чек</span></span>
+                    <span class="orders__item-check"><img src="<?= get_template_directory_uri(); ?>/img/get-check-icon.svg"><span>Получить чек</span></span>
                 </div>
                 <span class="orders__item-status red">Отменен</span>
             </div>
@@ -121,34 +130,11 @@
     <form action="#" method="post" class="orders__get-check-popup-form">
         <div class="orders__get-check-popup-form-email-wrapper">
             <input type="email" name="email" id="email" placeholder="Укажите e-mail">
-            <img src="img/email-popup-icon.svg" class="orders__get-check-popup-email-image">
+            <img src="<?= get_template_directory_uri(); ?>/img/email-popup-icon.svg" class="orders__get-check-popup-email-image">
         </div>
         <button type="submit">Отправить</button>
     </form>
 </div>
 <div class="overlay"></div>
 
-<div class="footer">
-    <div class="footer__container">
-        <div class="footer__wrapper1">
-            <img src="img/logo.svg">
-            <span>(с) Все права защищены</span>
-            <span>Построено в MOS-DIGITAL</span>
-        </div>
-        <div class="footer__wrapper2">
-            <a href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
-            <a href="#"><?php include "img/agreement.svg" ?> пользовательское соглашение</a>
-        </div>
-    </div>
-</div>
-<!--footer scripts start-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-<script src="js/common.js"></script>
-<script>
-    $("#phone").mask("+7 (999) 999-99-99");
-</script>
-<!--footer scripts end-->
-</body>
-</html>
+<?php get_footer() ?>

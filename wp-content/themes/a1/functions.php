@@ -241,3 +241,86 @@ function woo_is_in_cart($product_id) {
     return 0;
 }
 
+add_filter( 'woocommerce_checkout_fields' , 'custom_remove_woo_checkout_fields' );
+
+function custom_remove_woo_checkout_fields( $fields ) {
+    unset($fields['billing']['billing_last_name']);
+    unset($fields['billing']['billing_company']);
+    unset($fields['billing']['billing_address_2']);
+    unset($fields['billing']['billing_state']);
+//    unset($fields['billing']['billing_country']);
+//    unset($fields['billing']['billing_city']);
+    unset($fields['billing']['billing_postcode']);
+    unset($fields['billing']['billing_email']);
+//    $fields['billing']['billing_first_name']['default'] = "Thomas";
+    return $fields;
+}
+
+
+//'wc-pending' 'wc-processing'  'wc-on-hold' 'wc-completed' 'wc-cancelled' 'wc-refunded' 'wc-failed'
+function so_39252649_remove_processing_status( $statuses ){
+    if( isset( $statuses['wc-pending'] ) ){
+        unset( $statuses['wc-pending'] );
+    }
+
+    if( isset( $statuses['wc-refunded'] ) ){
+        unset( $statuses['wc-refunded'] );
+    }
+
+    if( isset( $statuses['wc-failed'] ) ){
+        unset( $statuses['wc-failed'] );
+    }
+
+    $statuses['wc-processing'] = 'Принят';
+    $statuses['wc-on-hold'] = 'Доставляется';
+    $statuses['wc-completed'] = 'Доставлен';
+    $statuses['wc-cancelled'] = 'Отменен';
+
+    return $statuses;
+}
+add_filter( 'wc_order_statuses', 'so_39252649_remove_processing_status' );
+
+function get_month_title($date_month) {
+    if($date_month == 1) {
+        $date_month = 'января';
+    } else if($date_month == 2) {
+        $date_month = 'февраля';
+    } else if($date_month == 3) {
+        $date_month = 'марта';
+    } else if($date_month == 4) {
+        $date_month = 'апреля';
+    } else if($date_month == 5) {
+        $date_month = 'мая';
+    } else if($date_month == 6) {
+        $date_month = 'июня';
+    } else if($date_month == 7) {
+        $date_month = 'июля';
+    } else if($date_month == 8) {
+        $date_month = 'августа';
+    } else if($date_month == 9) {
+        $date_month = 'сентября';
+    } else if($date_month == 10) {
+        $date_month = 'октября';
+    } else if($date_month == 11) {
+        $date_month = 'ноября';
+    } else if($date_month == 12) {
+        $date_month = 'декабря';
+    }
+
+    return $date_month;
+}
+
+function get_order_status_title($order_status) {
+    if($order_status == 'processing') {
+        $order_status = 'Принят';
+    } else if($order_status == 'on-hold') {
+        $order_status = 'Доставляется';
+    } else if($order_status == 'completed') {
+        $order_status = 'Доставлен';
+    } else {
+        $order_status = 'Отменен';
+    }
+
+    return $order_status;
+}
+

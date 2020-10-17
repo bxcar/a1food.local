@@ -1,7 +1,7 @@
 <?php
 /* Template Name: checkout-desk */
 get_header();
-//the_content();
+the_content();
 ?>
 
     <div class="cabinet__title-wrapper">
@@ -221,6 +221,7 @@ get_header();
                     </label>
                 </div>
             </form>
+            <span class="card_error"></span>
         </div>
         <div class="checkout-cards-right">
             <div class="payment2__owl-carousel-cards">
@@ -275,7 +276,12 @@ get_header();
             'url': '/wp-content/themes/a1/custom_files_dm/add_card.php',
             'data':  formData,
             success: function (data) {//success callback
-                console.log(data);
+                if(data.data === 'success') {
+                    $('.card_error').css('display', 'none');
+                    window.location.href = '/thanks/';
+                } else {
+                    $('.card_error').text(data.data).css('display', 'block');
+                }
             },
             error: function (data) {
                 console.log(data);

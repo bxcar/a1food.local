@@ -2639,3 +2639,13 @@ input[type=number] {
 .delivery-form__date-subfields::-webkit-scrollbar-thumb {
     background:#F8F8F8;
 }
+
+.checkout-cards-left {
+    position: relative;
+}
+
+.card_error {
+    position: absolute;
+    bottom: -30px;
+    color: #FF0303
+}
