@@ -324,3 +324,36 @@ function get_order_status_title($order_status) {
     return $order_status;
 }
 
+/*add_filter( 'woocommerce_checkout_create_order', 'mbm_alter_shipping', 10, 1 );
+function mbm_alter_shipping ($order) {
+
+    $order_data = $order->get_data(); // The Order data
+
+    $order_id = $order_data['id'];
+
+    $current_numbers_of_orders =  get_field('number_of_orders', 'user_' . get_current_user_id());
+    update_field('number_of_orders', $current_numbers_of_orders+1, 'user_' . get_current_user_id());
+    update_field('order_number_for_current_customer', $current_numbers_of_orders+1, $order_id);
+
+    return $order;
+}*/
+
+$hook_to = 'woocommerce_thankyou';
+$what_to_hook = 'wl8OrderPlacedTriggerSomething';
+$prioriy = 111;
+$num_of_arg = 1;
+add_action($hook_to, $what_to_hook, $prioriy, $num_of_arg);
+
+function wl8OrderPlacedTriggerSomething($order_id){
+    $current_number_of_orders =  get_field('number_of_orders', 'user_' . get_current_user_id());
+    $new_number_of_orders = $current_number_of_orders + 1;
+    if($new_number_of_orders <= 9) {
+        $new_number_of_orders = '0' . $new_number_of_orders;
+    }
+    update_field('number_of_orders', $new_number_of_orders, 'user_' . get_current_user_id());
+    update_field('order_number_for_current_customer', $new_number_of_orders, $order_id);
+}
+
+//https://stackoverflow.com/questions/39401393/how-to-get-woocommerce-order-details
+//https://stackoverflow.com/questions/51947198/how-to-query-woocommerce-orders-on-a-page
+
