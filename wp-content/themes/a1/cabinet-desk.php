@@ -2,6 +2,12 @@
 /* Template Name: cabinet-desk */
 get_header();
 
+if(!is_user_logged_in()) { ?>
+    <script>
+        window.location.href="/login";
+    </script>
+<?php }
+
 $address_counter = 1;
 
 if (isset($_POST['contact-name'])) {

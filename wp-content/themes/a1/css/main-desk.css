@@ -1362,7 +1362,7 @@ ol, ul {
 
 .orders__item-price {
     display: block;
-    margin-right: 19px;
+    /*margin-right: 19px;*/
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
@@ -1375,6 +1375,7 @@ ol, ul {
     cursor: pointer;
     width: 20px;
     height: 20px;
+    display: none;
 }
 
 .orders__item-address {
@@ -1443,6 +1444,10 @@ ol, ul {
 
 .orders__item-status {
     text-align: right
+}
+
+.orders__item-status.blue {
+    color: #5BD4FB;
 }
 
 .orders__item-status.green {
@@ -2648,4 +2653,47 @@ input[type=number] {
     position: absolute;
     bottom: -30px;
     color: #FF0303
+}
+
+.slider {
+    width: 100%;
+    background: #FFC000;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.slider__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 256px;
+    padding-left: 114px;
+    padding-right: 84px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.slider__item-left {
+    padding-right: 50px;
+    box-sizing: border-box;
+}
+
+.slider__title {
+    display: block;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
+    color: #000000;
+}
+
+.slider__text {
+    display: block;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 34px;
+    color: #4D4D4D;
 }

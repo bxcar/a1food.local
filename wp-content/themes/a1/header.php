@@ -45,6 +45,8 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=e215db02-6068-4965-8f36-3b1b1b18a6f1
 &lang=ru_RU" type="text/javascript">
     </script>
+    <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/owl.theme.default.css">
     <?php wp_head(); ?>
 </head>
 <body <?php //body_class(); ?>>

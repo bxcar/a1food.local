@@ -69,6 +69,10 @@ $delivery = 0;
 if(($cart_total_price < get_field('free_delivery_min_price', 'option')) || !get_field('free_delivery_min_price_logic', 'option')) {
     $delivery = (int)$delivery_current_time_price;
 }
+
+if($cart_total_price == 0) {
+    $delivery = 0;
+}
 ?>
 <script>
     var cart_formatted_value = '<?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?>';
@@ -100,8 +104,8 @@ if(($cart_total_price < get_field('free_delivery_min_price', 'option')) || !get_
                     items_amount = 0;
                 }
                 $this.find('.product-item-amount').text(parseInt(items_amount) + 1);
-                $('.header__cart-button span').text(data.cart_total + ' ₽');
-                $('.cart-button-desktop-right span').text(data.cart_total + ' ₽');
+                $('.header__cart-button span').text((data.cart_total + <?= (int)$delivery_current_time_price ?>) + ' ₽');
+                $('.cart-button-desktop-right span').text((data.cart_total + <?= (int)$delivery_current_time_price ?>) + ' ₽');
                 if(<?= get_the_ID(); ?> == 73) {
                     if($('.cart-products__item[data-id="' + data_id + '"]').length) {
                         $('.cart-products__item[data-id="' + data_id + '"]').find('.more').trigger("click");

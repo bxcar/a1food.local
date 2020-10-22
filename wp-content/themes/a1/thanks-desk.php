@@ -1,6 +1,13 @@
 <?php
 /* Template Name: thanks-desk */
 get_header();
+
+if(!is_user_logged_in()) { ?>
+    <script>
+        window.location.href="/login";
+    </script>
+<?php }
+
 ?>
 
     <div class="tanks-container">

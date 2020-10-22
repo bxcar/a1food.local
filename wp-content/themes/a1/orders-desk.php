@@ -1,6 +1,12 @@
 <?php
 /* Template Name: orders-desk */
 get_header();
+if(!is_user_logged_in()) { ?>
+    <script>
+        window.location.href="/login";
+    </script>
+<?php }
+
 ?>
 
 <div class="cabinet__title-wrapper">
@@ -57,7 +63,13 @@ get_header();
                              src="<?= get_template_directory_uri(); ?>/img/order-close.svg">
                     </div>
                 </div>
-                <span class="orders__item-address"><?= $order_address ?></span>
+                <span class="orders__item-address"><?= $order_address ?><br><br>
+                <?php foreach ($order->get_items() as $item_key => $item ) {
+                    $item_name    = $item->get_name(); // Name of the product
+                    $quantity     = $item->get_quantity();
+
+                    echo $item_name . ' x ' . $quantity . 'шт.<br>';
+                } ?></span>
                 <div class="orders__item-bottom-line">
                     <div class="orders__item-bottom-line-inner-wrapper">
                         <span class="orders__item-date"><?= $order_date ?></span>
@@ -65,7 +77,7 @@ get_header();
                                     src="<?= get_template_directory_uri(); ?>/img/get-check-icon.svg"><span>Получить чек</span></span>
                     </div>
                     <?php if ($order_status == 'Принят') { ?>
-                        <span class="orders__item-status yellow">Принят</span>
+                        <span class="orders__item-status blue">Принят</span>
                     <?php } else if ($order_status == 'Доставляется') { ?>
                         <span class="orders__item-status yellow">Доставляется</span>
                     <?php } else if ($order_status == 'Доставлен') { ?>

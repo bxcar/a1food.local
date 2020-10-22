@@ -108,4 +108,11 @@ $(document).ready(function () {
         $('.delivery-form__address-input').removeClass('active');
         $(this).addClass('active');
     });
+
+    $('#slider').owlCarousel({
+        loop:true,
+        nav:false,
+        dots:false,
+        items: 1
+    })
 });
