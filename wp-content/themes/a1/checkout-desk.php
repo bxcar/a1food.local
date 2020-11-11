@@ -5,7 +5,13 @@ if(!is_user_logged_in()) { ?>
     <script>
         window.location.href="/login";
     </script>
-<?php }
+<?php } ?>
+<style>
+    .main > .woocommerce {
+        display: none;
+    }
+</style>
+<?php
 the_content();
 ?>
 
@@ -263,36 +269,9 @@ the_content();
     </div>
 </div>
 <script>
-    /*var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = mm + '/' + dd + '/' + yyyy;
-    console.log(today);*/
-
-
     $('.checkout-desk-bottom-submit').on('click', function (e) {
         e.preventDefault();
         $('form.woocommerce-checkout').submit();
-        /*var formData = $('.payment__card').serialize();
-        $.ajax({
-            'method': 'POST',
-            'dataType': 'json',
-            'url': '/wp-content/themes/a1/custom_files_dm/add_card.php',
-            'data':  formData,
-            success: function (data) {//success callback
-                if(data.data === 'success') {
-                    $('.card_error').css('display', 'none');
-                    window.location.href = '/thanks/';
-                } else {
-                    $('.card_error').text(data.data).css('display', 'block');
-                }
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });*/
     });
 
     $('#billing_address_1').attr('value', $('#address-1').attr('value'));

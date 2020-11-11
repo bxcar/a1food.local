@@ -367,7 +367,7 @@ function my_custom_style() {
   </style>';
 }
 
-add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
+/*add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
 add_action( 'woocommerce_before_cart_totals', 'custom_cart_total' );
 function custom_cart_total() {
     include "custom_files_dm/calculate_total_price_with_delivery.php";
@@ -376,4 +376,35 @@ function custom_cart_total() {
         return;
 
     WC()->cart->total = (int)$cart_total_price + (int)$delivery;
+}
+
+add_action( 'woocommerce_calculate_totals', 'add_custom_price', 10, 1);
+function add_custom_price( $cart_object ) {
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+    if ( did_action( 'woocommerce_calculate_totals' ) >= 2 )
+        return;
+
+    include "custom_files_dm/calculate_total_price_with_delivery.php";
+
+    $cart_object->subtotal = (int)$cart_total_price + (int)$delivery;
+}*/
+
+add_filter( 'woocommerce_package_rates', 'override_ups_rates' );
+function override_ups_rates( $rates ) {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+    include "custom_files_dm/calculate_total_price_with_delivery.php";
+    foreach( $rates as $rate_key => $rate ){
+        // Check if the shipping method ID is UPS
+        /*if( ($rate->method_id == 'flexible_shipping_ups') ) {
+            // Set cost to zero
+            $rates[$rate_key]->cost = 0;
+        }*/
+        $rates[$rate_key]->cost = (int)$delivery;
+    }
+    return $rates;
 }
