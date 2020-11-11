@@ -35,6 +35,11 @@ $(document).ready(function () {
         $('.delivery-form__date .delivery-form__date-main-field-text').text($(this).text());
         $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
 
+        $('#billing_date').attr('value', $(this).text());
+        if($('#billing_time').attr('value') === 'Ближайшее') {
+            $('#billing_time').attr('value', '12:00');
+        }
+
         if($(this).text() != 'Сегодня') {
             if($('.delivery-form__time .delivery-form__date-main-field-text').text() == 'Ближайшее') {
                 $('.delivery-form__time .delivery-form__date-main-field-text').text('12:00');
@@ -58,7 +63,9 @@ $(document).ready(function () {
             $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
                 $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
                 $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
+                $('#billing_time').attr('value', $(this).text());
             });
+
         } else {
             location.reload();
         }
@@ -68,6 +75,7 @@ $(document).ready(function () {
     $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
         $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
         $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
+        $('#billing_time').attr('value', $(this).text());
     });
 
     $('.orders__item-rating-stars span').on('mouseenter', function () {
@@ -114,5 +122,14 @@ $(document).ready(function () {
         nav:false,
         dots:false,
         items: 1
-    })
+    });
+
+    $('.page-popup .sl-popup__close').on('click', function (e) {
+        $('.slider__item.sl-popup.page-popup').css('display', 'none');
+        $('.overlay-sl-popup.page-popup').css('display', 'none');
+    });
+    $('.hours-popup .sl-popup__close').on('click', function (e) {
+        $('.slider__item.sl-popup.hours-popup').css('display', 'none');
+        $('.overlay-sl-popup.hours-popup').css('display', 'none');
+    });
 });

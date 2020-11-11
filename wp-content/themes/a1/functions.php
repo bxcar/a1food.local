@@ -241,7 +241,7 @@ function woo_is_in_cart($product_id) {
     return 0;
 }
 
-add_filter( 'woocommerce_checkout_fields' , 'custom_remove_woo_checkout_fields' );
+//add_filter( 'woocommerce_checkout_fields' , 'custom_remove_woo_checkout_fields' );
 
 function custom_remove_woo_checkout_fields( $fields ) {
     unset($fields['billing']['billing_last_name']);
@@ -357,3 +357,23 @@ function wl8OrderPlacedTriggerSomething($order_id){
 //https://stackoverflow.com/questions/39401393/how-to-get-woocommerce-order-details
 //https://stackoverflow.com/questions/51947198/how-to-query-woocommerce-orders-on-a-page
 
+add_action('admin_head', 'my_custom_style');
+
+function my_custom_style() {
+    echo '<style>
+    .banks-cards-list {
+      display: none;
+    } 
+  </style>';
+}
+
+add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
+add_action( 'woocommerce_before_cart_totals', 'custom_cart_total' );
+function custom_cart_total() {
+    include "custom_files_dm/calculate_total_price_with_delivery.php";
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+    WC()->cart->total = (int)$cart_total_price + (int)$delivery;
+}

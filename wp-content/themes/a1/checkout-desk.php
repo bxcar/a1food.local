@@ -274,7 +274,8 @@ the_content();
 
     $('.checkout-desk-bottom-submit').on('click', function (e) {
         e.preventDefault();
-        var formData = $('.payment__card').serialize();
+        $('form.woocommerce-checkout').submit();
+        /*var formData = $('.payment__card').serialize();
         $.ajax({
             'method': 'POST',
             'dataType': 'json',
@@ -291,8 +292,24 @@ the_content();
             error: function (data) {
                 console.log(data);
             }
-        });
+        });*/
     });
+
+    $('#billing_address_1').attr('value', $('#address-1').attr('value'));
+
+    $('.delivery-form__address-input').on('click', function (e) {
+        $('#billing_address_1').attr('value', $(this).attr('value'));
+    });
+
+    <?php if(get_field('user_name_field', 'user_' . get_current_user_id())) { ?>
+    $('#billing_first_name').attr('value', '<?= get_field('user_name_field', 'user_' . get_current_user_id()); ?>');
+    <?php } else { ?>
+    $('#billing_first_name').attr('value', 'Имя не задано');
+    <?php } ?>
+
+    $('#billing_phone').attr('value', '<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>');
+    $('#billing_date').attr('value', 'Сегодня');
+    $('#billing_time').attr('value', 'Ближайшее');
 
 </script>
 <?php get_footer() ?>

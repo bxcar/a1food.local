@@ -8,7 +8,6 @@
  *
  * @package a1
  */
-
 ?>
 
 <div class="footer">
@@ -37,42 +36,7 @@
 </script>
 <!--footer scripts end-->
 <?php
-$cart_total_price =  WC()->cart->cart_contents_total;
-
-date_default_timezone_set('Asia/Omsk');
-$day = date('w', strtotime(date('m/d/Y', time())));
-$hour = date('G', time());
-
-if($day == 1) {
-    $day = 0;
-} else if($day == 2) {
-    $day = 1;
-} else if($day == 3) {
-    $day = 2;
-} else if($day == 4) {
-    $day = 3;
-} else if($day == 5) {
-    $day = 4;
-} else if($day == 6) {
-    $day = 5;
-} else if($day == 0) {
-    $day = 6;
-}
-
-if($hour < 12) {
-    $hour = 12;
-}
-
-$delivery_current_time_price = get_field('delivery_price_by_hours', 'option')['body'][$day][$hour]['c'];
-
-$delivery = 0;
-if(($cart_total_price < get_field('free_delivery_min_price', 'option')) || !get_field('free_delivery_min_price_logic', 'option')) {
-    $delivery = (int)$delivery_current_time_price;
-}
-
-if($cart_total_price == 0) {
-    $delivery = 0;
-}
+include "custom_files_dm/calculate_total_price_with_delivery.php";
 ?>
 <script>
     var cart_formatted_value = '<?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?>';
@@ -126,6 +90,44 @@ if($cart_total_price == 0) {
         items: 1,
     });
 </script>
+<?php print_r(WC()->cart->total); ?>
 <?php wp_footer(); ?>
+<?php
+if(get_field('page_popup')['logic'] && !isset($_SESSION["page_popup_".get_the_ID()])) {
+    $_SESSION["page_popup_".get_the_ID()] = 1;?>
+    <a class="slider__item sl-popup page-popup">
+        <div class="slider__item-left">
+            <span class="slider__title"><?= get_field('page_popup')['message']?></span>
+            <span class="slider__text"><?= get_field('page_popup')['desc']?></span>
+        </div>
+        <div class="slider__item-right">
+            <img src="<?= get_field('page_popup')['img']?>" class="slider__img">
+        </div>
+        <img class="sl-popup__close" src="<?= get_template_directory_uri(); ?>/img/close-popup.svg" alt="close">
+    </a>
+    <div class="overlay-sl-popup page-popup"></div>
+<?php }
+?>
+<?php
+date_default_timezone_set('Asia/Omsk');
+$day_footer = date('w', strtotime(date('m/d/Y', time())));
+$hour_footer = date('G', time());
+$delivery_current_time_price_footer = get_field('delivery_price_by_hours', 'option')['body'][$day][$hour]['c'];
+
+if(get_field('popup_non_working_hours','option')['logic']  && !isset($_SESSION["popup_non_working_hours"]) && !$delivery_current_time_price_footer) {
+    $_SESSION["popup_non_working_hours"] = 1;?>
+    <a class="slider__item sl-popup hours-popup">
+        <div class="slider__item-left">
+            <span class="slider__title"><?= get_field('popup_non_working_hours','option')['message']?></span>
+            <span class="slider__text"><?= get_field('popup_non_working_hours','option')['desc']?></span>
+        </div>
+        <div class="slider__item-right">
+            <img src="<?= get_field('popup_non_working_hours','option')['img']?>" class="slider__img">
+        </div>
+        <img class="sl-popup__close" src="<?= get_template_directory_uri(); ?>/img/close-popup.svg" alt="close">
+    </a>
+    <div class="overlay-sl-popup hours-popup"></div>
+<?php }
+?>
 </body>
 </html>
