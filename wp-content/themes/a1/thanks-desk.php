@@ -19,7 +19,26 @@ if(!is_user_logged_in()) { ?>
     <script>
         window.location.href="/login";
     </script>
-<?php }
+<?php } ?>
+
+<?php
+/*$order_id = 233;
+$order = wc_get_order( $order_id );
+$order_data = $order->get_data();
+$user_id = $order->get_user_id();
+
+$user_name = get_field('user_name_field', 'user_' . $user_id);
+$user_email = get_field('user_email_field', 'user_' . $user_id);
+$user_phone = get_field('user_phone_field', 'user_' . $user_id);
+$order_address = $order_data['billing']['address_1'];
+$order_date = get_post_meta( $order_id, '_billing_date', true);
+$order_time = get_post_meta( $order_id, '_billing_time', true);
+
+foreach ($order->get_items() as $item_key => $item ):
+    $item_data    = $item->get_data();
+    $product_name = $item_data['name'];
+    $quantity     = $item_data['quantity'];
+endforeach;*/
 
 ?>
 
