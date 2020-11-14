@@ -112,7 +112,7 @@ the_content();
                                 $date_echo = $day . ' ' . $date_number . ' ' . $date_month;
                             }
                             ?>
-                            <span class="delivery-form__date-subfield" data-date="<?= date('d/m/Y', time() + $time_plus) ?>"><?= $date_echo ?></span>
+                            <span class="delivery-form__date-subfield" data-date="<?= date('Y-m-d', time() + $time_plus) ?>"><?= $date_echo ?></span>
                         <?php $time_plus += 86400; }
                         ?>
                     </div>
@@ -144,9 +144,11 @@ the_content();
                             }
                         }
 
+                        $full_time_line_for_js_in_the_bottom = $hour . ':'. $minute . ':' . '00';
+
                         ?>
-                        <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute" ?>">Ближайшее</span>
-                        <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute" ?>"><?php echo "$hour:$minute" ?></span>
+                        <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute:00" ?>">Ближайшее</span>
+                        <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute:00" ?>"><?php echo "$hour:$minute" ?></span>
                         <?php
                         if($minute == '30') {
                             $minute = '00';
@@ -168,7 +170,7 @@ the_content();
                             $hour += 0.5;
                             $hour_current =(int)$hour;
                             ?>
-                            <span class="delivery-form__date-subfield"  data-time="<?php echo "$hour_current:$minute_current" ?>"><?php echo "$hour_current:$minute_current" ?></span>
+                            <span class="delivery-form__date-subfield"  data-time="<?php echo "$hour_current:$minute_current:00" ?>"><?php echo "$hour_current:$minute_current" ?></span>
                         <?php $i++; } ?>
                     </div>
                 </div>
@@ -287,8 +289,8 @@ the_content();
     <?php } ?>
 
     $('#billing_phone').attr('value', '<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>');
-    $('#billing_date').attr('value', 'Сегодня');
-    $('#billing_time').attr('value', 'Ближайшее');
+    $('#billing_date').attr('value', '<?= date('Y-m-d', time()) ?>');
+    $('#billing_time').attr('value', '<?= $full_time_line_for_js_in_the_bottom ?>');
 
 </script>
 <?php get_footer() ?>

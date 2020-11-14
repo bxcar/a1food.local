@@ -35,10 +35,10 @@ $(document).ready(function () {
         $('.delivery-form__date .delivery-form__date-main-field-text').text($(this).text());
         $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
 
-        $('#billing_date').attr('value', $(this).text());
-        if($('#billing_time').attr('value') === 'Ближайшее') {
+        $('#billing_date').attr('value', $(this).data('date'));
+        /*if($('#billing_time').attr('value') === 'Ближайшее') {
             $('#billing_time').attr('value', '12:00');
-        }
+        }*/
 
         if($(this).text() != 'Сегодня') {
             if($('.delivery-form__time .delivery-form__date-main-field-text').text() == 'Ближайшее') {
@@ -55,7 +55,7 @@ $(document).ready(function () {
                     current_min = '30';
                     min = -30;
                 }
-                $('.delivery-form__time .delivery-form__date-subfields').append('<span class="delivery-form__date-subfield" data-time="' + parseInt(hour) + ':' + current_min + '">' + parseInt(hour) + ':' + current_min + '</span>');
+                $('.delivery-form__time .delivery-form__date-subfields').append('<span class="delivery-form__date-subfield" data-time="' + parseInt(hour) + ':' + current_min + ':00">' + parseInt(hour) + ':' + current_min + '</span>');
             hour += 0.5;
             min += 30;
             }
@@ -63,7 +63,7 @@ $(document).ready(function () {
             $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
                 $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
                 $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
-                $('#billing_time').attr('value', $(this).text());
+                $('#billing_time').attr('value', $(this).data('time'));
             });
 
         } else {
@@ -75,7 +75,7 @@ $(document).ready(function () {
     $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
         $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
         $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
-        $('#billing_time').attr('value', $(this).text());
+        $('#billing_time').attr('value', $(this).data('time'));
     });
 
     $('.orders__item-rating-stars span').on('mouseenter', function () {

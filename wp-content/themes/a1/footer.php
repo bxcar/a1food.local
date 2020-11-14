@@ -112,7 +112,7 @@ if(get_field('page_popup')['logic'] && !isset($_SESSION["page_popup_".get_the_ID
 date_default_timezone_set('Asia/Omsk');
 $day_footer = date('w', strtotime(date('m/d/Y', time())));
 $hour_footer = date('G', time());
-$delivery_current_time_price_footer = get_field('delivery_price_by_hours', 'option')['body'][$day][$hour]['c'];
+$delivery_current_time_price_footer = get_field('delivery_price_by_hours', 'option')['body'][$day_footer][$hour_footer]['c'];
 
 if(get_field('popup_non_working_hours','option')['logic']  && !isset($_SESSION["popup_non_working_hours"]) && !$delivery_current_time_price_footer) {
     $_SESSION["popup_non_working_hours"] = 1;?>
