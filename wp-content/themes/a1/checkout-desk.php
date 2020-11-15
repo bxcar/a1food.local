@@ -36,7 +36,7 @@ the_content();
                     if ($item['apartment']) {
                         echo ', кв./офис ' . $item['apartment'];
                     }
-                    ?>" readonly data-street="<?= $item['street'] ?>" data-building="<?= $item['building'] ?>" data-entrance="<?= $item['entrance'] ?>" data-foor="<?= $item['floor'] ?>" data-apartment="<?= $item['apartment'] ?>">
+                    ?>" readonly data-street="<?= $item['street'] ?>" data-home="<?= $item['building'] ?>" data-pod="<?= $item['entrance'] ?>" data-et="<?= $item['floor'] ?>" data-apart="<?= $item['apartment'] ?>">
                 <?php $i++; }
             } else { ?>
                 <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address">Добавить адрес</a>
@@ -276,10 +276,32 @@ the_content();
         $('form.woocommerce-checkout').submit();
     });
 
-    $('#billing_address_1').attr('value', $('#address-1').attr('value'));
+    // $('#billing_address_1').attr('value', $('#address-1').attr('value'));
+    $('#billing_street').attr('value', $('#address-1').data('street'));
+    $('#billing_home').attr('value', $('#address-1').data('home'));
+    if($('#address-1').data('pod')) {
+        $('#billing_pod').attr('value', $('#address-1').data('pod'));
+    }
+    if($('#address-1').data('et')) {
+        $('#billing_et').attr('value', $('#address-1').data('et'));
+    }
+    if($('#address-1').data('apart')) {
+        $('#billing_apart').attr('value', $('#address-1').data('apart'));
+    }
 
     $('.delivery-form__address-input').on('click', function (e) {
-        $('#billing_address_1').attr('value', $(this).attr('value'));
+        // $('#billing_address_1').attr('value', $(this).attr('value'));
+        $('#billing_street').attr('value', $(this).data('street'));
+        $('#billing_home').attr('value', $(this).data('home'));
+        if($(this).data('pod')) {
+            $('#billing_pod').attr('value', $(this).data('pod'));
+        }
+        if($(this).data('et')) {
+            $('#billing_et').attr('value', $(this).data('et'));
+        }
+        if($(this).data('apart')) {
+            $('#billing_apart').attr('value', $(this).data('apart'));
+        }
     });
 
     <?php if(get_field('user_name_field', 'user_' . get_current_user_id())) { ?>

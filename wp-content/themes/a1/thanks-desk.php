@@ -30,11 +30,11 @@ $user_id = $order->get_user_id();
 $user_name = get_field('user_name_field', 'user_' . $user_id);
 $user_email = get_field('user_email_field', 'user_' . $user_id);
 $user_phone = get_field('user_phone_field', 'user_' . $user_id);
-$order_street = '';
-$order_home = '';
-$order_pod = '';
-$order_et = '';
-$order_apart = '';
+$order_street = get_post_meta( $order_id, '_billing_street', true);
+$order_home = get_post_meta( $order_id, '_billing_home', true);
+$order_pod = get_post_meta( $order_id, '_billing_pod', true);
+$order_et = get_post_meta( $order_id, '_billing_et', true);
+$order_apart = get_post_meta( $order_id, '_billing_apart',  true);
 $order_date = get_post_meta( $order_id, '_billing_date', true);
 $order_time = get_post_meta( $order_id, '_billing_time', true);
 $order_date_and_time = $order_date . ' ' . $order_time;
@@ -49,7 +49,7 @@ foreach ($order->get_items() as $item_key => $item ):
     $products_quantity_array[] = $item_data['quantity'];
 endforeach;
 
-print_r($order_date_and_time);
+//print_r($order_date_and_time);
 
 /*$url = 'https://app.frontpad.ru/api/index.php?new_order';
 $data = array(
