@@ -2,6 +2,12 @@
 /* Template Name: thanks-desk */
 get_header();
 
+if(!is_user_logged_in()) { ?>
+    <script>
+        window.location.href="/login";
+    </script>
+<?php }
+
 if(isset($_GET['order_id'])) {
     WC()->cart->empty_cart();
     $order_id = $_GET['order_id'];
@@ -13,56 +19,87 @@ if(isset($_GET['order_id'])) {
     }
     update_field('number_of_orders', $new_number_of_orders, 'user_' . get_current_user_id());
     update_field('order_number_for_current_customer', $new_number_of_orders, $order_id);
-}
 
-if(!is_user_logged_in()) { ?>
-    <script>
-        window.location.href="/login";
-    </script>
-<?php } ?>
+    $order = wc_get_order( $order_id );
+    $order_data = $order->get_data();
+    $user_id = $order->get_user_id();
 
-<?php
-$order_id = 236;
-$order = wc_get_order( $order_id );
-$order_data = $order->get_data();
-$user_id = $order->get_user_id();
+    $user_name = get_field('user_name_field', 'user_' . $user_id);
+    $user_email = get_field('user_email_field', 'user_' . $user_id);
+    $user_phone = get_field('user_phone_field', 'user_' . $user_id);
+    $order_street = get_post_meta( $order_id, '_billing_street', true);
+    $order_home = get_post_meta( $order_id, '_billing_home', true);
+    $order_pod = get_post_meta( $order_id, '_billing_pod', true);
+    $order_et = get_post_meta( $order_id, '_billing_et', true);
+    $order_apart = get_post_meta( $order_id, '_billing_apart',  true);
+    $order_date = get_post_meta( $order_id, '_billing_date', true);
+    $order_time = get_post_meta( $order_id, '_billing_time', true);
+    $order_date_and_time = $order_date . ' ' . $order_time;
 
-$user_name = get_field('user_name_field', 'user_' . $user_id);
-$user_email = get_field('user_email_field', 'user_' . $user_id);
-$user_phone = get_field('user_phone_field', 'user_' . $user_id);
-$order_street = get_post_meta( $order_id, '_billing_street', true);
-$order_home = get_post_meta( $order_id, '_billing_home', true);
-$order_pod = get_post_meta( $order_id, '_billing_pod', true);
-$order_et = get_post_meta( $order_id, '_billing_et', true);
-$order_apart = get_post_meta( $order_id, '_billing_apart',  true);
-$order_date = get_post_meta( $order_id, '_billing_date', true);
-$order_time = get_post_meta( $order_id, '_billing_time', true);
-$order_date_and_time = $order_date . ' ' . $order_time;
-//$order_address = $order_data['billing']['address_1'];
-
-$products_array = array();
-$products_quantity_array = array();
-foreach ($order->get_items() as $item_key => $item ):
-    $item_data    = $item->get_data();
-    $products_array[] = $item->get_product_id();
+    $products_array = array();
+    $products_quantity_array = array();
+    foreach ($order->get_items() as $item_key => $item ):
+        $item_data    = $item->get_data();
+        $products_array[] = $item->get_product_id();
 //    $product_name = $item_data['name'];
-    $products_quantity_array[] = $item_data['quantity'];
-endforeach;
+        $products_quantity_array[] = $item_data['quantity'];
+    endforeach;
 
-//print_r($order_date_and_time);
+    $data = array(
+        'secret' => 'EBrSYtTE4nT9aih9y6KQyRG7Q96AZkanQr6zKQ4B4HB5TH5dEDS2fnYYkQh94hnEBh49ZSBQr4G8BAa54TS88BShd3f69zAAFnAr635iSBff2haR5SN3ft9ihfefEEG8T7nQZf2EG6KydK97sNZA6YKb4SiyhTs5RFFBNs5fiEDrbBkya8Y7Tt9K9i6h5iaHSG8s24B9t5nztBSyABrfYrTYBN6t274FD32nRkk9eDzA4bTrE9Akne8QT4',
+        'product' => $products_array,
+        'product_kol' => $products_quantity_array,
+    );
 
-/*$url = 'https://app.frontpad.ru/api/index.php?new_order';
-$data = array(
-    'secret' => 'EBrSYtTE4nT9aih9y6KQyRG7Q96AZkanQr6zKQ4B4HB5TH5dEDS2fnYYkQh94hnEBh49ZSBQr4G8BAa54TS88BShd3f69zAAFnAr635iSBff2haR5SN3ft9ihfefEEG8T7nQZf2EG6KydK97sNZA6YKb4SiyhTs5RFFBNs5fiEDrbBkya8Y7Tt9K9i6h5iaHSG8s24B9t5nztBSyABrfYrTYBN6t274FD32nRkk9eDzA4bTrE9Akne8QT4',
-    'product' => $products_array,
-    'product_kol' => $products_quantity_array,
-);
-$curl = curl_init($url);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$response = curl_exec($curl);
-curl_close($curl);*/
+    if($user_name) {
+        $data['name'] = $user_name;
+    }
+
+    if($user_email) {
+        $data['mail'] = $user_email;
+    }
+
+    if($user_phone) {
+        $data['phone'] = $user_phone;
+    }
+
+    if($order_street) {
+        $data['street'] = $order_street;
+    }
+
+    if($order_home) {
+        $data['home'] = $order_home;
+    }
+
+    if($order_pod) {
+        $data['pod'] = $order_pod ;
+    }
+
+    if($order_et) {
+        $data['et'] = $order_et;
+    }
+
+    if($order_apart) {
+        $data['apart'] = $order_apart;
+    }
+
+    if($order_date_and_time) {
+        $data['datetime'] = $order_date_and_time;
+    }
+
+    $data['pay'] = 2;
+
+
+    $url = 'https://app.frontpad.ru/api/index.php?new_order';
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    print_r($response);
+}
 
 ?>
 
@@ -71,6 +108,10 @@ curl_close($curl);*/
         <span class="tanks__subtitle">Ваш заказ уже в пути</span>
         <a href="/orders" class="thanks-button">Отследить заказ</a>
     </div>
+
+<script>
+    window.history.replaceState(null, null, window.location.pathname);
+</script>
 
 
 
