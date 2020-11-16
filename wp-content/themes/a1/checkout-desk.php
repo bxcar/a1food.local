@@ -50,7 +50,15 @@ the_content();
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-data-icon.svg" class="delivery-form__date-main-field-left-img">
                         <div class="delivery-form__date-main-field-inner-wrapper">
                             <span class="delivery-form__date__title">Дата доставки</span>
-                            <span class="delivery-form__date-main-field-text">Сегодня</span>
+                            <?php
+                            date_default_timezone_set('Asia/Omsk');
+                            $current_hour = date('H', time());
+                            if($current_hour >= 23) { ?>
+                                <span class="delivery-form__date-main-field-text">Завтра</span>
+                            <?php } else { ?>
+                                <span class="delivery-form__date-main-field-text">Сегодня</span>
+                            <?php }
+                            ?>
                         </div>
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-bottom-icon.svg" class="delivery-form__date-main-field-right-img">
                     </div>
@@ -104,6 +112,7 @@ the_content();
                             } else if($date_month == 12) {
                                 $date_month = 'декабря';
                             }
+
                             if($i == 0) {
                                 $date_echo = 'Сегодня';
                             } else if($i == 1) {
@@ -111,9 +120,12 @@ the_content();
                             } else {
                                 $date_echo = $day . ' ' . $date_number . ' ' . $date_month;
                             }
-                            ?>
-                            <span class="delivery-form__date-subfield" data-date="<?= date('Y-m-d', time() + $time_plus) ?>"><?= $date_echo ?></span>
-                        <?php $time_plus += 86400; }
+
+                            if(!($i == 0 && $current_hour >= 23)) { ?>
+                                <span class="delivery-form__date-subfield" data-date="<?= date('Y-m-d', time() + $time_plus) ?>"><?= $date_echo ?></span>
+                            <?php }
+
+                             $time_plus += 86400; }
                         ?>
                     </div>
                 </div>
@@ -311,7 +323,12 @@ the_content();
     <?php } ?>
 
     $('#billing_phone').attr('value', '<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>');
-    $('#billing_date').attr('value', '<?= date('Y-m-d', time()) ?>');
+    $('#billing_date').attr('value', '<?php
+        if($current_hour >= 23) {
+            echo date('Y-m-d', time()+3600);
+        } else {
+            echo date('Y-m-d', time());
+        } ?>');
     $('#billing_time').attr('value', '<?= $full_time_line_for_js_in_the_bottom ?>');
 
 </script>

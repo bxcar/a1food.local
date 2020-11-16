@@ -35,20 +35,33 @@ if(isset($_GET['order_id'])) {
     $order_date = get_post_meta( $order_id, '_billing_date', true);
     $order_time = get_post_meta( $order_id, '_billing_time', true);
     $order_date_and_time = $order_date . ' ' . $order_time;
+    $promo_code = '';
+
+    foreach( $order->get_coupon_codes() as $coupon_code ) {
+        $coupon = new WC_Coupon($coupon_code);
+        $promo_code = $coupon->get_code();
+    }
 
     $products_array = array();
     $products_quantity_array = array();
+    $products_prices_array = array();
     foreach ($order->get_items() as $item_key => $item ):
-        $item_data    = $item->get_data();
+        $item_data = $item->get_data();
+        $product = $item->get_product();
         $products_array[] = $item->get_product_id();
-//    $product_name = $item_data['name'];
         $products_quantity_array[] = $item_data['quantity'];
+        $products_prices_array[] = $product->get_price();
     endforeach;
+
+    $products_array[] = 7777;
+    $products_quantity_array[] = 1;
+    $products_prices_array[] = $order_data['shipping_total'];
 
     $data = array(
         'secret' => 'EBrSYtTE4nT9aih9y6KQyRG7Q96AZkanQr6zKQ4B4HB5TH5dEDS2fnYYkQh94hnEBh49ZSBQr4G8BAa54TS88BShd3f69zAAFnAr635iSBff2haR5SN3ft9ihfefEEG8T7nQZf2EG6KydK97sNZA6YKb4SiyhTs5RFFBNs5fiEDrbBkya8Y7Tt9K9i6h5iaHSG8s24B9t5nztBSyABrfYrTYBN6t274FD32nRkk9eDzA4bTrE9Akne8QT4',
         'product' => $products_array,
         'product_kol' => $products_quantity_array,
+        'product_price' => $products_prices_array,
     );
 
     if($user_name) {
@@ -88,6 +101,10 @@ if(isset($_GET['order_id'])) {
     }
 
     $data['pay'] = 2;
+
+    if($promo_code) {
+        $data['certificate'] = $promo_code;
+    }
 
 
     $url = 'https://app.frontpad.ru/api/index.php?new_order';
