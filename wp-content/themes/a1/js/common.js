@@ -78,7 +78,32 @@ $(document).ready(function () {
         $('#billing_time').attr('value', $(this).data('time'));
     });
 
-    $('.orders__item-rating-stars span').on('mouseenter', function () {
+    $('.orders__item-feedback').on('submit', function (e) {
+        e.preventDefault();
+        // var formData = $(this).serialize();
+        var formData =  new FormData(document.getElementById("orders__item-feedback"));
+        $.ajax({
+            'method': 'POST',
+            'dataType': 'json',
+            'url': '/wp-content/themes/a1/custom_files_dm/add_feedback.php',
+            'data':  formData,
+            'cache': false,
+            'contentType': false,
+            'processData': false,
+            success: function (data) {//success callback
+                if(data.success === 'true') {
+                    $('.orders__item-feedback input[type="submit"]').attr('value', 'Отзыв отправлен').prop( "disabled", true );
+                } else {
+                    $('.orders__item-feedback input[type="submit"]').attr('value', 'Ошибка');
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+    $('.orders__item-rating-stars.not-chosen span').on('mouseenter', function () {
         $(this).find('svg path').css('fill', 'FFC000');
         $(this).prevAll().find('svg path').css('fill', 'FFC000');
     }).on('mouseleave', function () {
@@ -86,7 +111,9 @@ $(document).ready(function () {
         $(this).prevAll().find('svg path').css('fill', '444444');
     }).on('click', function () {
         $('.orders__item-rating-stars span').off('mouseleave').off('mouseenter');
-        $(this).parent().parent().parent().find('.orders__item-feedback').slideDown( 500 )
+        $(this).parent().parent().parent().find('.orders__item-feedback').slideDown( 500 );
+        $('.orders__item-feedback input[name="stars"]').attr('value', $(this).data('star'));
+        // $('.orders__item-feedback').submit();
     });
 
     $('.orders__item-check').on('click', function () {

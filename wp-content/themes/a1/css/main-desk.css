@@ -1485,6 +1485,10 @@ ol, ul {
     cursor: pointer
 }
 
+.orders__item-rating-stars.chosen span svg path {
+    fill: #FFC000;
+}
+
 .orders__item-feedback {
     margin-top: 14px;
     position: relative;

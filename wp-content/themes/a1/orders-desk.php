@@ -87,27 +87,45 @@ if(!is_user_logged_in()) { ?>
                     <?php } ?>
 
                 </div>
-                <?php if ($order_status == 'Доставлен') { ?>
-                    <div class="orders__item-rating">
-                        <span class="orders__item-rating-title">Оцените заказ</span>
-                        <div class="orders__item-rating-stars">
-                            <span><?php include "img/star-icon.svg" ?></span>
-                            <span><?php include "img/star-icon.svg" ?></span>
-                            <span><?php include "img/star-icon.svg" ?></span>
-                            <span><?php include "img/star-icon.svg" ?></span>
-                            <span><?php include "img/star-icon.svg" ?></span>
+                <?php if ($order_status == 'Доставлен') {
+                    if(get_field('client_feedback_stars')) { ?>
+                        <div class="orders__item-rating">
+                            <span class="orders__item-rating-title">Ваш отзыв</span>
+                            <div class="orders__item-rating-stars chosen">
+                                <?php
+                                for ($i = 0; $i < get_field('client_feedback_stars'); $i++) { ?>
+                                    <span><?php include "img/star-icon.svg" ?></span>
+                                <?php } ?>
+                            </div>
                         </div>
-                    </div>
-                    <form action="#" method="post" class="orders__item-feedback">
-                        <textarea name="feedback" placeholder="Вы можете оставить отзыв"></textarea>
-                        <img src="<?= get_template_directory_uri(); ?>/img/feedback-icon.svg"
-                             class="orders__item-feedback-icon">
-                        <div class="orders__item-feedback-file-wrapper">
-                            <label class="orders__item-feedback-file-image" for="file"><img
-                                        src="<?= get_template_directory_uri(); ?>/img/input-file-img.svg"></label>
-                            <input type="file" name="file" id="file">
+                        <?php if(get_field('client_feedback_text')) { ?>
+                            <span class="orders__item-address" style="margin-top: 10px;margin-bottom: 0;"><?= get_field('client_feedback_text') ?></span>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <div class="orders__item-rating">
+                            <span class="orders__item-rating-title">Оцените заказ</span>
+                            <div class="orders__item-rating-stars not-chosen">
+                                <span data-star="1"><?php include "img/star-icon.svg" ?></span>
+                                <span data-star="2"><?php include "img/star-icon.svg" ?></span>
+                                <span data-star="3"><?php include "img/star-icon.svg" ?></span>
+                                <span data-star="4"><?php include "img/star-icon.svg" ?></span>
+                                <span data-star="5"><?php include "img/star-icon.svg" ?></span>
+                            </div>
                         </div>
-                    </form>
+                        <form action="#" method="post" class="orders__item-feedback" id="orders__item-feedback" enctype="multipart/form-data">
+                            <input type="hidden" name="stars">
+                            <input type="hidden" name="order_id" value="<?= $order_id ?>">
+                            <textarea name="feedback" placeholder="Вы можете оставить отзыв"></textarea>
+                            <img src="<?= get_template_directory_uri(); ?>/img/feedback-icon.svg"
+                                 class="orders__item-feedback-icon">
+                            <div class="orders__item-feedback-file-wrapper">
+                                <label class="orders__item-feedback-file-image" for="file"><img
+                                            src="<?= get_template_directory_uri(); ?>/img/input-file-img.svg"></label>
+                                <input type="file" name="file" id="file">
+                            </div>
+                            <input type="submit" value="Отправить" style="margin-left: auto;border: none;outline: none;margin-top: 10px;height: 40px;cursor: pointer;" class="cabinet__top-buttons-orders">
+                        </form>
+                    <?php } ?>
                 <?php } ?>
             </div>
 
