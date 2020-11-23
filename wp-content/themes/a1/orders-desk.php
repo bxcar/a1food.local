@@ -39,7 +39,7 @@ if(!is_user_logged_in()) { ?>
             $user_phone = get_field('user_phone_field', 'user_' . get_current_user_id());
             $user_phone = preg_replace('/[^0-9]/', '', $user_phone);
             $user_phone = substr($user_phone, 1);
-            $order_number = $user_phone . '-' . get_field('order_number_for_current_customer', $order_data['id']);;
+            $order_number = $user_phone . '-' . get_field('order_number_for_current_customer', $order_data['id']);
             $order_address = $order_data['billing']['address_1'];
 
 
