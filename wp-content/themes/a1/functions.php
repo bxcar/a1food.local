@@ -471,3 +471,10 @@ function md_support_save($order_id){
 
 //https://wordpress.stackexchange.com/questions/198781/wordpress-ajax-file-upload-frontend
 //https://stackoverflow.com/questions/21214608/jquery-ajax-single-file-upload
+
+function tg_include_custom_post_types_in_search_results( $query ) {
+    if ( $query->is_main_query() && $query->is_search() && ! is_admin() ) {
+        $query->set( 'post_type', array('product') );
+    }
+}
+add_action( 'pre_get_posts', 'tg_include_custom_post_types_in_search_results' );

@@ -8,20 +8,20 @@ if(is_user_logged_in()) { ?>
 <?php }
 ?>
     <div class="login__form-wrapper">
-        <span class="login__form-wrapper__title">Мы вас не узнали</span>
-        <span class="login__title">Пожалуйста, укажите номер телефона</span>
+        <span class="login__form-wrapper__title animated-background">Мы вас не узнали</span>
+        <span class="login__title animated-background">Пожалуйста, укажите номер телефона</span>
 
         <form action="#" method="post" class="login__form1">
-            <input type="text" class="login__form1-number" name="number" id="phone" placeholder="номер телефона" required pattern="+7 (999) 999-99-99">
-            <span class="login__form1-number-before">+7</span>
-            <button type="submit">Получить код</button>
+            <input type="text" class="login__form1-number animated-background" name="number" id="phone" placeholder="номер телефона" required pattern="+7 (999) 999-99-99">
+            <span class="login__form1-number-before animated-background">+7</span>
+            <button type="submit"><span class="animated-background">Получить код</span></button>
         </form>
         <form action="#" method="post" class="login__form2">
-            <input type="number" class="login__form2-code" name="code" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" placeholder="Код из sms" required pattern="999">
-            <button type="submit">Далее</button>
+            <input type="number" class="login__form2-code animated-background" name="code" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" placeholder="Код из sms" required pattern="999">
+            <button type="submit"><span class="animated-background">Далее</span></button>
         </form>
 
-        <p class="login__agreement">Нажимая на кнопку, вы принимаете условия<br> <a href="#">пользовательского соглашения</a></p>
+        <p class="login__agreement animated-background">Нажимая на кнопку, вы принимаете условия<br> <a href="#">пользовательского соглашения</a></p>
     </div>
 
 

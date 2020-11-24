@@ -55,21 +55,21 @@ session_start();
     <header class="header">
         <div class="header_inner_wrapper">
             <!--            <img class="header__menu-button" src="img/burger-menu-icon.svg">-->
-            <a href="/"><img class="header__logo" src="<?= get_field('logo_field', 'option') ?>"></a>
+            <a href="/" class="animated-background"><img class="header__logo" src="<?= get_field('logo_field', 'option') ?>"></a>
         </div>
         <div class="header__login-and-cart-wrapper">
             <?php if(is_user_logged_in()) { ?>
-                <a href="/cabinet" class="header__login-button" style="width: 170px;">
+                <a href="/cabinet" class="header__login-button animated-background" style="width: 170px;">
                     <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
                     <span class="header__login-text"><?= get_field('user_phone_field', 'user_'.get_current_user_id()); ?></span>
                 </a>
             <?php } else { ?>
-                <a href="/login" class="header__login-button">
+                <a href="/login" class="header__login-button animated-background">
                     <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
                     <span class="header__login-text">Войти</span>
                 </a>
             <?php } ?>
-            <a href="/cart" class="header__cart-button">
+            <a href="/cart" class="header__cart-button animated-background">
                 <img src="<?= get_template_directory_uri(); ?>/img/cart-icon.svg">
                 <span>0 ₽</span>
             </a>

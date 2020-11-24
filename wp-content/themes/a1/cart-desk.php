@@ -62,7 +62,7 @@ get_header();
             }
 
             ?>
-            <div class="cart-products__item" data-key="<?= $item ?>" data-id="<?= $values['product_id'] ?>">
+            <div class="cart-products__item animated-background" data-key="<?= $item ?>" data-id="<?= $values['product_id'] ?>">
                 <div class="cart-products__item-wrapper1">
                     <a href="<?= $cart_item_remove_url ?>" class="cart-products__item-remove"><img src="<?= get_template_directory_uri(); ?>/img/cart-product-remove.svg"></a>
                     <img src="<?= get_the_post_thumbnail_url($values['product_id']) ?>" class="cart-products__item-image">
@@ -87,7 +87,7 @@ get_header();
 
         ?>
     </div>
-    <div class="cart-delivery">
+    <div class="cart-delivery animated-background">
         <div class="cart-delivery__left-wrapper">
             <span class="cart-delivery__title">Доставка</span>
             <?php if(($cart_total_price < get_field('free_delivery_min_price', 'option')) && get_field('free_delivery_min_price_logic', 'option')) {
@@ -104,15 +104,15 @@ get_header();
         <?php } ?>
     </div>
     <div class="cart-promo">
-        <div class="cart-promo__title">Введите промокод если есть:</div>
-        <form method="post" action="#" class="cart-promo-form">
+        <div class="cart-promo__title animated-background">Введите промокод если есть:</div>
+        <form method="post" action="#" class="cart-promo-form animated-background">
             <input type="text" name="promo" id="promo" placeholder="6136316136136" maxlength="13">
             <span class="promo-error">Промокод введен неверно</span>
             <span class="promo-success">Промокод активирован</span>
             <input type="submit">
         </form>
     </div>
-    <a style="text-decoration: none;" class="cart-button-desktop"
+    <a style="text-decoration: none;" class="cart-button-desktop animated-background"
         <?php
         if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
             echo 'href=""';
@@ -147,7 +147,7 @@ get_header();
     }
 
     ?>
-    <div class="cart-recommend">
+    <div class="cart-recommend animated-background">
         <span>Рекомендуем</span>
     </div>
 
@@ -167,7 +167,7 @@ get_header();
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post(); ?>
-                <div class="product-item" style="position: relative">
+                <div class="product-item animated-background" style="position: relative">
                     <img class="product-item-img"
                          src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
                     <h2 class="product-item-title"><?php the_title(); ?></h2>

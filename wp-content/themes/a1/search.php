@@ -1,32 +1,12 @@
 <?php get_header(); ?>
-<div class="search">
+<div class="search animated-background">
     <form role="search" method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="search__form searchform">
         <input autocomplete="off" type="search" name="s" id="search" placeholder="Поиск" value="<?= get_search_query() ?>">
         <button type="submit"><img src="<?= get_template_directory_uri(); ?>/img/search-icon.svg"></button>
     </form>
 </div>
-<div class="filters">
-    <?php
-    $categories = get_categories([
-        'taxonomy' => 'category',
-        'hide_empty' => 0
-    ]);
 
-    if ($categories) {
-        foreach ($categories as $cat) {
-            $cat_image_link = get_field('cat_image', 'category_' . $cat->term_id); ?>
-            <a href="/?category_id=<?= $cat->cat_ID ?>" class="filter-item" data-catid="<?= $cat->cat_ID ?>">
-                <?php if ($cat_image_link) {
-                    echo file_get_contents("$cat_image_link");
-                } ?>
-                <span class="filter-item-text"><?= $cat->name ?></span>
-            </a>
-            <?php $i++;
-        }
-    }
-    ?>
-</div>
-<h1 class="main__title">Результаты поиска по запросу: <span><?= get_search_query() ?></span></h1>
+<h1 class="main__title animated-background">Результаты поиска по запросу: <span><?= get_search_query() ?></span></h1>
 <div class="products">
     <?php
 
@@ -35,7 +15,7 @@
     if (have_posts()) {
         while (have_posts()) {
             the_post(); ?>
-            <div class="product-item" style="position: relative">
+            <div class="product-item animated-background" style="position: relative">
                 <img class="product-item-img"
                      src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
                 <h2 class="product-item-title"><?php the_title(); ?></h2>
@@ -47,11 +27,28 @@
 
 
                     </div>
-                    <span class="product-item-price-crossed-out">350 ₽</span>
-                    <div class="product-item-price-wrapper">
-                        <span class="product-item-price-main">249 ₽</span>
-                        <span class="product-item-amount">15</span>
-                    </div>
+                    <?php
+                    $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
+                    if (get_post_meta(get_the_ID(), '_sale_price', true)) {
+                        $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
+                        <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                    <?php } else {
+                        $sale_price = $regular_price; ?>
+                        <span style="visibility: hidden; opacity: 0; height: 0;"
+                              class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                    <?php }
+                    ?>
+                    <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper"
+                       data-id="<?= get_the_ID(); ?>">
+                        <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
+                        <?php
+                        // Usage as a condition in an if statement
+                        if (0 < woo_is_in_cart(get_the_ID())) { ?>
+                            <span class="product-item-amount"><?= woo_is_in_cart(get_the_ID()) ?></span>
+                        <?php } else { ?>
+                            <span class="product-item-amount" style="display: none;"></span>
+                        <?php } ?>
+                    </a>
                 </div>
                 <div class="product-item-bottom-i-desc">
                     <ul class="product-item-bottom-i-list">

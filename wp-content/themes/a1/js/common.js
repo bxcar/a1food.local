@@ -160,3 +160,7 @@ $(document).ready(function () {
         $('.overlay-sl-popup.hours-popup').css('display', 'none');
     });
 });
+
+window.onload = function () {
+    $('*').removeClass('animated-background');
+};

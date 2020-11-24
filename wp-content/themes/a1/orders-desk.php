@@ -9,14 +9,14 @@ if(!is_user_logged_in()) { ?>
 
 ?>
 
-<div class="cabinet__title-wrapper">
+<div class="cabinet__title-wrapper animated-background">
     <h1 class="cabinet__title">Личный кабинет</h1>
 </div>
 
 <div class="cabinet__top-buttons">
-    <a href="/cabinet" class="cabinet__top-buttons-profile inactive"><?php include "img/cabinet-profile-icon.svg" ?>
+    <a href="/cabinet" class="cabinet__top-buttons-profile inactive animated-background"><?php include "img/cabinet-profile-icon.svg" ?>
         Профиль</a>
-    <a href="/orders" class="cabinet__top-buttons-orders"><?php include "img/cabinet-cart-icon.svg" ?>Заказы</a>
+    <a href="/orders" class="cabinet__top-buttons-orders animated-background"><?php include "img/cabinet-cart-icon.svg" ?>Заказы</a>
 </div>
 
 <div class="orders">
@@ -54,7 +54,7 @@ if(!is_user_logged_in()) { ?>
 
 //        print_r($order_number . '<br>' . $order_address . '<br>' . $order_date . '<br>' . $order_status . '<br>' . $order_total . '<br>'); ?>
 
-            <div class="orders__item order-success">
+            <div class="orders__item order-success animated-background">
                 <div class="orders__item-top-line">
                     <span class="orders__item-number">Заказ #<?= $order_number ?></span>
                     <div class="orders__item-top-line-right">

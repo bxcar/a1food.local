@@ -15,18 +15,18 @@ if(!is_user_logged_in()) { ?>
 the_content();
 ?>
 
-    <div class="cabinet__title-wrapper">
+    <div class="cabinet__title-wrapper animated-background">
         <h1 class="cabinet__title">Оформление заказа</h1>
     </div>
 
     <form method="post" class="delivery-form" id="delivery-form">
         <div class="delivery-form__address">
-            <span class="delivery-address__title">Выберите адрес доставки</span>
+            <span class="delivery-address__title animated-background">Выберите адрес доставки</span>
             <?php
             $i = 1;
             if(get_field('user_addresses_list_field', 'user_' . get_current_user_id())) {
                 foreach (get_field('user_addresses_list_field', 'user_' . get_current_user_id()) as $item) { ?>
-                    <input class="delivery-form__address-input <?php if($i == 1) {echo 'active'; } ?>" type="text" name="address-<?= $i; ?>" id="address-<?= $i; ?>" placeholder="ул. Фрунзе 38, офис 401" value="<?= 'ул. ' . $item['street'] . ' ' . $item['building'] ?>
+                    <input class="delivery-form__address-input animated-background <?php if($i == 1) {echo 'active'; } ?>" type="text" name="address-<?= $i; ?>" id="address-<?= $i; ?>" placeholder="ул. Фрунзе 38, офис 401" value="<?= 'ул. ' . $item['street'] . ' ' . $item['building'] ?>
 <?php if ($item['entrance']) {
                         echo ', под. ' . $item['entrance'];
                     }
@@ -39,14 +39,14 @@ the_content();
                     ?>" readonly data-street="<?= $item['street'] ?>" data-home="<?= $item['building'] ?>" data-pod="<?= $item['entrance'] ?>" data-et="<?= $item['floor'] ?>" data-apart="<?= $item['apartment'] ?>">
                 <?php $i++; }
             } else { ?>
-                <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address">Добавить адрес</a>
+                <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
             <?php }
             ?>
         </div>
         <div class="delivery-form__date-time-wrapper">
             <div class="delivery-form__date">
                 <div class="delivery-form__date-fields-wrapper">
-                    <div class="delivery-form__date-main-field">
+                    <div class="delivery-form__date-main-field animated-background">
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-data-icon.svg" class="delivery-form__date-main-field-left-img">
                         <div class="delivery-form__date-main-field-inner-wrapper">
                             <span class="delivery-form__date__title">Дата доставки</span>
@@ -132,7 +132,7 @@ the_content();
             </div>
             <div class="delivery-form__time">
                 <div class="delivery-form__date-fields-wrapper">
-                    <div class="delivery-form__date-main-field">
+                    <div class="delivery-form__date-main-field animated-background">
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-time-icon.svg" class="delivery-form__date-main-field-left-img">
                         <div class="delivery-form__date-main-field-inner-wrapper">
                             <span class="delivery-form__date__title">Время доставки</span>
@@ -193,7 +193,7 @@ the_content();
 
     <div class="checkout-cards">
         <div class="checkout-cards-left">
-            <div class="checkout-cards-right-price">
+            <div class="checkout-cards-right-price animated-background">
                 <span>Итого к оплате:</span>
                 <span>1 095 ₽</span>
             </div>
@@ -278,8 +278,8 @@ the_content();
         </div>
     </div>
     <div class="checkout-desk-bottom">
-        <span class="checkout-desk-bottom-submit">Оплатить</span>
-        <span class="checkout-desk-bottom-text">А1 доставляет только<br>предоплаченные заказы</span>
+        <span class="checkout-desk-bottom-submit animated-background">Оплатить</span>
+        <span class="checkout-desk-bottom-text animated-background">А1 доставляет только<br>предоплаченные заказы</span>
     </div>
 </div>
 <script>

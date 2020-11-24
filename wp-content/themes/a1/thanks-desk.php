@@ -126,9 +126,9 @@ if(isset($_GET['order_id'])) {
 ?>
 
     <div class="tanks-container">
-        <span class="tanks__title">Спасибо!</span>
-        <span class="tanks__subtitle">Ваш заказ уже в пути</span>
-        <a href="/orders" class="thanks-button">Отследить заказ</a>
+        <span class="tanks__title animated-background">Спасибо!</span>
+        <span class="tanks__subtitle animated-background">Ваш заказ уже в пути</span>
+        <a href="/orders" class="thanks-button animated-background">Отследить заказ</a>
     </div>
 
 <script>

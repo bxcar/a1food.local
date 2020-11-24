@@ -70,6 +70,7 @@ body, html {
 }
 
 body {
+    background: #090909;
     background: url(../img/desk-bg.png) no-repeat;
     background-size: cover;
     position: relative;
@@ -1180,6 +1181,7 @@ ol, ul {
 
 .header__logo {
     width: 123px;
+    display: block;
 }
 
 .header__login-and-cart-wrapper {
@@ -2734,6 +2736,52 @@ input[type=number] {
     background: rgba(9, 9, 9, .73);
     z-index: 1;
     display: block;
+}
+
+@keyframes placeHolderShimmer{
+    0%{
+        background-color: #232323;
+    }
+    50%{
+        background-color: #2d2d2d;
+    }
+    100%{
+        background-color: #232323;
+    }
+}
+
+@-webkit-keyframes placeHolderShimmer
+{
+    0%{
+        background-color: #232323;
+    }
+    50%{
+        background-color: #2d2d2d;
+    }
+    100%{
+        background-color: #232323;
+    }
+}
+
+.animated-background {
+    animation: placeHolderShimmer 1s infinite ease-in-out;
+    -webkit-animation:placeHolderShimmer 1s infinite ease-in-out;
+    /*background: #2B2B2B;*/
+    background-image: none !important;
+    background-size: cover !important;
+    position: relative !important;
+    box-shadow: none !important;
+    text-indent: -9999px !important;
+    font-size: 0 !important;
+}
+
+.footer.animated-background {
+    position: absolute !important;
+    bottom: 0 !important;
+}
+
+.animated-background * {
+    visibility: hidden !important;
 }
 
 

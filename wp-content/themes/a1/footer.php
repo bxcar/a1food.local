@@ -10,7 +10,7 @@
  */
 ?>
 
-<div class="footer">
+<div class="footer animated-background">
     <div class="footer__container">
         <div class="footer__wrapper1">
             <img src="<?= get_template_directory_uri(); ?>/img/logo.svg">

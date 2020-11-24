@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <?php if (get_field('slider_logic', 'option')) { ?>
-    <div class="slider owl-carousel" id="slider">
+    <div class="slider owl-carousel animated-background" id="slider">
         <?php foreach (get_field('slider', 'option') as $item) { ?>
             <a href="<?= $item['link'] ?>" class="slider__item">
                 <div class="slider__item-left">
@@ -16,7 +16,7 @@
 <?php } ?>
 <?php
 if (get_field('search_line', 'option')) { ?>
-    <div class="search">
+    <div class="search animated-background">
         <form role="search" method="get" id="searchform" action="<?php echo esc_url(home_url('/')); ?>"
               class="search__form searchform">
             <input autocomplete="off" type="search" name="s" id="search" placeholder="Поиск">
@@ -53,7 +53,7 @@ if (get_field('search_line', 'option')) { ?>
                 }
                 ?>
             <?php } ?>
-            <a href="/?category_id=<?= $cat->cat_ID ?>" class="filter-item <?php
+            <a href="/?category_id=<?= $cat->cat_ID ?>" class="filter-item animated-background <?php
             if (isset($_GET['category_id'])) {
                 if ($cat->cat_ID == $_GET['category_id']) {
                     echo 'active';
@@ -85,7 +85,7 @@ if (isset($_GET['category_id'])) {
 }
 
 ?>
-<h1 class="main__title"><?= $first_cat_name ?> <span><?= $count ?></span></h1>
+<h1 class="main__title animated-background"><?= $first_cat_name ?> <span><?= $count ?></span></h1>
 <div class="products">
     <?php
     $args = array(
@@ -107,7 +107,7 @@ if (isset($_GET['category_id'])) {
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post(); ?>
-            <div class="product-item" style="position: relative">
+            <div class="product-item animated-background" style="position: relative">
                 <img class="product-item-img"
                      src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
                 <h2 class="product-item-title"><?php the_title(); ?></h2>
