@@ -2784,4 +2784,13 @@ input[type=number] {
     visibility: hidden !important;
 }
 
+.email-alert {
+    display: block;
+    margin-bottom: 20px;
+    color: #FF0303;
+    font-size: 16px;
+}
 
+.email-alert a {
+    color: #FF0303;
+}

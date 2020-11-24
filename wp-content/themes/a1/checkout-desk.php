@@ -20,6 +20,9 @@ the_content();
     </div>
 
     <form method="post" class="delivery-form" id="delivery-form">
+        <?php if(!get_field('user_email_field', 'user_' . get_current_user_id())) { ?>
+            <span class="email-alert animated-background">Для оформления заказа укажите свой email в <a href="/cabinet">личном кабинете</a></span>
+        <?php } ?>
         <div class="delivery-form__address">
             <span class="delivery-address__title animated-background">Выберите адрес доставки</span>
             <?php
@@ -278,8 +281,10 @@ the_content();
         </div>
     </div>
     <div class="checkout-desk-bottom">
-        <span class="checkout-desk-bottom-submit animated-background">Оплатить</span>
-        <span class="checkout-desk-bottom-text animated-background">А1 доставляет только<br>предоплаченные заказы</span>
+        <?php if(get_field('user_email_field', 'user_' . get_current_user_id())) { ?>
+            <span class="checkout-desk-bottom-submit animated-background">Оплатить</span>
+            <span class="checkout-desk-bottom-text animated-background">А1 доставляет только<br>предоплаченные заказы</span>
+        <?php } ?>
     </div>
 </div>
 <script>
@@ -289,6 +294,7 @@ the_content();
     });
 
     // $('#billing_address_1').attr('value', $('#address-1').attr('value'));
+    $('#billing_city').attr('value', 'Омск');
     $('#billing_street').attr('value', $('#address-1').data('street'));
     $('#billing_home').attr('value', $('#address-1').data('home'));
     if($('#address-1').data('pod')) {

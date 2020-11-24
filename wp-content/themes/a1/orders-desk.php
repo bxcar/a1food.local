@@ -25,6 +25,8 @@ if(!is_user_logged_in()) { ?>
         'post_type' => 'shop_order',
         'post_status' => array_keys(wc_get_order_statuses()),
         'posts_per_page' => -1,
+        'meta_key' => '_customer_user',
+        'meta_value' => get_current_user_id(),
     ));
 
     // The Wordpress post loop
