@@ -10,8 +10,23 @@ $(document).ready(function () {
         if(!check_active_class) {
             $(this).parent().addClass('active')
         }*/
+        $('.product-item-bottom-i-desc').removeClass('active');
+        $('.product-item-bottom-i-wrapper').removeClass('active');
+
         $(this).parent().toggleClass('active');
         $(this).parent().parent().parent().find('.product-item-bottom-i-desc').toggleClass('active');
+    });
+
+    $('body').click(function(evt){
+        if(evt.target.className !== 'product-item-bottom-i-desc'
+        && evt.target.className !== 'product-item-bottom-i-list'
+        && evt.target.className !== 'product-item-bottom-i-list-title'
+        && evt.target.className !== 'product-item-bottom-i-list-text'
+        && evt.target.className !== 'product-item-bottom-i-desc-bottom-text'
+        && evt.target.className !== 'product-item-bottom-i') {
+            $('.product-item-bottom-i-desc').removeClass('active');
+            $('.product-item-bottom-i-wrapper').removeClass('active');
+        }
     });
 
     $('.filter-item').on('click', function () {
@@ -93,6 +108,7 @@ $(document).ready(function () {
             success: function (data) {//success callback
                 if(data.success === 'true') {
                     $('.orders__item-feedback input[type="submit"]').attr('value', 'Отзыв отправлен').prop( "disabled", true );
+                    $('.orders__item-feedback textarea').prop( "disabled", true );
                 } else {
                     $('.orders__item-feedback input[type="submit"]').attr('value', 'Ошибка');
                 }
@@ -104,11 +120,11 @@ $(document).ready(function () {
     });
 
     $('.orders__item-rating-stars.not-chosen span').on('mouseenter', function () {
-        $(this).find('svg path').css('fill', 'FFC000');
-        $(this).prevAll().find('svg path').css('fill', 'FFC000');
+        $(this).find('svg path').css('fill', '#FFC000');
+        $(this).prevAll().find('svg path').css('fill', '#FFC000');
     }).on('mouseleave', function () {
-        $(this).find('svg path').css('fill', '444444');
-        $(this).prevAll().find('svg path').css('fill', '444444');
+        $(this).find('svg path').css('fill', '#444444');
+        $(this).prevAll().find('svg path').css('fill', '#444444');
     }).on('click', function () {
         $('.orders__item-rating-stars span').off('mouseleave').off('mouseenter');
         $(this).parent().parent().parent().find('.orders__item-feedback').slideDown( 500 );

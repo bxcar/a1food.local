@@ -2240,7 +2240,8 @@ input[type=number] {
     margin: 0;
     padding-left: 28px;
     padding-right: 31px;
-    margin-bottom: 25px
+    margin-bottom: 25px;
+    min-height: 80px;
 }
 
 .product-item-bottom {

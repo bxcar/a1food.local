@@ -30,7 +30,36 @@
 <script src="<?= get_template_directory_uri(); ?>/js/owl.carousel.min.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/common.js"></script>
 <script>
-    $("#phone").mask("(999) 999-99-99");
+    $.fn.selectRange = function(start, end) {
+        if(end === undefined) {
+            end = start;
+        }
+        return this.each(function() {
+            if('selectionStart' in this) {
+                this.selectionStart = start;
+                this.selectionEnd = end;
+            } else if(this.setSelectionRange) {
+                this.setSelectionRange(start, end);
+            } else if(this.createTextRange) {
+                var range = this.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', end);
+                range.moveStart('character', start);
+                range.select();
+            }
+        });
+    };
+
+    function hasNumber(myString) {
+        return /\d/.test(myString);
+    }
+
+    $("#phone").mask("(999) 999-99-99").on('click', function () {
+        if(!hasNumber($(this).val())) {
+            $(this).selectRange(1);
+        }
+    });
+    // .mask('999-999-9999', { autoclear: false, 'placeholder': '' });
     $("#phone-cabinet").mask("+7 (999) 999-99-99");
     $("#birth-date").mask("99.99.9999");
 </script>
