@@ -15,6 +15,19 @@ require_once("../../../../wp-load.php");
 
 
 if(!empty($_POST['order_id'])) {
+    if(!empty($_FILES['file']['name'])) {
+        $uploadedfilename = $_FILES['file']['name'];
+        $ext = pathinfo($uploadedfilename, PATHINFO_EXTENSION);
+        if(($ext != 'jpg') && ($ext != 'jpeg') && ($ext != 'png')) {
+            echo json_encode(
+                [
+                    'success' => 'invalid_extension'
+                ]
+            );
+            die();
+        }
+    }
+
     $order_id = $_POST['order_id'];
 
     $data = array();
@@ -58,7 +71,7 @@ if(!empty($_POST['order_id'])) {
         if(!empty(md_support_save($order_id))) {
             $file = get_field('client_feedback_file', $order_id);
             $file = str_replace("https://", "",$file);
-            $data['description'] .= " \r\n \r\n Ссылка на загруженный покупателем файл: $file";
+            $data['description'] .= " \r\n \r\n https://$file";
         }
     }
 

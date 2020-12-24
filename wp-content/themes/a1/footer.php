@@ -62,6 +62,16 @@
     // .mask('999-999-9999', { autoclear: false, 'placeholder': '' });
     $("#phone-cabinet").mask("+7 (999) 999-99-99");
     $("#birth-date").mask("99.99.9999");
+
+    $('#slider').owlCarousel({
+        loop:true,
+        nav:false,
+        dots:false,
+        autoplay: true,
+        autoplayTimeout: <?= get_field('slider_interval', 'options') ?>,
+        autoplayHoverPause: true,
+        items: 1
+    });
 </script>
 <!--footer scripts end-->
 <?php
@@ -69,7 +79,8 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
 ?>
 <script>
     var cart_formatted_value = '<?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?>';
-    $('.header__cart-button span').text(cart_formatted_value + ' ₽');
+    var cart_formatted_value_without_delivery = '<?= number_format(((int)$cart_total_price), 0, '.', ' ') ?>';
+    $('.header__cart-button span').text(cart_formatted_value_without_delivery + ' ₽');
     $('.checkout-cards-right-price span:last-child').text(cart_formatted_value + ' ₽');
 </script>
 <script>
@@ -97,7 +108,8 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
                     items_amount = 0;
                 }
                 $this.find('.product-item-amount').text(parseInt(items_amount) + 1);
-                $('.header__cart-button span').text((data.cart_total + <?= (int)$delivery_current_time_price ?>) + ' ₽');
+                //$('.header__cart-button span').text((data.cart_total + <?//= (int)$delivery_current_time_price ?>//) + ' ₽');
+                $('.header__cart-button span').text((data.cart_total) + ' ₽');
                 $('.cart-button-desktop-right span').text((data.cart_total + <?= (int)$delivery_current_time_price ?>) + ' ₽');
                 if(<?= get_the_ID(); ?> == 73) {
                     if($('.cart-products__item[data-id="' + data_id + '"]').length) {

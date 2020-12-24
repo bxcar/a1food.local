@@ -17,7 +17,7 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="img/favicon.png"/>
+    <link rel="icon" href="<?= get_template_directory_uri(); ?>/img/favicon.png"/>
     <title><?php the_title() ?> - A1</title>
 
     <script>
@@ -59,9 +59,13 @@ session_start();
         </div>
         <div class="header__login-and-cart-wrapper">
             <?php if(is_user_logged_in()) { ?>
-                <a href="/cabinet" class="header__login-button animated-background" style="width: 170px;">
+                <a href="/cabinet" class="header__login-button animated-background" style="width: auto; padding-left: 20px; padding-right: 20px; /*width: 170px;*/">
                     <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
-                    <span class="header__login-text"><?= get_field('user_phone_field', 'user_'.get_current_user_id()); ?></span>
+                    <?php if(get_field('user_name_field', 'user_'.get_current_user_id())) { ?>
+                        <span class="header__login-text"><?= get_field('user_name_field', 'user_'.get_current_user_id()); ?></span>
+                    <?php } else { ?>
+                        <span class="header__login-text"><?= get_field('user_phone_field', 'user_'.get_current_user_id()); ?></span>
+                    <?php } ?>
                 </a>
             <?php } else { ?>
                 <a href="/login" class="header__login-button animated-background">

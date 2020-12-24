@@ -125,6 +125,7 @@ if(!is_user_logged_in()) { ?>
                                             src="<?= get_template_directory_uri(); ?>/img/input-file-img.svg"></label>
                                 <input type="file" name="file" id="file">
                             </div>
+                            <span class="orders__item-rating-title" style="display: flex; justify-content: flex-end; margin-top: 10px;">Разрешенные для загрузки форматы файлов: jpg, jpeg, png</span>
                             <input type="submit" value="Отправить" style="margin-left: auto;border: none;outline: none;margin-top: 10px;height: 40px;cursor: pointer;" class="cabinet__top-buttons-orders">
                         </form>
                     <?php } ?>

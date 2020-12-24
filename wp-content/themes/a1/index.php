@@ -27,6 +27,12 @@ if (get_field('search_line', 'option')) { ?>
 ?>
 <div class="filters">
     <?php
+    global $wp_query;
+    $current_product_cat_id =  $wp_query->get_queried_object()->term_id;
+    if($current_product_cat_id) {
+        $_GET['category_id'] = $current_product_cat_id;
+    }
+
     $categories = get_categories([
         'taxonomy' => 'product_cat',
         'hide_empty' => 0
@@ -53,7 +59,7 @@ if (get_field('search_line', 'option')) { ?>
                 }
                 ?>
             <?php } ?>
-            <a href="/?category_id=<?= $cat->cat_ID ?>" class="filter-item animated-background <?php
+            <a href="/<?= $cat->slug ?>" class="filter-item animated-background <?php
             if (isset($_GET['category_id'])) {
                 if ($cat->cat_ID == $_GET['category_id']) {
                     echo 'active';

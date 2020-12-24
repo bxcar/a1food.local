@@ -3,7 +3,7 @@
 get_header();
 if(!is_user_logged_in()) { ?>
     <script>
-        window.location.href="/login";
+        window.location.href="/login?order=true";
     </script>
 <?php } ?>
 <style>

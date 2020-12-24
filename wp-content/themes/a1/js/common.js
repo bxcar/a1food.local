@@ -111,6 +111,9 @@ $(document).ready(function () {
                     $('.orders__item-feedback textarea').prop( "disabled", true );
                 } else {
                     $('.orders__item-feedback input[type="submit"]').attr('value', 'Ошибка');
+                    if(data.success === 'invalid_extension') {
+                        alert('Неверный формат файла. Разрешенные форматы: jpg, jpeg, png.')
+                    }
                 }
             },
             error: function (data) {
@@ -160,12 +163,6 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 
-    $('#slider').owlCarousel({
-        loop:true,
-        nav:false,
-        dots:false,
-        items: 1
-    });
 
     $('.page-popup .sl-popup__close').on('click', function (e) {
         $('.slider__item.sl-popup.page-popup').css('display', 'none');

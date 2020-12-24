@@ -76,6 +76,7 @@ if(is_user_logged_in()) { ?>
         });
     });
 
+
     $('.login__form2').on('submit', function (e) {
         e.preventDefault();
         var authcode = getCookie('authcode');
@@ -92,6 +93,12 @@ if(is_user_logged_in()) { ?>
                         'user_phone_format': user_phone_format
                     },
                 success: function (data) {//success callback
+                    var url_string = window.location.href;
+                    var url = new URL(url_string);
+                    var order = url.searchParams.get("order");
+                   if(order == 'true') {
+                       window.location.href = "/cart";
+                   }
                     window.location.href = "/cabinet";
                 },
                 error: function (data) {
