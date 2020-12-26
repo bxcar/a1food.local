@@ -21,6 +21,9 @@ if(isset($_GET['order_id'])) {
     update_field('order_number_for_current_customer', $new_number_of_orders, $order_id);
 
     $order = wc_get_order( $order_id );
+    //update status to initial
+    $order->update_status('pending');
+
     $order_data = $order->get_data();
     $user_id = $order->get_user_id();
 
@@ -119,6 +122,8 @@ if(isset($_GET['order_id'])) {
     curl_close($curl);
 
     $response = json_decode($response);
+
+//    print_r($response);
 
     update_field('order_id_frontpad', $response->order_id, $order_id);
 }

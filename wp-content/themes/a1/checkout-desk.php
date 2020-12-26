@@ -21,7 +21,9 @@ the_content();
 
     <form method="post" class="delivery-form" id="delivery-form">
         <?php if(!get_field('user_email_field', 'user_' . get_current_user_id())) { ?>
-            <span class="email-alert animated-background">Для оформления заказа укажите свой email в <a href="/cabinet">личном кабинете</a></span>
+            <!--<span class="email-alert animated-background">Для оформления заказа укажите свой email в <a href="/cabinet">личном кабинете</a></span>-->
+            <span class="delivery-address__title animated-background">Введите ваш e-mail (обязательное поле)</span>
+            <input class="temporary-email-field" type="email" id="temporary-email-field" placeholder="example@example.com">
         <?php } ?>
         <div class="delivery-form__address">
             <span class="delivery-address__title animated-background">Выберите адрес доставки</span>
@@ -282,15 +284,46 @@ the_content();
     </div>
     <div class="checkout-desk-bottom">
         <?php if(get_field('user_email_field', 'user_' . get_current_user_id())) { ?>
-            <span class="checkout-desk-bottom-submit animated-background">Оплатить</span>
-            <span class="checkout-desk-bottom-text animated-background">А1 доставляет только<br>предоплаченные заказы</span>
+
         <?php } ?>
+        <span class="checkout-desk-bottom-submit animated-background">Оплатить</span>
+        <span class="checkout-desk-bottom-text animated-background">А1 доставляет только<br>предоплаченные заказы</span>
     </div>
 </div>
 <script>
     $('.checkout-desk-bottom-submit').on('click', function (e) {
         e.preventDefault();
         $('form.woocommerce-checkout').submit();
+    });
+
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    $('#temporary-email-field').on('input', function() {
+        if (validateEmail($(this).val())) {
+            $(this).css('border', '2px solid #3F9B48');
+
+            $.ajax({
+                type: 'post',
+                url: '/wp-content/themes/a1/custom_files_dm/add_email.php',
+                dataType: 'json',
+                data:
+                    {
+                        'contact-email': $(this).val(),
+                    },
+                success: function (data) {//success callback
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log('error');
+                }
+            });
+
+        } else {
+            $(this).css('border', '2px solid #FF0303');
+        }
     });
 
     // $('#billing_address_1').attr('value', $('#address-1').attr('value'));

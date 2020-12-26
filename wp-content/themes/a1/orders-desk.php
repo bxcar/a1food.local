@@ -80,6 +80,8 @@ if(!is_user_logged_in()) { ?>
                     </div>
                     <?php if ($order_status == 'Принят') { ?>
                         <span class="orders__item-status blue">Принят</span>
+                    <?php } else if ($order_status == 'Готовится') { ?>
+                        <span class="orders__item-status yellow">Готовится</span>
                     <?php } else if ($order_status == 'Доставляется') { ?>
                         <span class="orders__item-status yellow">Доставляется</span>
                     <?php } else if ($order_status == 'Доставлен') { ?>

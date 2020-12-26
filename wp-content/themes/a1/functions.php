@@ -259,9 +259,9 @@ function custom_remove_woo_checkout_fields( $fields ) {
 
 //'wc-pending' 'wc-processing'  'wc-on-hold' 'wc-completed' 'wc-cancelled' 'wc-refunded' 'wc-failed'
 function so_39252649_remove_processing_status( $statuses ){
-    if( isset( $statuses['wc-pending'] ) ){
+    /*if( isset( $statuses['wc-pending'] ) ){
         unset( $statuses['wc-pending'] );
-    }
+    }*/
 
     if( isset( $statuses['wc-refunded'] ) ){
         unset( $statuses['wc-refunded'] );
@@ -271,7 +271,13 @@ function so_39252649_remove_processing_status( $statuses ){
         unset( $statuses['wc-failed'] );
     }
 
-    $statuses['wc-processing'] = 'Принят';
+    /*$statuses['wc-processing'] = 'Принят';
+    $statuses['wc-on-hold'] = 'Доставляется';
+    $statuses['wc-completed'] = 'Доставлен';
+    $statuses['wc-cancelled'] = 'Отменен';*/
+
+    $statuses['wc-pending'] = 'Принят';
+    $statuses['wc-processing'] = 'Готовится';
     $statuses['wc-on-hold'] = 'Доставляется';
     $statuses['wc-completed'] = 'Доставлен';
     $statuses['wc-cancelled'] = 'Отменен';
@@ -311,8 +317,10 @@ function get_month_title($date_month) {
 }
 
 function get_order_status_title($order_status) {
-    if($order_status == 'processing') {
+    if($order_status == 'pending') {
         $order_status = 'Принят';
+    } else if($order_status == 'processing') {
+        $order_status = 'Готовится';
     } else if($order_status == 'on-hold') {
         $order_status = 'Доставляется';
     } else if($order_status == 'completed') {

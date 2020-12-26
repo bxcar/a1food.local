@@ -11,6 +11,8 @@ $order_id = $data->order_id;
 $status = $data->status;
 
 if($status == 1) {
+    $status = 'pending';
+} else if($status == 12) {
     $status = 'processing';
 } else if($status == 4) {
     $status = 'on-hold';

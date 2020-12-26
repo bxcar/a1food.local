@@ -883,7 +883,7 @@ ol, ul {
     display: none
 }
 
-.delivery-form__address input {
+.delivery-form__address input, .temporary-email-field {
     width: 320px;
     box-sizing: border-box;
     display: block;
@@ -902,6 +902,13 @@ ol, ul {
     padding-right: 20px;
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+.temporary-email-field {
+    background-image: none;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    display: block;
 }
 
 .delivery-form__address input.active {
