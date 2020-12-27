@@ -105,6 +105,10 @@ if(!is_user_logged_in()) { ?>
                         <?php if(get_field('client_feedback_text')) { ?>
                             <span class="orders__item-address" style="margin-top: 10px;margin-bottom: 0;"><?= get_field('client_feedback_text') ?></span>
                         <?php } ?>
+                        <?php if(get_field('client_feedback_file')) { ?>
+                            <span class="orders__item-rating-title">Прикрепленный файл:</span>
+                            <img src="<?= get_field('client_feedback_file') ?>" class="orders__item-address" style="margin-top: 10px;margin-bottom: 0; border-radius: 8px; width: 100px; height: 80px; object-fit: cover;">
+                        <?php } ?>
                     <?php } else { ?>
                         <div class="orders__item-rating">
                             <span class="orders__item-rating-title">Оцените заказ</span>
@@ -117,6 +121,7 @@ if(!is_user_logged_in()) { ?>
                             </div>
                         </div>
                         <form action="#" method="post" class="orders__item-feedback" id="orders__item-feedback" enctype="multipart/form-data">
+                            <img style="display:none;" src="" class="orders__item-feedback-img" alt="review-img">
                             <input type="hidden" name="stars">
                             <input type="hidden" name="order_id" value="<?= $order_id ?>">
                             <textarea name="feedback" placeholder="Вы можете оставить отзыв"></textarea>

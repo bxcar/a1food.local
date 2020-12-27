@@ -93,6 +93,37 @@ $(document).ready(function () {
         $('#billing_time').attr('value', $(this).data('time'));
     });
 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $(input).parent().parent().find('.orders__item-feedback-img').attr('src', e.target.result).css('display', 'block');
+            };
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $(".orders__item-feedback input[type='file']").change(function() {
+        var sFileName = $(this).val();
+        var _validFileExtensions = [".jpg", ".jpeg", ".png"];
+        var blnValid = false;
+        for (var j = 0; j < _validFileExtensions.length; j++) {
+            var sCurExtension = _validFileExtensions[j];
+            if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                blnValid = true;
+                readURL(this);
+                break;
+            }
+        }
+
+        if (!blnValid) {
+            $(this).val('');
+            alert('Некорректный формат файла. Разрешенные форматы: jpg, jpeg, png.');
+        }
+    });
+
     $('.orders__item-feedback').on('submit', function (e) {
         e.preventDefault();
         // var formData = $(this).serialize();
@@ -112,7 +143,7 @@ $(document).ready(function () {
                 } else {
                     $('.orders__item-feedback input[type="submit"]').attr('value', 'Ошибка');
                     if(data.success === 'invalid_extension') {
-                        alert('Неверный формат файла. Разрешенные форматы: jpg, jpeg, png.')
+                        alert('Некорректный формат файла. Разрешенные форматы: jpg, jpeg, png.')
                     }
                 }
             },
