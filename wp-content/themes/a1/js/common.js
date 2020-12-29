@@ -203,6 +203,72 @@ $(document).ready(function () {
         $('.slider__item.sl-popup.hours-popup').css('display', 'none');
         $('.overlay-sl-popup.hours-popup').css('display', 'none');
     });
+
+    $('.contact-popup__item2').on('click', function () {
+        $('.contact-popup__item2-wrapper').toggleClass('active');
+    });
+
+    $('.contact-popup__item2-subfield').on('click', function () {
+        $('.contact-popup__item2-title span').text($(this).text());
+        $('.contact-popup__item2-wrapper').toggleClass('active');
+        $('.contact-popup input[name="email"]').attr('value', $(this).data('email'));
+    });
+
+    $('.contact-popup__feedback-file').on('click', function () {
+        $('.contact-popup input[name="file"]').trigger('click');
+    });
+    $('.contact-popup__feedback-bottom > img').on('click', function () {
+        $('.contact-popup input[name="file"]').trigger('click');
+    });
+
+    function readURLcontact(input, extension) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                if((extension === '.jpg') || (extension === '.jpeg') || (extension === '.png')) {
+                    $('.contact-popup__feedback-bottom-file-name').css('display', 'none');
+                    $('.contact-popup__feedback-bottom > img').attr('src', e.target.result).css('display', 'block');
+                } else {
+                    $('.contact-popup__feedback-bottom > img').css('display', 'none');
+                    $('.contact-popup__feedback-bottom-file-name').text($(input).val().split('\\').pop()).css('display', 'block');
+                }
+
+            };
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $(".contact-popup input[name='file']").change(function() {
+        var sFileName = $(this).val();
+        var _validFileExtensions = [".jpg", ".jpeg", ".png", ".txt", ".pdf", ".doc", ".docx", ".xlsx", ".xlsm", ".xlsb", ".xltx", ".xltm"];
+        var blnValid = false;
+        for (var j = 0; j < _validFileExtensions.length; j++) {
+            var sCurExtension = _validFileExtensions[j];
+            if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                blnValid = true;
+                readURLcontact(this, sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase());
+                break;
+            }
+        }
+
+        if (!blnValid) {
+            $(this).val('');
+            alert('Некорректный формат файла. Разрешенные форматы: jpg, jpeg, png.');
+        }
+    });
+
+    $('.contact-popup-close').on('click', function () {
+        $('.contact-popup').fadeOut(400);
+        $('.overlay').fadeOut(400);
+    });
+
+    $('.contact-popup-button').on('click', function (e) {
+        e.preventDefault();
+        $('.overlay').fadeIn(400);
+        $('.contact-popup').fadeIn(400);
+    });
 });
 
 window.onload = function () {

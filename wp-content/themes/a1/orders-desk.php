@@ -159,7 +159,7 @@ if(!is_user_logged_in()) { ?>
         <button type="submit">Отправить</button>
     </form>
 </div>
-<div class="overlay"></div>
+<!--<div class="overlay"></div>-->
 
 <script>
     $('.orders__item-close').on('click', function (e) {
