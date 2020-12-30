@@ -254,32 +254,36 @@ the_content();
             <span class="card_error"></span>
         </div>
         <div class="checkout-cards-right">
-            <div class="payment2__owl-carousel-cards">
-                <div class="payment2__owl-carousel-card-1">
-                    <div class="payment2__owl-carousel-card-1-block-1">
-                        <img src="<?= get_template_directory_uri(); ?>/img/visa-big-icon.svg">
-                        <img src="<?= get_template_directory_uri(); ?>/img/check-yellow.svg">
-                    </div>
-                    <div class="payment2__owl-carousel-card-1-block-2">
-                        <span>**** **** **** 1951</span>
-                    </div>
-                    <div class="payment2__owl-carousel-card-1-block-3">
-                        <span>Сбербанк</span>
-                    </div>
-                </div>
-                <div class="payment2__owl-carousel-card-1">
-                    <div class="payment2__owl-carousel-card-1-block-1">
-                        <img src="<?= get_template_directory_uri(); ?>/img/visa-big-icon.svg">
-                        <img src="<?= get_template_directory_uri(); ?>/img/check-yellow.svg">
-                    </div>
-                    <div class="payment2__owl-carousel-card-1-block-2">
-                        <span>**** **** **** 1951</span>
-                    </div>
-                    <div class="payment2__owl-carousel-card-1-block-3">
-                        <span>Сбербанк</span>
-                    </div>
-                </div>
+            <div class="checkout-cards-right__apple-pay">
+                <span>Оплата в один клик:</span>
+                <img src="<?= get_template_directory_uri(); ?>/img/apple-pay-logo-desk.svg">
             </div>
+            <!--<div class="payment2__owl-carousel-cards">
+                <div class="payment2__owl-carousel-card-1">
+                    <div class="payment2__owl-carousel-card-1-block-1">
+                        <img src="<?php/*= get_template_directory_uri(); */?>/img/visa-big-icon.svg">
+                        <img src="<?php/*= get_template_directory_uri(); */?>/img/check-yellow.svg">
+                    </div>
+                    <div class="payment2__owl-carousel-card-1-block-2">
+                        <span>**** **** **** 1951</span>
+                    </div>
+                    <div class="payment2__owl-carousel-card-1-block-3">
+                        <span>Сбербанк</span>
+                    </div>
+                </div>
+                <div class="payment2__owl-carousel-card-1">
+                    <div class="payment2__owl-carousel-card-1-block-1">
+                        <img src="<?php/*= get_template_directory_uri(); */?>/img/visa-big-icon.svg">
+                        <img src="<?php/*= get_template_directory_uri(); */?>/img/check-yellow.svg">
+                    </div>
+                    <div class="payment2__owl-carousel-card-1-block-2">
+                        <span>**** **** **** 1951</span>
+                    </div>
+                    <div class="payment2__owl-carousel-card-1-block-3">
+                        <span>Сбербанк</span>
+                    </div>
+                </div>
+            </div>-->
         </div>
     </div>
     <div class="checkout-desk-bottom">

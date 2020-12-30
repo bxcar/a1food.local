@@ -2600,7 +2600,7 @@ input[type=number] {
 }
 
 .checkout-cards-right {
-    display: none;
+    /*display: none;*/
 }
 
 .checkout-cards-right-price {
@@ -2614,7 +2614,7 @@ input[type=number] {
     padding-left: 31px;
     padding-right: 31px;
     box-sizing: border-box;
-    margin-bottom: 22px;
+    /*margin-bottom: 22px;*/
 }
 
 .checkout-cards-right-price span:first-child {
@@ -3063,4 +3063,25 @@ input[type=number] {
     right: 10px;
     width: 30px;
     cursor: pointer;
+}
+
+.checkout-cards-right__apple-pay {
+    background: #1E1E1E;
+    border-radius: 10px;
+    width: 555px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85px;
+    cursor: pointer;
+}
+
+.checkout-cards-right__apple-pay span {
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    margin-right: 17px;
 }
