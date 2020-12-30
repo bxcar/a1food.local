@@ -212,6 +212,7 @@ $(document).ready(function () {
         $('.contact-popup__item2-title span').text($(this).text());
         $('.contact-popup__item2-wrapper').toggleClass('active');
         $('.contact-popup input[name="email"]').attr('value', $(this).data('email'));
+        $('.contact-popup input[name="user_section"]').attr('value', $(this).text());
     });
 
     $('.contact-popup__feedback-file').on('click', function () {
@@ -268,6 +269,32 @@ $(document).ready(function () {
         e.preventDefault();
         $('.overlay').fadeIn(400);
         $('.contact-popup').fadeIn(400);
+    });
+
+    $('.contact-popup').on('submit', function (e) {
+        e.preventDefault();
+        var formData =  new FormData(this);
+        $.ajax({
+            'method': 'POST',
+            'dataType': 'json',
+            'url': '/wp-content/themes/a1/custom_files_dm/send_contact_form.php',
+            'data':  formData,
+            'cache': false,
+            'contentType': false,
+            'processData': false,
+            success: function (data) {//success callback
+                if(data.success === 'true') {
+                    $('.contact-popup button[type="submit"]').text('Успешно отправлено');
+                } else {
+                    $('.contact-popup button[type="submit"]').text('Ошибка');
+                    console.log(data);
+                }
+            },
+            error: function (data) {
+                $('.contact-popup button[type="submit"]').text('Ошибка');
+                console.log(data);
+            }
+        });
     });
 });
 

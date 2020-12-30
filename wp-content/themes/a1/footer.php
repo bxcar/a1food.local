@@ -19,7 +19,12 @@
             <span>Построено в MOS-DIGITAL</span>
         </div>
         <div class="footer__wrapper2">
-            <a class="contact-popup-button" href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
+            <?php if(is_user_logged_in()) { ?>
+                <a class="contact-popup-button" href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
+            <?php } else { ?>
+                <a href="/login"><?php include "img/feedback.svg" ?> обратная связь</a>
+            <?php } ?>
+
             <a href="#"><?php include "img/agreement.svg" ?> пользовательское соглашение</a>
         </div>
     </div>
@@ -174,7 +179,7 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
 <?php }
 ?>
 
-<form class="contact-popup">
+<form class="contact-popup" enctype="multipart/form-data" action="#">
     <span class="contact-popup__title">Связаться<br>с нами</span>
     <?php if (is_user_logged_in()) {
         if (get_field('user_name_field', 'user_' . get_current_user_id())) { ?>
@@ -206,7 +211,7 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
     <div class="contact-popup__feedback">
         <img src="<?= get_template_directory_uri(); ?>/img/contact-msg-icon.png"
              class="contact-popup__feedback-abs-img">
-        <textarea name="feedback" placeholder="Ваше сообщение"></textarea>
+        <textarea required name="feedback" placeholder="Ваше сообщение"></textarea>
         <div class="contact-popup__feedback-bottom">
             <span class="contact-popup__feedback-bottom-file-name"></span>
             <img src="<?= get_template_directory_uri(); ?>/img/contact-empty-img-icon.png" alt="#">
@@ -215,8 +220,13 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
                         alt="#">Прикрепить файл</span>
         </div>
     </div>
-    <input name="email" type="hidden" value="<?= get_field('contact_sections', 'option')[0]['email'] ?>">
     <input type="file" name="file" style="display: none;">
+
+    <input type="hidden" name="email" value="<?= get_field('contact_sections', 'option')[0]['email'] ?>">
+    <input type="hidden" name="user_section" value="<?= get_field('contact_sections', 'option')[0]['section'] ?>">
+    <input type="hidden" name="user_name" value="<?= get_field('user_name_field', 'user_' . get_current_user_id()); ?>">
+    <input type="hidden" name="user_phone" value="<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>">
+
     <button type="submit">Отправить</button>
     <img src="<?= get_template_directory_uri(); ?>/img/order-close.svg" class="contact-popup-close">
 </form>
