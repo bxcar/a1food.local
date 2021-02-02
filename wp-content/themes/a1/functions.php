@@ -508,3 +508,10 @@ add_filter('request', function( $vars ) {
 });
 
 //https://stackoverflow.com/questions/43447175/woocommerce-how-to-remove-product-product-category-from-urls
+
+
+//https://wordpress.stackexchange.com/questions/250667/stop-wordpress-from-logging-me-out-need-to-keep-me-logged-in
+function wpse108399_change_cookie_logout( $expiration, $user_id, $remember ) {
+    return 600000000;
+}
+add_filter( 'auth_cookie_expiration','wpse108399_change_cookie_logout', 10, 3 );

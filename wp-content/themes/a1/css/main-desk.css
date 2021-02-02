@@ -77,6 +77,11 @@ body {
     min-height: 100vh;
 }
 
+body[data-type="text-page"] {
+    background: url(../img/desk-text-bg.png) repeat;
+    background-size: contain;
+}
+
 .container {
     width: 1140px;
 }
@@ -2388,11 +2393,13 @@ input[type=number] {
 
 .footer__container {
     width: 1140px;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .footer__wrapper1,
@@ -2401,12 +2408,12 @@ input[type=number] {
     align-items: center;
 }
 
-.footer__wrapper1 img {
+.footer__wrapper1 > img {
     width: 123px;
-    margin-right: 35px;
+    margin-right: 72px;
 }
 
-.footer__wrapper1 span {
+.footer__wrapper1 > span {
     font-family: Proxima Nova Lt, sans-serif;
     font-weight: 600;
     font-size: 16px;
@@ -2414,9 +2421,33 @@ input[type=number] {
     color: #FFFFFF;
 }
 
-.footer__wrapper1 span:nth-child(2) {
-    margin-right: 34px;
+.footer__wrapper1 > span:nth-child(2) {
+    margin-right: 59px;
 }
+
+.footer_mos {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.footer_mos:hover {
+    color: #FFC000;
+}
+
+.footer_mos svg {
+    width: 21px;
+    margin-right: 6px;
+}
+
+.footer_mos:hover svg path {
+    fill: #FFC000;
+}
+
+.footer_mos span {
+    text-decoration: underline;
+}
+
 
 .footer__wrapper2 a {
     font-family: Proxima Nova Lt, sans-serif;
@@ -2427,6 +2458,11 @@ input[type=number] {
     color: #fff;
     display: flex;
     align-items: center;
+}
+
+.footer_location {
+    text-underline: none;
+    cursor: default;
 }
 
 .footer__wrapper2 a svg {
@@ -2441,8 +2477,29 @@ input[type=number] {
     fill: #FFC000;
 }
 
-.footer__wrapper2 a:first-child {
-    margin-right: 38px;
+.footer__wrapper2 a:first-child,
+.footer__wrapper2 a:nth-child(2) {
+    margin-right: 59px;
+}
+
+.footer__wrapper3 {
+    position: absolute;
+    right: 0;
+    bottom: 13px;
+}
+
+.footer__wrapper3 span {
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A8A8A8;
+    margin-right: 15px;
+}
+
+.footer__wrapper3 span:last-child {
+    margin-right: 0;
 }
 
 .cart-button-desktop {
@@ -3084,4 +3141,52 @@ input[type=number] {
     line-height: 20px;
     color: #FFFFFF;
     margin-right: 17px;
+}
+
+.textpage p {
+    text-align: left;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.textpage_title {
+    text-align: center;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.textpage h2 {
+    text-align: center;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 47px;
+}
+
+.textpage h3 {
+    text-align: left;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-top: 35px;
+    margin-bottom: 30px;
 }

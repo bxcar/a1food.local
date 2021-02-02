@@ -16,16 +16,22 @@
         <div class="footer__wrapper1">
             <img src="<?= get_template_directory_uri(); ?>/img/logo.svg">
             <span>(с) Все права защищены</span>
-            <span>Построено в MOS-DIGITAL</span>
+            <a href="https://mos-digital.com/" target="_blank" class="footer_mos"><?php include "img/crown.svg" ?><span>Построено в MOS-DIGITAL</span></a>
         </div>
         <div class="footer__wrapper2">
+            <a class="footer_location"><?php include "img/footer-location-icon.svg" ?> г.Омск</a>
             <?php if(is_user_logged_in()) { ?>
                 <a class="contact-popup-button" href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
             <?php } else { ?>
                 <a href="/login"><?php include "img/feedback.svg" ?> обратная связь</a>
             <?php } ?>
 
-            <a href="#"><?php include "img/agreement.svg" ?> пользовательское соглашение</a>
+            <a href="/offer"><?php include "img/agreement.svg" ?> Оферта</a>
+        </div>
+        <div class="footer__wrapper3">
+            <span>ИП Шиян Ю.А.</span>
+            <span>ИНН 550505503072</span>
+            <span>ОГРНИП 320554300054388</span>
         </div>
     </div>
 </div>
@@ -193,7 +199,7 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
         <div class="contact-popup__item2">
             <div class="contact-popup__item2-left">
                 <span class="contact-popup__item2-title"><img
-                            src="<?= get_template_directory_uri(); ?>/img/contact-msg-icon.png"><span><?= get_field('contact_sections', 'option')[0]['section'] ?></span></span>
+                            src="<?= get_template_directory_uri(); ?>/img/contact-msg-icon.png"><span>Тема обращения</span></span>
             </div>
             <div class="contact-popup__item2-right">
                 <img src="<?= get_template_directory_uri(); ?>/img/contact-dropdown-icon.png">
@@ -222,8 +228,8 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
     </div>
     <input type="file" name="file" style="display: none;">
 
-    <input type="hidden" name="email" value="<?= get_field('contact_sections', 'option')[0]['email'] ?>">
-    <input type="hidden" name="user_section" value="<?= get_field('contact_sections', 'option')[0]['section'] ?>">
+    <input type="hidden" name="email" value="">
+    <input type="hidden" name="user_section" value="">
     <input type="hidden" name="user_name" value="<?= get_field('user_name_field', 'user_' . get_current_user_id()); ?>">
     <input type="hidden" name="user_phone" value="<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>">
 

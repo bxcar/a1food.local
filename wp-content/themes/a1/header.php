@@ -49,7 +49,7 @@ session_start();
     <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/owl.theme.default.css">
     <?php wp_head(); ?>
 </head>
-<body <?php //body_class(); ?>>
+<body <?php if(get_page_template_slug( get_the_ID() ) == 'text-desk.php') { echo 'data-type="text-page"'; }//body_class(); ?>>
 <?php wp_body_open(); ?>
 <div class="main container">
     <header class="header">
@@ -67,8 +67,10 @@ session_start();
                         <span class="header__login-text"><?= get_field('user_phone_field', 'user_'.get_current_user_id()); ?></span>
                     <?php } ?>
                 </a>
-            <?php } else { ?>
-                <a href="/login" class="header__login-button animated-background">
+            <?php } else {
+                $current_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                ?>
+                <a href="/login?redirect=<?= $current_link ?>" class="header__login-button animated-background">
                     <img class="header__login-img" src="<?= get_template_directory_uri(); ?>/img/user-icon.svg">
                     <span class="header__login-text">Войти</span>
                 </a>

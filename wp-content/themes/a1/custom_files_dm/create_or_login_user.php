@@ -16,7 +16,8 @@ if ( !is_wp_error( $user ) )
 {
     wp_clear_auth_cookie();
     wp_set_current_user ( $user->ID );
-    wp_set_auth_cookie  ( $user->ID );
+    wp_set_auth_cookie  ( $user->ID , true);
+
 
     /*$redirect_to = user_admin_url();
     wp_safe_redirect( $redirect_to );

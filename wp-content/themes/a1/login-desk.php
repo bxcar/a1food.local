@@ -21,7 +21,7 @@ if(is_user_logged_in()) { ?>
             <button type="submit"><span class="animated-background">Далее</span></button>
         </form>
 
-        <p class="login__agreement animated-background">Нажимая на кнопку, вы принимаете условия<br> <a href="#">пользовательского соглашения</a></p>
+        <p class="login__agreement animated-background">Нажимая на кнопку «Далее», вы принимаете условия <a href="/offer">оферты</a></p>
     </div>
 
 
@@ -95,11 +95,14 @@ if(is_user_logged_in()) { ?>
                 success: function (data) {//success callback
                     var url_string = window.location.href;
                     var url = new URL(url_string);
-                    var order = url.searchParams.get("order");
-                   if(order == 'true') {
-                       window.location.href = "/cart";
-                   }
-                    window.location.href = "/cabinet";
+                    // var order = url.searchParams.get("order");
+                    var redirect = url.searchParams.get("redirect");
+                    if(redirect) {
+                        window.location.href = redirect;
+                    } else {
+                        window.location.href = "/cabinet";
+                    }
+
                 },
                 error: function (data) {
                     console.log(data);

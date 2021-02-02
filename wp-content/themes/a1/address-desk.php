@@ -151,7 +151,7 @@ if(!is_user_logged_in()) { ?>
     }
 
     setInterval(function(){
-        $('input.ymaps-2-1-77-searchbox-input__input').attr('readonly', 'true');
+        $('input.ymaps-2-1-78-searchbox-input__input').attr('readonly', 'true');
         }, 1000);
 
     $('.address__form').on('submit', function (e) {

@@ -10,11 +10,21 @@ $(document).ready(function () {
         if(!check_active_class) {
             $(this).parent().addClass('active')
         }*/
-        $('.product-item-bottom-i-desc').removeClass('active');
-        $('.product-item-bottom-i-wrapper').removeClass('active');
 
-        $(this).parent().toggleClass('active');
-        $(this).parent().parent().parent().find('.product-item-bottom-i-desc').toggleClass('active');
+        if($(this).parent().hasClass('active')) {
+            $('.product-item-bottom-i-desc').removeClass('active');
+            $('.product-item-bottom-i-wrapper').removeClass('active');
+
+            $(this).parent().removeClass('active');
+            $(this).parent().parent().parent().find('.product-item-bottom-i-desc').removeClass('active');
+        } else {
+            $('.product-item-bottom-i-desc').removeClass('active');
+            $('.product-item-bottom-i-wrapper').removeClass('active');
+
+            $(this).parent().addClass('active');
+            $(this).parent().parent().parent().find('.product-item-bottom-i-desc').addClass('active');
+        }
+
     });
 
     $('body').click(function(evt){
@@ -273,7 +283,21 @@ $(document).ready(function () {
 
     $('.contact-popup').on('submit', function (e) {
         e.preventDefault();
+
+        var error = false;
+        $(this).serializeArray().forEach(function(entry) {
+            if((entry['name'] === 'email' || entry['name'] === 'user_section') && !entry['value']) {
+                error = true;
+            }
+        });
+
+        if(error) {
+            alert('Выберите тему обращения');
+            return;
+        }
+
         var formData =  new FormData(this);
+
         $.ajax({
             'method': 'POST',
             'dataType': 'json',

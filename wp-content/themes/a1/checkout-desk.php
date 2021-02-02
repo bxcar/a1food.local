@@ -1,9 +1,10 @@
 <?php
 /* Template Name: checkout-desk */
 get_header();
-if(!is_user_logged_in()) { ?>
+if(!is_user_logged_in()) {
+    $current_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
     <script>
-        window.location.href="/login?order=true";
+        window.location.href="/login?redirect=<?= $current_link; ?>";
     </script>
 <?php } ?>
 <style>
