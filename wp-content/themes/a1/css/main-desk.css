@@ -3155,7 +3155,7 @@ input[type=number] {
     margin-bottom: 20px;
 }
 
-.textpage_title {
+.textpage h1 {
     text-align: center;
     font-family: Proxima Nova Lt, sans-serif;
     font-style: normal;
@@ -3189,4 +3189,19 @@ input[type=number] {
     color: #FFFFFF;
     margin-top: 35px;
     margin-bottom: 30px;
+}
+
+
+.text-page-custom-block__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.text-page-custom-block__item:nth-child(2) {
+    align-items: center;
+}
+
+.text-page-custom-block__subitem {
+    width: 50%;
 }

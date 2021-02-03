@@ -515,3 +515,21 @@ function wpse108399_change_cookie_logout( $expiration, $user_id, $remember ) {
     return 600000000;
 }
 add_filter( 'auth_cookie_expiration','wpse108399_change_cookie_logout', 10, 3 );
+
+add_shortcode( 'text_page_shortcode', 'textpage_func' );
+
+function textpage_func( $atts ){
+    $text = '';
+    if(get_field('list', 293)) {
+        foreach (get_field('list', 293) as $item) {
+           $text .= '<div class="text-page-custom-block__item">
+                        <div class="text-page-custom-block__subitem">'.$item['title']. '</div>
+                        <div class="text-page-custom-block__subitem">' . $item['opisanie'].'</div>
+                    </div>';
+        }
+    }
+    $text = '<div class="text-page-custom-block">'.$text.'</div>';
+
+    return $text;
+}
+
