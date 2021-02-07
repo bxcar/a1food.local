@@ -8,7 +8,7 @@ require_once 'header_mobile.php';
         }
 </script>
     <header class="header">
-        <div class="header_inner_wrapper">
+        <div class="header_inner_wrapper animated-background">
             <img class="header__menu-button" src="<?= get_template_directory_uri(); ?>/img/burger-menu-icon.svg">
             <img class="header__logo" src="<?= get_template_directory_uri(); ?>/img/logo.svg">
         </div>
@@ -217,7 +217,7 @@ if (isset($_GET['category_id'])) {
         wp_reset_postdata();
         ?>
     </div>
-    <a href="/cart-mobile" class="cart-button-wrapper">
+    <a href="/cart-mobile" class="cart-button-wrapper animated-background">
         <div class="cart-button">
             <div class="cart-button-left">
                 <img src="<?= get_template_directory_uri(); ?>/img/cart-icon.svg">

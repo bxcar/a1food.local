@@ -983,7 +983,10 @@ ol, ul {
 .filters {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-bottom: 13px
+    margin-bottom: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
 }
 
 .filter-item, .filters {
@@ -1060,13 +1063,19 @@ ol, ul {
     color: #fff
 }
 
+header {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
 .header {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding-top: 20px;
     padding-bottom: 14px;
     border-bottom: 1px solid #333;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .header, .header_inner_wrapper {
@@ -2224,4 +2233,93 @@ input[type=number] {
 
 .animated-background * {
     visibility: hidden !important;
+}
+
+.textpage {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.textpage p {
+    text-align: left;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.textpage h1 {
+    text-align: center;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.textpage h2 {
+    text-align: center;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 47px;
+}
+
+.textpage h3 {
+    text-align: left;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-top: 35px;
+    margin-bottom: 30px;
+}
+
+
+.text-page-custom-block__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.text-page-custom-block__item:nth-child(2) {
+    align-items: center;
+}
+
+.text-page-custom-block__subitem {
+    width: 50%;
+}
+
+.burger-menu_mos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-decoration: underline;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.burger-menu_mos svg {
+    width: 15px;
+    margin-right: 8px;
 }

@@ -22,7 +22,8 @@
         </a>
     </div>
     <div class="burger-menu__button-wrapper">
-        <a href="#" class="burger-menu__button">Связаться с нами</a>
+        <a href="https://mos-digital.com/" target="_blank" class="burger-menu_mos"><?php include "img/crown-mob.svg" ?><span>Построено в MOS-DIGITAL</span></a>
+        <a href="#" class="burger-menu__button">Обратная связь</a>
     </div>
 
 </div>

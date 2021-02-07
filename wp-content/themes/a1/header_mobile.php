@@ -9,7 +9,7 @@ session_start();
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="<?= get_template_directory_uri(); ?>/img/favicon.png"/>
-        <title><?php the_title() ?> - A1</title>
+        <title><?= str_replace(" моб", "",get_the_title()); ?> - A1</title>
 
         <script>
             window.mobileAndTabletCheck = function() {
@@ -46,7 +46,7 @@ session_start();
         <header class="header-in animated-background">
             <div class="header-in__inner-wrapper">
                 <a href="/m" class="header-in__back"><img src="<?= get_template_directory_uri(); ?>/img/header-in-back.svg"></a>
-                <span class="header-in__title"><?php the_title() ?></span>
+                <span class="header-in__title"><?= str_replace(" моб", "",get_the_title()); ?></span>
             </div>
             <img class="header-in__logo" src="<?= get_template_directory_uri(); ?>/img/header-in-logo.svg">
         </header>
