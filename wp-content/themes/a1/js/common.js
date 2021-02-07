@@ -308,7 +308,7 @@ $(document).ready(function () {
             'processData': false,
             success: function (data) {//success callback
                 if(data.success === 'true') {
-                    $('.contact-popup button[type="submit"]').text('Успешно отправлено');
+                    $('.contact-popup button[type="submit"]').text('Успешно отправлено').prop( "disabled", true );
                 } else {
                     $('.contact-popup button[type="submit"]').text('Ошибка');
                     console.log(data);

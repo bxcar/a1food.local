@@ -371,6 +371,18 @@ ol, ul {
     cursor: pointer
 }
 
+.cabinet__profile-form div .remove_address {
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    right: 20px;
+    cursor: pointer;
+    background-image: url(../img/cabinet-remove.svg);
+}
+
 .cabinet__profile-form-phone:before {
     background-image: url(../img/cabinet-phone-icon.svg)
 }
@@ -404,7 +416,8 @@ ol, ul {
 }
 
 .cabinet__profile-form-address:after {
-    background-image: url(../img/cabinet-remove.svg)
+    /*background-image: url(../img/cabinet-remove.svg);*/
+    display: none;
 }
 
 .cabinet__profile-form-add-address {
@@ -425,7 +438,8 @@ ol, ul {
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
-    color: #333
+    color: #333;
+    text-decoration: none;
 }
 
 .main {
@@ -441,7 +455,8 @@ ol, ul {
     width: 100%;
     left: 0;
     -ms-flex-pack: center;
-    justify-content: center
+    justify-content: center;
+    text-decoration: none;
 }
 
 .cart-button, .cart-button-wrapper {
@@ -520,7 +535,16 @@ ol, ul {
 }
 
 .cart-products__item-image {
-    margin-right: 17px
+    margin-right: 17px;
+    width: 58px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cart-products__item-wrapper1 {
+    display: flex;
+    align-items: center;
 }
 
 .cart-products__item-title-wrapper {
@@ -667,6 +691,23 @@ ol, ul {
     padding-left: 61px;
     color: #fff;
     padding-right: 20px
+}
+
+.promo-error,
+.promo-success {
+    margin-top: 10px;
+    text-align: center;
+    font-family: Proxima Nova Lt, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FF0303;
+    display: none;
+}
+
+.promo-success {
+    color: #3F9B48;
 }
 
 .cart-minimum-order-price {
@@ -963,7 +1004,9 @@ ol, ul {
     font-size: 14px;
     line-height: 17px;
     cursor: pointer;
-    margin-bottom: 12px
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: #fff;
 }
 
 .filter-item.active {
@@ -1045,11 +1088,15 @@ ol, ul {
     align-items: center;
     -ms-flex-pack: center;
     justify-content: center;
-    width: 103px;
+    /*width: 103px;*/
     height: 32px;
     border-radius: 100px;
     background: #1e1e1e;
-    cursor: pointer
+    cursor: pointer;
+    text-decoration: none;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .header__login-button span {
@@ -1968,9 +2015,13 @@ input[type=number] {
     box-sizing: border-box;
     height: auto;
     position: absolute;
-    top: -156px;
-    left: -8px;
-    display: none
+    display: none;
+    left: 5px;
+    bottom: 38px;
+}
+
+.product-item-bottom-i-desc.active {
+    display: block;
 }
 
 .product-item-bottom-i-wrapper.active .product-item-bottom-i-desc {
@@ -2036,7 +2087,9 @@ input[type=number] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-    align-items: center
+    align-items: center;
+    position: absolute;
+    bottom: 5px;
 }
 
 .product-item-price-crossed-out {
@@ -2044,11 +2097,13 @@ input[type=number] {
     font-size: 10px;
     line-height: 12px;
     text-decoration: line-through;
-    margin-right: 10px
+    margin-right: 10px;
+    color: #fff;
 }
 
 .product-item-price-wrapper {
-    position: relative
+    position: relative;
+    text-decoration: none;
 }
 
 .product-item-price-main {
@@ -2123,4 +2178,50 @@ input[type=number] {
     transform: translateY(-50%);
     outline: none;
     cursor: pointer
+}
+
+@keyframes placeHolderShimmer{
+    0%{
+        background-color: #232323;
+    }
+    50%{
+        background-color: #2d2d2d;
+    }
+    100%{
+        background-color: #232323;
+    }
+}
+
+@-webkit-keyframes placeHolderShimmer
+{
+    0%{
+        background-color: #232323;
+    }
+    50%{
+        background-color: #2d2d2d;
+    }
+    100%{
+        background-color: #232323;
+    }
+}
+
+.animated-background {
+    animation: placeHolderShimmer 1s infinite ease-in-out;
+    -webkit-animation:placeHolderShimmer 1s infinite ease-in-out;
+    /*background: #2B2B2B;*/
+    background-image: none !important;
+    background-size: cover !important;
+    position: relative !important;
+    box-shadow: none !important;
+    text-indent: -9999px !important;
+    font-size: 0 !important;
+}
+
+.footer.animated-background {
+    position: absolute !important;
+    bottom: 0 !important;
+}
+
+.animated-background * {
+    visibility: hidden !important;
 }

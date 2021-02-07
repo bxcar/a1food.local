@@ -39,15 +39,6 @@ get_header();
             $_product = wc_get_product($values['data']->get_id());
             //product image
             $getProductDetail = wc_get_product($values['product_id']);
-//            echo $getProductDetail->get_image(); // accepts 2 arguments ( size, attr )
-//            echo get_the_post_thumbnail_url($values['product_id']);
-
-//            echo "<b>" . $_product->get_title() . '</b>  <br> Quantity: ' . $values['quantity'] . '<br>';
-//            $price = get_post_meta($values['product_id'], '_price', true);
-//            echo "  Price: " . $price . "<br>";
-            /*Regular Price and Sale Price*/
-//            echo "Regular Price: " . get_post_meta($values['product_id'], '_regular_price', true) . "<br>";
-//            echo "Sale Price: " . get_post_meta($values['product_id'], '_sale_price', true) . "<br>";
             if(get_post_meta($values['product_id'], '_sale_price', true)) {
                 $total_price = get_post_meta($values['product_id'], '_sale_price', true) * $values['quantity'];
             } else {
@@ -275,10 +266,6 @@ get_header();
 
     function calculateDelivery(cartTotal) {
         var cart_total = cartTotal;
-        /*var cart_total = 0;
-        $(".cart-products__item").each(function( index ) {
-            cart_total +=  parseInt($(this).find('.cart-products__item-price span').text());
-        });*/
 
         if((cart_total >= <?= get_field('free_delivery_min_price', 'option') ?>) && '<?= get_field('free_delivery_min_price_logic', 'option') ?>') {
             $('.cart-delivery__title-bottom').css('display', 'none');

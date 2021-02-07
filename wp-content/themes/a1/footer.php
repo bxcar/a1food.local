@@ -21,9 +21,9 @@
         <div class="footer__wrapper2">
             <a class="footer_location"><?php include "img/footer-location-icon.svg" ?> г.Омск</a>
             <?php if(is_user_logged_in()) { ?>
-                <a class="contact-popup-button" href="#"><?php include "img/feedback.svg" ?> обратная связь</a>
+                <a class="contact-popup-button" href="#"><?php include "img/feedback.svg" ?> Обратная связь</a>
             <?php } else { ?>
-                <a href="/login"><?php include "img/feedback.svg" ?> обратная связь</a>
+                <a href="/login"><?php include "img/feedback.svg" ?> Обратная связь</a>
             <?php } ?>
 
             <a href="/offer"><?php include "img/agreement.svg" ?> Оферта</a>
@@ -99,8 +99,6 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
     $('.product-item-price-wrapper').on('click', function (e) {
         e.preventDefault();
         var data_id = $(this).data('id');
-        /*$('.hiddenDiv').load($(this).attr('href')).html('');
-        console.log('hello');*/
 
         var $this = $(this);
 
@@ -145,7 +143,7 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
         items: 1,
     });
 </script>
-<?php print_r(WC()->cart->total); ?>
+<?php //print_r(WC()->cart->total); ?>
 <?php wp_footer(); ?>
 <?php
 if (get_field('page_popup')['logic'] && !isset($_SESSION["page_popup_" . get_the_ID()])) {

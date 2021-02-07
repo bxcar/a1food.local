@@ -46,12 +46,10 @@ if (get_field('search_line', 'option')) { ?>
         foreach ($categories as $cat) {
             $thumbnail_id = get_woocommerce_term_meta($cat->term_id, 'thumbnail_id', true);
             $cat_image_link = wp_get_attachment_url($thumbnail_id);
-//                $cat_image_link = get_field('cat_image', 'category_' . $cat->term_id);
             if ($i == 0) {
 
                 if (isset($_GET['category_id'])) {
                     $first_cat_id = $_GET['category_id'];
-//                        $first_cat_name = get_cat_name($_GET['category_id']);
                     $first_cat_name = get_term_by('id', $_GET['category_id'], 'product_cat')->name;
                 } else {
                     $first_cat_id = $cat->cat_ID;
@@ -82,14 +80,9 @@ if (get_field('search_line', 'option')) { ?>
 <?php
 if (isset($_GET['category_id'])) {
     $count = get_term_by('id', $_GET['category_id'], 'product_cat')->count;
-//        $category = get_category($_GET['category_id']);
-//        $count = $category->category_count;
 } else {
-//        $category = get_category($first_cat_id);
-//        $count = $category->category_count;
     $count = get_term_by('id', $first_cat_id, 'product_cat')->count;
 }
-
 ?>
 <h1 class="main__title animated-background"><?= $first_cat_name ?> <span><?= $count ?></span></h1>
 <div class="products">

@@ -60,7 +60,7 @@ if(isset($_GET['order_id'])) {
     $products_quantity_array[] = 1;
     $products_prices_array[] = $order_data['shipping_total'];
 
-    $order_statuses_array = array(1,4,10,11);
+    $order_statuses_array = array(1,4,10,11,12);
 
     $data = array(
         'secret' => 'EBrSYtTE4nT9aih9y6KQyRG7Q96AZkanQr6zKQ4B4HB5TH5dEDS2fnYYkQh94hnEBh49ZSBQr4G8BAa54TS88BShd3f69zAAFnAr635iSBff2haR5SN3ft9ihfefEEG8T7nQZf2EG6KydK97sNZA6YKb4SiyhTs5RFFBNs5fiEDrbBkya8Y7Tt9K9i6h5iaHSG8s24B9t5nztBSyABrfYrTYBN6t274FD32nRkk9eDzA4bTrE9Akne8QT4',

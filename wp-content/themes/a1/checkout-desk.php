@@ -45,9 +45,10 @@ the_content();
                     ?>" readonly data-street="<?= $item['street'] ?>" data-home="<?= $item['building'] ?>" data-pod="<?= $item['entrance'] ?>" data-et="<?= $item['floor'] ?>" data-apart="<?= $item['apartment'] ?>">
                 <?php $i++; }
             } else { ?>
-                <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
+<!--                <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>-->
             <?php }
             ?>
+            <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
         </div>
         <div class="delivery-form__date-time-wrapper">
             <div class="delivery-form__date">
