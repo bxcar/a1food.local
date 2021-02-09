@@ -38,11 +38,6 @@ if (isset($_POST['addresses-amount'])) {
 }
 
 ?>
-    <script>
-        if(!window.mobileAndTabletCheck()) {
-            window.location.href = '/cabinet';
-        }
-    </script>
 
     <div class="cabinet__top-buttons">
         <a href="" class="cabinet__top-buttons-profile animated-background"><?php include "img/cabinet-profile-icon.svg"?>Профиль</a>
@@ -85,7 +80,7 @@ if (isset($_POST['addresses-amount'])) {
             }
         } ?>
         <input type="hidden" name="addresses-amount" value="<?= $address_counter - 1 ?>">
-        <a href="/address" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
+        <a href="/address-mobile" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
         <button type="submit" class="cabinet__profile-form-add-address animated-background"
                 style="margin-top: 14px; border: none; outline: none;">Сохранить
         </button>

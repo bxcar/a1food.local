@@ -32,7 +32,20 @@ session_start();
         // console.log(window.mobileAndTabletCheck());
 
         if (window.mobileAndTabletCheck()) {
-            // window.location.href = '/m';
+            if(location.pathname !== '/thanks/')  {
+                window.location.href = '/m';
+            } else {
+                var head = document.getElementsByTagName('head')[0];
+                var s = document.createElement('style');
+                s.setAttribute('type', 'text/css');
+                css = 'body { display: none !important;}';
+                if (s.styleSheet) {   // IE
+                    s.styleSheet.cssText = css;
+                } else {                // the world
+                    s.appendChild(document.createTextNode(css));
+                }
+                head.appendChild(s);
+            }
         }
     </script>
 

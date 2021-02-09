@@ -20,9 +20,9 @@ session_start();
 
             // console.log(window.mobileAndTabletCheck());
 
-            /*if(!window.mobileAndTabletCheck()) {
+            if(!window.mobileAndTabletCheck()) {
                 window.location.href = '/';
-            }*/
+            }
         </script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -43,12 +43,12 @@ session_start();
 <?php wp_body_open(); ?>
 <div class="main <?php if(get_the_ID() == 357) { echo 'container-inner'; } else { echo 'container'; }?>">
     <?php if(get_the_ID() != 12) { ?>
-        <header class="header-in animated-background">
+        <header class="header-in header-in-common animated-background">
             <div class="header-in__inner-wrapper">
                 <a href="/m" class="header-in__back"><img src="<?= get_template_directory_uri(); ?>/img/header-in-back.svg"></a>
                 <span class="header-in__title"><?= str_replace(" моб", "",get_the_title()); ?></span>
             </div>
-            <img class="header-in__logo" src="<?= get_template_directory_uri(); ?>/img/header-in-logo.svg">
+            <a href="/m"><img class="header-in__logo" src="<?= get_template_directory_uri(); ?>/img/header-in-logo.svg"></a>
         </header>
     <?php } ?>
 

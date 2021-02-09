@@ -2,11 +2,6 @@
 /* Template Name: text-mobile */
 require_once 'header_mobile.php';
 ?>
-<script>
-    if(!window.mobileAndTabletCheck()) {
-        window.location.href = '/offer';
-    }
-</script>
 
 <div class="textpage animated-background">
 

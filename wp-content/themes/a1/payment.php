@@ -2,11 +2,6 @@
 /* Template Name: payment-mobile */
 require_once 'header_mobile.php';
 ?>
-<script>
-    if(!window.mobileAndTabletCheck()) {
-        window.location.href = '/checkout';
-    }
-</script>
     <span class="payment__price-title">1 095 ₽</span>
     <span class="payment__price-subtitle">Итого к оплате</span>
 

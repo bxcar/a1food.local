@@ -8,12 +8,6 @@ if (is_user_logged_in()) { ?>
 <?php }
 ?>
 
-    <script>
-        if(!window.mobileAndTabletCheck()) {
-            window.location.href = '/login';
-        }
-    </script>
-
     <img class="login__logo" src="<?= get_template_directory_uri(); ?>/img/payment3_logo.svg">
     <span class="login__title">Пожалуйста, укажите номер телефона</span>
 

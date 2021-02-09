@@ -3,11 +3,7 @@
 require_once 'header_mobile.php';
 //the_content();
 ?>
-    <script>
-        if(!window.mobileAndTabletCheck()) {
-            window.location.href = '/cart';
-        }
-    </script>
+
     <div class="cart-products">
         <?php
         date_default_timezone_set('Asia/Omsk');

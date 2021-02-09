@@ -2,11 +2,6 @@
 /* Template Name: index-m */
 require_once 'header_mobile.php';
 ?>
-<script>
-    if(!window.mobileAndTabletCheck()) {
-            window.location.href = '/';
-        }
-</script>
     <header class="header">
         <div class="header_inner_wrapper animated-background">
             <img class="header__menu-button" src="<?= get_template_directory_uri(); ?>/img/burger-menu-icon.svg">

@@ -199,7 +199,7 @@ the_content();
     <div class="cart-button-wrapper">
         <div class="cart-button cart-button-2 checkout-submit">
             <div class="cart-button-left">
-                <span>Оформить заказ</span>
+                <span>Оплатить заказ</span>
             </div>
         </div>
     </div>

@@ -113,7 +113,10 @@ ol, ul {
 }
 
 .address__form {
-    margin-top: 20px
+    margin-top: 20px;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .address__form-inner-wrapper {
@@ -172,6 +175,12 @@ ol, ul {
     border: none;
     outline: none;
     cursor: pointer
+}
+
+.address__form-delivery-city {
+    margin-bottom: 20px;
+    text-align: center;
+    display: none;
 }
 
 .burger-menu {
