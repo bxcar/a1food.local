@@ -42,46 +42,7 @@ the_content();
             } ?>
             <a href="/address-mobile?checkout=true" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
         </div>
-        <!--<div class="delivery-form__date-time-wrapper">
-            <div class="delivery-form__date">
-                <span class="delivery-form__date__title">Дата доставки</span>
-                <div class="delivery-form__date-fields-wrapper">
-                    <div class="delivery-form__date-main-field">
-                        <img src="<?/*= get_template_directory_uri(); */?>/img/checkout-data-icon.svg" class="delivery-form__date-main-field-left-img">
-                        <span class="delivery-form__date-main-field-text">Сегодня</span>
-                        <img src="<?/*= get_template_directory_uri(); */?>/img/checkout-bottom-icon.svg" class="delivery-form__date-main-field-right-img">
-                    </div>
-                    <div class="delivery-form__date-subfields">
-                        <span class="delivery-form__date-subfield">Сегодня</span>
-                        <span class="delivery-form__date-subfield">Завтра</span>
-                        <span class="delivery-form__date-subfield">Ср 21 июня</span>
-                        <span class="delivery-form__date-subfield">Чт 22 июня</span>
-                        <span class="delivery-form__date-subfield">Пт 23 июня</span>
-                        <span class="delivery-form__date-subfield">Сб 24 июня</span>
-                        <span class="delivery-form__date-subfield">Вс 25 июня</span>
-                    </div>
-                </div>
-            </div>
-            <div class="delivery-form__time">
-                <span class="delivery-form__date__title">Время доставки</span>
-                <div class="delivery-form__date-fields-wrapper">
-                    <div class="delivery-form__date-main-field">
-                        <img src="<?/*= get_template_directory_uri(); */?>/img/checkout-time-icon.svg" class="delivery-form__date-main-field-left-img">
-                        <span class="delivery-form__date-main-field-text">Ближайшее</span>
-                        <img src="<?/*= get_template_directory_uri(); */?>/img/checkout-bottom-icon.svg" class="delivery-form__date-main-field-right-img">
-                    </div>
-                    <div class="delivery-form__date-subfields">
-                        <span class="delivery-form__date-subfield">Ближайшее</span>
-                        <span class="delivery-form__date-subfield">15:00</span>
-                        <span class="delivery-form__date-subfield">16:00</span>
-                        <span class="delivery-form__date-subfield">17:00</span>
-                        <span class="delivery-form__date-subfield">18:00</span>
-                        <span class="delivery-form__date-subfield">19:00</span>
-                        <span class="delivery-form__date-subfield">20:00</span>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+
         <div class="delivery-form__date-time-wrapper">
             <div class="delivery-form__date">
                 <span class="delivery-form__date__title">Дата доставки</span>
@@ -89,7 +50,6 @@ the_content();
                     <div class="delivery-form__date-main-field animated-background">
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-data-icon.svg" class="delivery-form__date-main-field-left-img">
                         <div class="delivery-form__date-main-field-inner-wrapper">
-<!--                            <span class="delivery-form__date__title">Дата доставки</span>-->
                             <?php
                             date_default_timezone_set('Asia/Omsk');
                             $current_hour = date('H', time());
@@ -176,7 +136,6 @@ the_content();
                     <div class="delivery-form__date-main-field animated-background">
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-time-icon.svg" class="delivery-form__date-main-field-left-img">
                         <div class="delivery-form__date-main-field-inner-wrapper">
-<!--                            <span class="delivery-form__date__title">Время доставки</span>-->
                             <span class="delivery-form__date-main-field-text">Ближайшее</span>
                         </div>
                         <img src="<?= get_template_directory_uri(); ?>/img/checkout-bottom-icon.svg" class="delivery-form__date-main-field-right-img">

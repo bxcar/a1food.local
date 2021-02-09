@@ -52,56 +52,7 @@ $(document).ready(function () {
         $('.burger-menu').css('left', '-272px');
     });
 
-    $('.delivery-form__date-main-field').on('click', function () {
-        $(this).toggleClass('active');
-    });
-
-    $('.delivery-form__date .delivery-form__date-subfield').on('click', function () {
-        $('.delivery-form__date .delivery-form__date-main-field-text').text($(this).text());
-        $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
-
-        $('#billing_date').attr('value', $(this).data('date'));
-        /*if($('#billing_time').attr('value') === 'Ближайшее') {
-            $('#billing_time').attr('value', '12:00');
-        }*/
-
-        if($(this).text() != 'Сегодня') {
-            if($('.delivery-form__time .delivery-form__date-main-field-text').text() == 'Ближайшее') {
-                $('.delivery-form__time .delivery-form__date-main-field-text').text('12:00');
-            }
-            $('.delivery-form__time .delivery-form__date-subfields').empty();
-            var hour = 12;
-            var min = 0;
-            var current_min = 0;
-            for(var i = 0; i < 23; i++) {
-                if(min === 0) {
-                    current_min = '00';
-                } else {
-                    current_min = '30';
-                    min = -30;
-                }
-                $('.delivery-form__time .delivery-form__date-subfields').append('<span class="delivery-form__date-subfield" data-time="' + parseInt(hour) + ':' + current_min + ':00">' + parseInt(hour) + ':' + current_min + '</span>');
-            hour += 0.5;
-            min += 30;
-            }
-
-            $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
-                $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
-                $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
-                $('#billing_time').attr('value', $(this).data('time'));
-            });
-
-        } else {
-            location.reload();
-        }
-
-    });
-
-    $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
-        $('.delivery-form__time .delivery-form__date-main-field-text').text($(this).text());
-        $(this).parent().parent().find('.delivery-form__date-main-field').toggleClass('active');
-        $('#billing_time').attr('value', $(this).data('time'));
-    });
+    //here was the code for checkout, moved to js/checkout-js.php
 
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -199,10 +150,7 @@ $(document).ready(function () {
         window.scrollTo(scrollPosition[0], scrollPosition[1])*/
     });
 
-    $('.delivery-form__address-input').on('click', function (e) {
-        $('.delivery-form__address-input').removeClass('active');
-        $(this).addClass('active');
-    });
+    //2 here was the code for checkout, moved to checkout-js.php
 
 
     $('.page-popup .sl-popup__close').on('click', function (e) {
