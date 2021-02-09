@@ -41,7 +41,7 @@ if (isset($_POST['addresses-amount'])) {
 
     <div class="cabinet__top-buttons">
         <a href="" class="cabinet__top-buttons-profile animated-background"><?php include "img/cabinet-profile-icon.svg"?>Профиль</a>
-        <a href="#" class="cabinet__top-buttons-orders inactive animated-background"><?php include "img/cabinet-cart-icon.svg"?>Заказы</a>
+        <a href="/orders-mobile" class="cabinet__top-buttons-orders inactive animated-background"><?php include "img/cabinet-cart-icon.svg"?>Заказы</a>
     </div>
 
 

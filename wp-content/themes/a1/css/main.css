@@ -1317,7 +1317,7 @@ header {
     line-height: 12px;
     color: #bfbfbf;
     display: block;
-    margin-bottom: 27px
+    margin-bottom: 20px
 }
 
 .orders__item-bottom-line {
@@ -1369,6 +1369,10 @@ header {
     text-align: right
 }
 
+.orders__item-status.blue {
+    color: #5BD4FB;
+}
+
 .orders__item-status.green {
     color: #45d880
 }
@@ -1404,11 +1408,16 @@ header {
     cursor: pointer
 }
 
+.orders__item-rating-stars.chosen span svg path {
+    fill: #FFC000;
+}
+
 .orders__item-feedback {
     margin-top: 14px;
     position: relative;
     display: none
 }
+
 
 .orders__item-feedback textarea {
     background: #151515;

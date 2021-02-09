@@ -120,6 +120,7 @@ function init() {
 
 setInterval(function(){
     $('input.ymaps-2-1-78-searchbox-input__input').attr('readonly', 'true');
+    // $('.ymaps-2-1-78-search.ymaps-2-1-78-search_layout_normal.ymaps-2-1-78-searchbox__normal-layout').css('display', 'none');
 }, 1000);
 
 $('.address__form').on('submit', function (e) {

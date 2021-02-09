@@ -56,7 +56,7 @@ if(!is_user_logged_in()) { ?>
 
 //        print_r($order_number . '<br>' . $order_address . '<br>' . $order_date . '<br>' . $order_status . '<br>' . $order_total . '<br>'); ?>
 
-            <div class="orders__item order-success animated-background">
+            <div class="orders__item <?php if($order_status == 'Доставлен') { echo 'order-success';} ?> animated-background">
                 <div class="orders__item-top-line">
                     <span class="orders__item-number">Заказ #<?= $order_number ?></span>
                     <div class="orders__item-top-line-right">
@@ -75,8 +75,8 @@ if(!is_user_logged_in()) { ?>
                 <div class="orders__item-bottom-line">
                     <div class="orders__item-bottom-line-inner-wrapper">
                         <span class="orders__item-date"><?= $order_date ?></span>
-                        <span class="orders__item-check"><img
-                                    src="<?= get_template_directory_uri(); ?>/img/get-check-icon.svg"><span>Получить чек</span></span>
+                        <!--<span class="orders__item-check"><img
+                                    src="<?/*= get_template_directory_uri(); */?>/img/get-check-icon.svg"><span>Получить чек</span></span>-->
                     </div>
                     <?php if ($order_status == 'Принят') { ?>
                         <span class="orders__item-status blue">Принят</span>
@@ -161,26 +161,6 @@ if(!is_user_logged_in()) { ?>
 </div>
 <!--<div class="overlay"></div>-->
 
-<script>
-    $('.orders__item-close').on('click', function (e) {
-        $(this).parent().parent().parent().remove();
-
-        $.ajax({
-            type: 'post',
-            url: '/wp-content/themes/a1/custom_files_dm/delete_order.php',
-            dataType: 'json',
-            data:
-                {
-                    'order_id': $(this).data('order-id'),
-                },
-            success: function (data) {//success callback
-                console.log(data);
-            },
-            error: function (data) {
-                console.log('error');
-            }
-        });
-    });
-</script>
-
-<?php get_footer() ?>
+<?php
+include 'js/orders-js.php';
+get_footer() ?>
