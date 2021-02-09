@@ -41,7 +41,7 @@ session_start();
     </head>
 <body <?php if(get_page_template_slug( get_the_ID() ) == 'text-desk.php') { echo 'data-type="text-page"'; }//body_class(); ?>>
 <?php wp_body_open(); ?>
-<div class="main <?php if(get_the_ID() == 12 || get_the_ID() == 360 || get_the_ID() == 363) { echo 'container'; } else { echo 'container-inner'; }?>">
+<div class="main <?php if(get_the_ID() == 357) { echo 'container-inner'; } else { echo 'container'; }?>">
     <?php if(get_the_ID() != 12) { ?>
         <header class="header-in animated-background">
             <div class="header-in__inner-wrapper">

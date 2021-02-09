@@ -1,40 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="img/favicon.png"/>
-    <title>Оплата - A1</title>
-
-    <!--header styles start-->
-    <link rel="stylesheet" href="css/main.css">
-    <!--header styles end-->
-</head>
-<body>
-<div class="main container">
-    <header class="header-in">
-        <div class="header-in__inner-wrapper">
-            <a href="#" class="header-in__back"><img src="img/header-in-back.svg"></a>
-            <span class="header-in__title">Оплата</span>
-        </div>
-        <img class="header-in__logo" src="img/header-in-logo.svg">
-    </header>
-
+<?php
+/* Template Name: payment-mobile */
+require_once 'header_mobile.php';
+?>
+<script>
+    if(!window.mobileAndTabletCheck()) {
+        window.location.href = '/checkout';
+    }
+</script>
     <span class="payment__price-title">1 095 ₽</span>
     <span class="payment__price-subtitle">Итого к оплате</span>
 
     <span class="payment__methods-title">Оплата в один клик</span>
     <div class="payment__methods">
-        <a href="#"><img src="img/apple-pay-icon.svg"></a>
-        <a href="#"><img src="img/samsung-pay-icon.svg"></a>
-        <a href="#"><img src="img/google-pay-icon.svg"></a>
+        <a href="#"><img src="<?= get_template_directory_uri(); ?>/img/apple-pay-icon.svg"></a>
+        <a href="#"><img src="<?= get_template_directory_uri(); ?>/img/samsung-pay-icon.svg"></a>
+        <a href="#"><img src="<?= get_template_directory_uri(); ?>/img/google-pay-icon.svg"></a>
     </div>
 
     <span class="payment__card-title">Оплата картой</span>
 
-    <form action="#" method="post" class="payment__card">
+    <!--<form action="#" method="post" class="payment__card">
         <span class="payment__card-number-title">Номер карты:</span>
         <div class="payment__card-example-numbers">
             <input type="number" name="card_number_1" placeholder="5469" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
@@ -56,9 +41,9 @@
             <div class="payment__card-bottom-block-1">
                 <span>Принимаем к оплате:</span>
                 <div>
-                    <img src="img/visa-icon.svg">
-                    <img src="img/mastercard-icon.svg">
-                    <img src="img/mir-icon.svg">
+                    <img src="<?/*= get_template_directory_uri(); */?>/img/visa-icon.svg">
+                    <img src="<?/*= get_template_directory_uri(); */?>/img/mastercard-icon.svg">
+                    <img src="<?/*= get_template_directory_uri(); */?>/img/mir-icon.svg">
                 </div>
             </div>
             <div class="payment__card-bottom-block-2">
@@ -72,7 +57,7 @@
                 <span class="checkmark"></span>
             </label>
         </div>
-    </form>
+    </form>-->
 
 
     <div class="cart-button-wrapper">
@@ -83,10 +68,5 @@
         </div>
     </div>
 </div>
-<!--footer scripts start-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="js/common.js"></script>
-<!--footer scripts end-->
-</body>
-</html>
+<?php
+require_once 'footer_mobile.php';
