@@ -156,10 +156,11 @@ the_content();
                             }
                         }
 
-                        $full_time_line_for_js_in_the_bottom = $hour . ':'. $minute . ':' . '00';
+//                        $full_time_line_for_js_in_the_bottom = $hour . ':'. $minute . ':' . '00';
+                        $full_time_line_for_js_in_the_bottom = date('H', time()) . ':'. date('i', time()) . ':' . '00';
 
                         ?>
-                        <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute:00" ?>">Ближайшее</span>
+                        <span class="delivery-form__date-subfield" data-time="<?php echo date('H', time()) . ":" . date('i', time()) . ":00" ?>">Ближайшее</span>
                         <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute:00" ?>"><?php echo "$hour:$minute" ?></span>
                         <?php
                         if($minute == '30') {

@@ -79,7 +79,7 @@
         loop: true,
         nav: false,
         dots: false,
-        autoplay: true,
+        autoplay: false,
         autoplayTimeout: <?= get_field('slider_interval', 'options') ?>,
         autoplayHoverPause: true,
         items: 1
@@ -185,6 +185,7 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
 
 <form class="contact-popup" enctype="multipart/form-data" action="#">
     <span class="contact-popup__title">Связаться<br>с нами</span>
+    <span class="tanks__subtitle" style="display: none;">Ваше сообщение отправлено</span>
     <?php if (is_user_logged_in()) {
         if (get_field('user_name_field', 'user_' . get_current_user_id())) { ?>
             <div class="contact-popup__item1">

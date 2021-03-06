@@ -1,3 +1,17 @@
+<style>
+    .ymaps-2-1-78-map-copyrights-promo,
+    .ymaps-2-1-78-copyright,
+    .ymaps-2-1-78-islets_card__toponym-buttons,
+    .ymaps-2-1-78-islets_card__buttons,
+    .ymaps-2-1-78-islets_card__separator,
+    .ymaps-2-1-78-islets_card__row-links {
+        display: none !important;
+    }
+
+    .ymaps-2-1-78-balloon__content > ymaps:first-child {
+        height: auto !important;
+    }
+</style>
 <script>
 /*var latitude = 0;
     var longitude = 0;

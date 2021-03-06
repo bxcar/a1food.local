@@ -2657,7 +2657,7 @@ input[type=number] {
 }
 
 .checkout-cards-right {
-    /*display: none;*/
+    display: none;
 }
 
 .checkout-cards-right-price {
@@ -2754,10 +2754,16 @@ input[type=number] {
     align-items: center;
     justify-content: space-between;
     height: 256px;
-    padding-left: 114px;
-    padding-right: 84px;
+    /*padding-left: 114px;*/
+    /*padding-right: 84px;*/
     box-sizing: border-box;
     text-decoration: none;
+}
+
+.slider__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .slider__item-left {

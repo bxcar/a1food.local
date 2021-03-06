@@ -114,6 +114,37 @@ if(isset($_GET['order_id'])) {
 
     $response = json_decode($response);
 
+    if($user_name) {
+        $user_receipt_name = $user_name;
+    } else {
+        $user_receipt_name = 'Покупатель';
+    }
+
+    $receipt_products_list_string = '';
+
+    foreach ($order->get_items() as $item_key => $item ):
+        $item_data = $item->get_data();
+        $product = $item->get_product();
+        $receipt_products_list_string .= 'Product:' . $item_data['name'] . '^';
+        $receipt_products_list_string .= 'Quantity:' . $item_data['quantity'] . '^';
+        $receipt_products_list_string .= 'Price:' . $product->get_price()  . '^' . "\r\n";
+    endforeach;
+
+    $receipt_products_list_string .= 'Product:Доставка^Quantity:1^Price:'.$order_data['shipping_total']  . '^' . "\r\n";
+
+    $line_total = $order_data['total'];
+
+    $message = "Payment^\r\nname:$user_receipt_name^\r\ne-mail:$user_email^\r\n$receipt_products_list_string" . "LineTotal:$line_total^";
+
+    $email_from = get_field('email_order_data_send_from', 'option');
+    $email_to = get_field('email_order_data_send', 'option');
+
+    $headers = 'From: ' . $email_from . "\r\n" .
+        'Reply-To: ' . $email_from .  "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+
+    mail($email_to,'Receipt',$message, $headers);
+
 //    print_r($response);
 
     update_field('order_id_frontpad', $response->order_id, $order_id);

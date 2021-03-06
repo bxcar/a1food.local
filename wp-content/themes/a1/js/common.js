@@ -124,9 +124,22 @@ $(document).ready(function () {
         }
     });
 
-    $('.contact-popup-close').on('click', function () {
+    function close_contact_form() {
         $('.contact-popup').fadeOut(400);
         $('.overlay').fadeOut(400);
+
+        setTimeout(function () {
+            $('.contact-popup__title').html('Связаться<br>с нами').css('margin-bottom', '35px');
+            $('.tanks__subtitle').css('display', 'none');
+            $('.contact-popup__item1').css('display', 'flex');
+            $('.contact-popup__item2-wrapper').css('display', 'block');
+            $('.contact-popup__feedback').css('display', 'block');
+            $('.contact-popup button[type="submit"]').text('Отправить').off('click');
+        }, 500);
+    }
+
+    $('.contact-popup-close').on('click', function () {
+        close_contact_form();
     });
 
     $('.contact-popup-button').on('click', function (e) {
@@ -162,7 +175,16 @@ $(document).ready(function () {
             'processData': false,
             success: function (data) {//success callback
                 if(data.success === 'true') {
-                    $('.contact-popup button[type="submit"]').text('Успешно отправлено').prop( "disabled", true );
+                    $('.contact-popup__title').text('Спасибо!').css('margin-bottom', '15px');
+                    $('.tanks__subtitle').css('display', 'block');
+                    $('.contact-popup__item1').css('display', 'none');
+                    $('.contact-popup__item2-wrapper').css('display', 'none');
+                    $('.contact-popup__feedback').css('display', 'none');
+                    $('.contact-popup__feedback textarea').val('');
+                    $('.contact-popup button[type="submit"]').text('Закрыть').on('click', function (e) {
+                        e.preventDefault();
+                        close_contact_form();
+                    });
                 } else {
                     $('.contact-popup button[type="submit"]').text('Ошибка');
                     console.log(data);
