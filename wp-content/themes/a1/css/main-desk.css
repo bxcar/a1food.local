@@ -2760,6 +2760,12 @@ input[type=number] {
     text-decoration: none;
 }
 
+.slider__item.hours-popup,
+.slider__item.page-popup {
+    padding-left: 114px;
+    padding-right: 84px;
+}
+
 .slider__img {
     width: 100%;
     height: 100%;

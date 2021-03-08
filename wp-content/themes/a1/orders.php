@@ -124,7 +124,7 @@ if(!is_user_logged_in()) {
 
 //        print_r($order_number . '<br>' . $order_address . '<br>' . $order_date . '<br>' . $order_status . '<br>' . $order_total . '<br>'); ?>
 
-                <div class="orders__item <?php if($order_status == 'Доставлен') { echo 'order-success';} ?> animated-background">
+                <div id="<?= get_the_ID(); ?>" class="orders__item <?php if($order_status == 'Доставлен') { echo 'order-success';} ?> animated-background">
                     <div class="orders__item-top-line">
                         <span class="orders__item-number">Заказ #<?= $order_number ?></span>
                         <div class="orders__item-top-line-right">
@@ -159,7 +159,7 @@ if(!is_user_logged_in()) {
                         <?php } ?>
 
                     </div>
-                    <?php if ($order_status == 'Доставлен') {
+                    <?php if ($order_status == 'Доставлен' || true) {
                         if(get_field('client_feedback_stars')) { ?>
                             <div class="orders__item-rating">
                                 <span class="orders__item-rating-title">Ваш отзыв</span>
