@@ -3217,3 +3217,13 @@ input[type=number] {
 .text-page-custom-block__subitem {
     width: 50%;
 }
+
+.orders__item-feedback-sent-image {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 0;
+    border-radius: 8px;
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+}

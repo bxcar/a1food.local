@@ -22,71 +22,7 @@ if(!is_user_logged_in()) {
         <a href="" class="cabinet__top-buttons-orders animated-background"><?php include "img/cabinet-cart-icon.svg"?>Заказы</a>
     </div>
 
-    <!--<div class="orders">
-        <div class="orders__item order-success animated-background">
-            <div class="orders__item-top-line">
-                <span class="orders__item-number">Заказ #9235555-01</span>
-                <div class="orders__item-top-line-right">
-                    <span class="orders__item-price">2249 ₽</span>
-                    <img class="orders__item-close" src="<?/*= get_template_directory_uri(); */?>/img/order-close.svg">
-                </div>
-            </div>
-            <span class="orders__item-address">ул. Фрунзе 308, офис 401</span>
-            <div class="orders__item-bottom-line">
-                <span class="orders__item-date">25 мая 2020 г.</span>
-                <span class="orders__item-check"><img src="<?/*= get_template_directory_uri(); */?>/img/get-check-icon.svg"><span>Получить чек</span></span>
-                <span class="orders__item-status green">Доставлен</span>
-            </div>
-            <div class="orders__item-rating">
-                <span class="orders__item-rating-title">Оцените заказ</span>
-                <div class="orders__item-rating-stars">
-                    <span><?php /*include "img/star-icon.svg"*/?></span>
-                    <span><?php /*include "img/star-icon.svg"*/?></span>
-                    <span><?php /*include "img/star-icon.svg"*/?></span>
-                    <span><?php /*include "img/star-icon.svg"*/?></span>
-                    <span><?php /*include "img/star-icon.svg"*/?></span>
-                </div>
-            </div>
-            <form action="#" method="post" class="orders__item-feedback">
-                <textarea name="feedback" placeholder="Вы можете оставить отзыв"></textarea>
-                <img src="<?/*= get_template_directory_uri(); */?>/img/feedback-icon.svg" class="orders__item-feedback-icon">
-                <div class="orders__item-feedback-file-wrapper">
-                    <label class="orders__item-feedback-file-image" for="file"><img src="<?/*= get_template_directory_uri(); */?>/img/input-file-img.svg"></label>
-                    <input type="file" name="file" id="file">
-                </div>
-            </form>
-        </div>
-        <div class="orders__item animated-background">
-            <div class="orders__item-top-line">
-                <span class="orders__item-number">Заказ #9235555-01</span>
-                <div class="orders__item-top-line-right">
-                    <span class="orders__item-price">2249 ₽</span>
-                    <img class="orders__item-close" src="<?/*= get_template_directory_uri(); */?>/img/order-close.svg">
-                </div>
-            </div>
-            <span class="orders__item-address">ул. Фрунзе 308, офис 401</span>
-            <div class="orders__item-bottom-line">
-                <span class="orders__item-date">25 мая 2020 г.</span>
-                <span class="orders__item-check"><img src="<?/*= get_template_directory_uri(); */?>/img/get-check-icon.svg"><span>Получить чек</span></span>
-                <span class="orders__item-status yellow">Доставляется</span>
-            </div>
-        </div>
-        <div class="orders__item animated-background">
-            <div class="orders__item-top-line">
-                <span class="orders__item-number">Заказ #9235555-01</span>
-                <div class="orders__item-top-line-right">
-                    <span class="orders__item-price">2249 ₽</span>
-                    <img class="orders__item-close" src="<?/*= get_template_directory_uri(); */?>/img/order-close.svg">
-                </div>
-            </div>
-            <span class="orders__item-address">ул. Фрунзе 308, офис 401</span>
-            <div class="orders__item-bottom-line">
-                <span class="orders__item-date">25 мая 2020 г.</span>
-                <span class="orders__item-check"><img src="<?/*= get_template_directory_uri(); */?>/img/get-check-icon.svg"><span>Получить чек</span></span>
-                <span class="orders__item-status red">Отменен</span>
-            </div>
-        </div>
-    </div>-->
+
     <div class="orders">
         <?php
         $loop = new WP_Query(array(
@@ -175,7 +111,7 @@ if(!is_user_logged_in()) {
                             <?php } ?>
                             <?php if(get_field('client_feedback_file')) { ?>
                                 <span class="orders__item-rating-title">Прикрепленный файл:</span>
-                                <img src="<?= get_field('client_feedback_file') ?>" class="orders__item-address" style="margin-top: 10px;margin-bottom: 0; border-radius: 8px; width: 100px; height: 80px; object-fit: cover;">
+                                <img src="<?= get_field('client_feedback_file') ?>" class="orders__item-feedback-sent-image">
                             <?php } ?>
                         <?php } else { ?>
                             <div class="orders__item-rating">
@@ -189,7 +125,7 @@ if(!is_user_logged_in()) {
                                 </div>
                             </div>
                             <form action="#" method="post" class="orders__item-feedback" id="orders__item-feedback" enctype="multipart/form-data">
-<!--                                <img style="display:none;" src="" class="orders__item-feedback-img" alt="review-img">-->
+                                <img style="display:none;" src="" class="orders__item-feedback-img" alt="review-img">
                                 <input type="hidden" name="stars">
                                 <input type="hidden" name="order_id" value="<?= $order_id ?>">
                                 <textarea name="feedback" placeholder="Вы можете оставить отзыв"></textarea>

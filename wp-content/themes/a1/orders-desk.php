@@ -107,7 +107,7 @@ if(!is_user_logged_in()) { ?>
                         <?php } ?>
                         <?php if(get_field('client_feedback_file')) { ?>
                             <span class="orders__item-rating-title">Прикрепленный файл:</span>
-                            <img src="<?= get_field('client_feedback_file') ?>" class="orders__item-address" style="margin-top: 10px;margin-bottom: 0; border-radius: 8px; width: 100px; height: 80px; object-fit: cover;">
+                            <img src="<?= get_field('client_feedback_file') ?>" class="orders__item-feedback-sent-image">
                         <?php } ?>
                     <?php } else { ?>
                         <div class="orders__item-rating">

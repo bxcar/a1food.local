@@ -52,6 +52,7 @@
 
     $('.orders__item-feedback').on('submit', function (e) {
         e.preventDefault();
+        var $this = $(this);
         // var formData = $(this).serialize();
         var formData = new FormData(document.getElementById("orders__item-feedback"));
         $.ajax({
@@ -64,10 +65,17 @@
             'processData': false,
             success: function (data) {//success callback
                 if (data.success === 'true') {
-                    $('.orders__item-feedback input[type="submit"]').attr('value', 'Отзыв отправлен').prop("disabled", true);
-                    $('.orders__item-feedback textarea').prop("disabled", true);
+                    $this.parent().find('.orders__item-rating > .orders__item-rating-title').text('Ваш отзыв');
+                    $this.parent().append('<span class="orders__item-address" style="margin-top: 10px;margin-bottom: 0;">' + $this.find('textarea').val() + '</span>');
+
+                    if($this.parent().find('.orders__item-feedback-img').attr('src')) {
+                        $this.parent().append('<span class="orders__item-rating-title">Прикрепленный файл:</span>');
+                        $this.parent().append('<img src="' + $this.parent().find('.orders__item-feedback-img').attr('src') + '" class="orders__item-feedback-sent-image">');
+                    }
+
+                    $this.remove();
                 } else {
-                    $('.orders__item-feedback input[type="submit"]').attr('value', 'Ошибка');
+                    $this.find('input[type="submit"]').attr('value', 'Ошибка');
                     if (data.success === 'invalid_extension') {
                         alert('Некорректный формат файла. Разрешенные форматы: jpg, jpeg, png.')
                     }
