@@ -45,10 +45,12 @@ $(document).ready(function () {
     });
 
     $('.header__menu-button').on('click', function () {
+        $('.overlay').fadeIn(200);
         $('.burger-menu').css('left', 0);
     });
 
     $('.burger-menu__close').on('click', function () {
+        $('.overlay').fadeOut(200);
         $('.burger-menu').css('left', '-272px');
     });
 
@@ -181,6 +183,7 @@ $(document).ready(function () {
                     $('.contact-popup__item2-wrapper').css('display', 'none');
                     $('.contact-popup__feedback').css('display', 'none');
                     $('.contact-popup__feedback textarea').val('');
+                    $('.burger-menu').css('left', '-272px');
                     $('.contact-popup button[type="submit"]').text('Закрыть').on('click', function (e) {
                         e.preventDefault();
                         close_contact_form();

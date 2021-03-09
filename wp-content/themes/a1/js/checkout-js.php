@@ -1,7 +1,12 @@
 <script>
     $('.checkout-submit').on('click', function (e) {
         e.preventDefault();
-        $('form.woocommerce-checkout').submit();
+        if(<?php if(get_field('user_email_field', 'user_' . get_current_user_id())) { echo 'true'; } else { echo 'false'; } ?> &&
+        <?php if(get_field('user_addresses_list_field', 'user_' . get_current_user_id())) { echo 'true'; } else { echo 'false'; } ?>) {
+            $('form.woocommerce-checkout').submit();
+        } else {
+            alert('Заполните все необходимые поля для оформления заказа');
+        }
     });
 
     $('.checkout-cards-right__apple-pay').on('click', function (e) {

@@ -1,3 +1,4 @@
+<div class="overlay"></div>
 <div class="burger-menu">
     <div class="burger-menu__header">
         <img src="<?= get_template_directory_uri(); ?>/img/burger-close.svg" class="burger-menu__close">
@@ -23,7 +24,7 @@
     </div>
     <div class="burger-menu__button-wrapper">
         <a href="https://mos-digital.com/" target="_blank" class="burger-menu_mos"><?php include "img/crown-mob.svg" ?><span>Построено в MOS-DIGITAL</span></a>
-        <a href="#" class="burger-menu__button">Обратная связь</a>
+        <a href="#" class="burger-menu__button contact-popup-button">Обратная связь</a>
     </div>
 
 </div>
@@ -139,5 +140,57 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
 </script>
 <!--footer scripts end-->
 <?php wp_footer(); ?>
+<form class="contact-popup" enctype="multipart/form-data" action="#">
+    <span class="contact-popup__title">Связаться<br>с нами</span>
+    <span class="tanks__subtitle" style="display: none;">Ваше сообщение отправлено</span>
+    <?php if (is_user_logged_in()) {
+        if (get_field('user_name_field', 'user_' . get_current_user_id())) { ?>
+            <div class="contact-popup__item1">
+                <span class="contact-popup__item1-title"><img src="<?= get_template_directory_uri(); ?>/img/contact-user-icon.png">Привет, <?= get_field('user_name_field', 'user_' . get_current_user_id()) ?></span>
+                <span class="contact-popup__item1-phone"><?= get_field('user_phone_field', 'user_' . get_current_user_id()) ?></span>
+            </div>
+        <?php }
+    } ?>
+    <div class="contact-popup__item2-wrapper">
+        <div class="contact-popup__item2">
+            <div class="contact-popup__item2-left">
+                <span class="contact-popup__item2-title"><img
+                            src="<?= get_template_directory_uri(); ?>/img/contact-msg-icon.png"><span>Тема обращения</span></span>
+            </div>
+            <div class="contact-popup__item2-right">
+                <img src="<?= get_template_directory_uri(); ?>/img/contact-dropdown-icon.png">
+            </div>
+        </div>
+        <div class="contact-popup__item2-subfields">
+            <?php if (get_field('contact_sections', 'option')) {
+                foreach (get_field('contact_sections', 'option') as $item) { ?>
+                    <span class="contact-popup__item2-subfield"
+                          data-email="<?= $item['email'] ?>"><?= $item['section'] ?></span>
+                <?php }
+            } ?>
+        </div>
+    </div>
+    <div class="contact-popup__feedback">
+        <img src="<?= get_template_directory_uri(); ?>/img/contact-msg-icon.png"
+             class="contact-popup__feedback-abs-img">
+        <textarea required name="feedback" placeholder="Ваше сообщение"></textarea>
+        <div class="contact-popup__feedback-bottom">
+            <span class="contact-popup__feedback-bottom-file-name"></span>
+            <img src="<?= get_template_directory_uri(); ?>/img/contact-empty-img-icon.png" alt="#">
+            <span class="contact-popup__feedback-file"><img
+                        src="<?= get_template_directory_uri(); ?>/img/contact-file-icon.png"
+                        alt="#">Прикрепить файл</span>
+        </div>
+    </div>
+    <input type="file" name="file" style="display: none;">
+
+    <input type="hidden" name="email" value="">
+    <input type="hidden" name="user_section" value="">
+    <input type="hidden" name="user_name" value="<?= get_field('user_name_field', 'user_' . get_current_user_id()); ?>">
+    <input type="hidden" name="user_phone" value="<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>">
+
+    <button type="submit">Отправить</button>
+    <img src="<?= get_template_directory_uri(); ?>/img/order-close.svg" class="contact-popup-close">
+</form>
 </body>
 </html>

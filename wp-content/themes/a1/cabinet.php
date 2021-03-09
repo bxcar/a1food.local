@@ -29,10 +29,11 @@ if (isset($_POST['contact-email'])) {
 }
 
 if (isset($_POST['addresses-amount'])) {
-    $i = 1;
-    for (; $i <= $_POST['addresses-amount']; $i++) {
+    $ix = 0;
+    for ($i = 1; $i <= $_POST['addresses-amount']; $i++) {
         if (!isset($_POST['address-' . $i])) {
-            delete_row('user_addresses_list_field', $i, 'user_' . get_current_user_id());
+            delete_row('user_addresses_list_field', $i-$ix, 'user_' . get_current_user_id());
+            $ix++;
         }
     }
 }
