@@ -5,7 +5,7 @@
     .ymaps-2-1-78-islets_card__buttons,
     .ymaps-2-1-78-islets_card__separator,
     .ymaps-2-1-78-islets_card__row-links,
-    .ymaps-2-1-78-controls__control_toolbar{
+    .ymaps-2-1-78-controls__control_toolbar {
         display: none !important;
     }
 
@@ -87,8 +87,8 @@ function init() {
                 if (dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[3].name !== 'Омск') {
                     $('.address__form-delivery-city').css('display', 'block');
                 } else {
-                    $('input[name="street"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[4].name);
-                    $('input[name="house"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[5].name);
+                    $('input[name="street"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[5].name);
+                    $('input[name="house"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[6].name);
                     searchControl.search('Россия, Омск, ' + $("input[name='street']").val() + ', ' + $("input[name='house']").val());
                 }
             }
@@ -101,6 +101,7 @@ function init() {
     // https://ru.stackoverflow.com/questions/453173/%D0%9A%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%80%D0%B5%D1%82%D0%B8%D1%82%D1%8C-%D0%BC%D0%B0%D1%81%D1%88%D1%82%D0%B0%D0%B1%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%9A%D0%B0%D1%80%D1%82%D1%8B-%D0%BF%D1%80%D0%B8-%D1%81%D0%BA%D1%80%D0%BE%D0%BB%D0%BB%D0%B5-%D1%82%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%BD%D0%B0-%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D1%83%D1%81%D1%82%D1%80%D0%BE
 
     // console.log(latitude + ' ' + longitude);
+    var location = ymaps.geolocation;
     var myMap = new ymaps.Map("map", {
         // Координаты центра карты.
         // Порядок по умолчанию: «широта, долгота».
@@ -128,6 +129,30 @@ function init() {
     });
 
     myMap.controls.add(searchControl);
+
+    // Получение местоположения и автоматическое отображение его на карте.
+    /*location.get({
+        mapStateAutoApply: true
+    })
+        .then(
+            function(result) {
+                // Получение местоположения пользователя.
+                var userAddress = result.geoObjects.get(0).properties.get('text');
+                var userCoodinates = result.geoObjects.get(0).geometry.getCoordinates();
+                // Пропишем полученный адрес в балуне.
+                result.geoObjects.get(0).properties.set({
+                    balloonContentBody: 'Адрес: ' + userAddress +
+                        '<br/>Координаты:' + userCoodinates
+                });
+
+                myMap.geoObjects.add(result.geoObjects);
+                myMap.setZoom(12);
+
+            },
+            function(err) {
+                console.log('Ошибка: ' + err)
+            }
+        );*/
 
 
     $("input[name='street']").on('input', function (e) {

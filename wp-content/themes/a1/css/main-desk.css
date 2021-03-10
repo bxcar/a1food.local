@@ -2269,6 +2269,7 @@ input[type=number] {
 
 .product-item-bottom {
     padding-left: 28px;
+    padding-right: 26px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -2286,6 +2287,7 @@ input[type=number] {
 .product-item-price-wrapper {
     position: relative;
     text-decoration: none;
+    margin-left: auto;
 }
 
 .product-item-price-main {

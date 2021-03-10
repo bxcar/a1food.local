@@ -1,4 +1,16 @@
 $(document).ready(function () {
+    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    // We listen to the resize event
+    window.addEventListener('resize', () => {
+        // We execute the same script as before
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+
     $('.product-item-bottom-i').on('click', function () {
         /*var check_active_class = false;
         if($(this).parent().hasClass('active')) {
@@ -44,14 +56,58 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 
+    // left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+    var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+    function preventDefault(e) {
+        e.preventDefault();
+    }
+
+    function preventDefaultForScrollKeys(e) {
+        if (keys[e.keyCode]) {
+            preventDefault(e);
+            return false;
+        }
+    }
+
+// modern Chrome requires { passive: false } when adding event
+    var supportsPassive = false;
+    try {
+        window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+            get: function () { supportsPassive = true; }
+        }));
+    } catch(e) {}
+
+    var wheelOpt = supportsPassive ? { passive: false } : false;
+    var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+// call this to Disable
+    function disableScroll() {
+        window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+        window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+        window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+        window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+// call this to Enable
+    function enableScroll() {
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+        window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+        window.removeEventListener('touchmove', preventDefault, wheelOpt);
+        window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
     $('.header__menu-button').on('click', function () {
         $('.overlay').fadeIn(200);
         $('.burger-menu').css('left', 0);
+        disableScroll();
     });
 
     $('.burger-menu__close').on('click', function () {
         $('.overlay').fadeOut(200);
         $('.burger-menu').css('left', '-272px');
+        enableScroll();
     });
 
     //here was the code for checkout, moved to js/checkout-js.php
@@ -184,6 +240,7 @@ $(document).ready(function () {
                     $('.contact-popup__feedback').css('display', 'none');
                     $('.contact-popup__feedback textarea').val('');
                     $('.burger-menu').css('left', '-272px');
+                    enableScroll();
                     $('.contact-popup button[type="submit"]').text('Закрыть').on('click', function (e) {
                         e.preventDefault();
                         close_contact_form();

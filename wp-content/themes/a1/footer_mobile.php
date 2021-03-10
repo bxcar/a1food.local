@@ -19,7 +19,7 @@
             <span><img src="<?= get_template_directory_uri(); ?>/img/location-icon.svg">г. Омск</span>
         </a>
         <a href="/offer-mobile" class="burger-menu__content-item">
-            <span><img src="<?= get_template_directory_uri(); ?>/img/user-agreement-icon.svg">Пользовательское соглашение</span>
+            <span><img src="<?= get_template_directory_uri(); ?>/img/user-agreement-icon.svg">Оферта</span>
         </a>
     </div>
     <div class="burger-menu__button-wrapper">
