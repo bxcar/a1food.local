@@ -87,8 +87,8 @@ function init() {
                 if (dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[3].name !== 'Омск') {
                     $('.address__form-delivery-city').css('display', 'block');
                 } else {
-                    $('input[name="street"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[5].name);
-                    $('input[name="house"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[6].name);
+                    $('input[name="street"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components.slice(-2)[0].name);
+                    $('input[name="house"]').attr('value', dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components.slice(-1)[0].name);
                     searchControl.search('Россия, Омск, ' + $("input[name='street']").val() + ', ' + $("input[name='house']").val());
                 }
             }
@@ -130,6 +130,26 @@ function init() {
 
     myMap.controls.add(searchControl);
 
+    //https://yandex.ru/dev/maps/jsapi/doc/2.1/dg/concepts/geocoding/searchControl.html
+
+    /*searchControl.events.add('resultselect', function (e) {
+        // Получает массив результатов.
+        var results = searchControl.getResultsArray();
+        // Индекс выбранного объекта.
+        var selected = e.get('index');
+        // Получает координаты выбранного объекта.
+        var point = results[selected].geometry.getCoordinates();
+        console.log(point);
+        $.ajax({
+            url: 'https://geocode-maps.yandex.ru/1.x/?apikey=e215db02-6068-4965-8f36-3b1b1b18a6f1&geocode=' + point[1] + ',' + point[0] + '&kind=house&format=json',
+            dataType: 'jsonp',
+            success: function (dataWeGotViaJsonp) {
+                console.log(dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components.slice(-2)[0].name);
+                console.log(dataWeGotViaJsonp.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components.slice(-1)[0].name);
+            }
+        });
+    });*/
+
     // Получение местоположения и автоматическое отображение его на карте.
     /*location.get({
         mapStateAutoApply: true
@@ -166,7 +186,8 @@ function init() {
 
 setInterval(function(){
     $('input.ymaps-2-1-78-searchbox-input__input').attr('readonly', 'true');
-    // $('.ymaps-2-1-78-search.ymaps-2-1-78-search_layout_normal.ymaps-2-1-78-searchbox__normal-layout').css('display', 'none');
+
+    //// $('.ymaps-2-1-78-search.ymaps-2-1-78-search_layout_normal.ymaps-2-1-78-searchbox__normal-layout').css('display', 'none');
 }, 1000);
 
 $('.address__form').on('submit', function (e) {
