@@ -18,10 +18,12 @@
  *
  * @param string $query The search query.
  * @param int    $hits  The number of hits found.
+ *
+ * @return boolean True if logged, false if not logged.
  */
 function relevanssi_update_log( $query, $hits ) {
 	if ( empty( $query ) ) {
-		return;
+		return false;
 	}
 
 	// Bot filter, by Justin_K.
@@ -29,7 +31,17 @@ function relevanssi_update_log( $query, $hits ) {
 	$user_agent = '';
 	if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 		$user_agent = $_SERVER['HTTP_USER_AGENT'];
-		$bots       = array( 'Google' => 'Mediapartners-Google' );
+		$bots       = array(
+			'Google 1'   => 'Mediapartners-Google',
+			'Google 2'   => 'Googlebot',
+			'Bing'       => 'Bingbot',
+			'Yahoo'      => 'Slurp',
+			'DuckDuckGo' => 'DuckDuckBot',
+			'Baidu'      => 'Baiduspider',
+			'Yandex'     => 'YandexBot',
+			'Sogou'      => 'Sogou',
+			'Exalead'    => 'Exabot',
+		);
 
 		/**
 		 * Filters the bots Relevanssi should block from logs.
@@ -39,9 +51,9 @@ function relevanssi_update_log( $query, $hits ) {
 		 * @param array $bots An array of bot user agents.
 		 */
 		$bots = apply_filters( 'relevanssi_bots_to_not_log', $bots );
-		foreach ( $bots as $name => $lookfor ) {
+		foreach ( array_values( $bots ) as $lookfor ) {
 			if ( false !== stristr( $user_agent, $lookfor ) ) {
-				return;
+				return false;
 			}
 		}
 	}
@@ -57,12 +69,12 @@ function relevanssi_update_log( $query, $hits ) {
 	$user = apply_filters( 'relevanssi_log_get_user', wp_get_current_user() );
 	if ( 0 !== $user->ID && get_option( 'relevanssi_omit_from_logs' ) ) {
 		$omit = explode( ',', get_option( 'relevanssi_omit_from_logs' ) );
-		array_walk( $omit, 'trim' );
+		$omit = array_map( 'trim', $omit );
 		if ( in_array( strval( $user->ID ), $omit, true ) ) {
-			return;
+			return false;
 		}
 		if ( in_array( $user->user_login, $omit, true ) ) {
-			return;
+			return false;
 		}
 	}
 
@@ -107,7 +119,9 @@ function relevanssi_update_log( $query, $hits ) {
 				$ip
 			)
 		);
+		return true;
 	}
+	return false;
 }
 
 /**
@@ -117,11 +131,13 @@ function relevanssi_update_log( $query, $hits ) {
  *
  * @global object $wpdb                 The WordPress database interface.
  * @global array  $relevanssi_variables The global Relevanssi variables, used for database table names.
+ *
+ * @return int|bool Number of rows deleted, or false on error.
  */
 function relevanssi_trim_logs() {
 	global $wpdb, $relevanssi_variables;
 	$interval = intval( get_option( 'relevanssi_trim_logs' ) );
-	$wpdb->query(
+	return $wpdb->query(
 		$wpdb->prepare(
 			'DELETE FROM ' . $relevanssi_variables['log_table'] . ' WHERE time < TIMESTAMP(DATE_SUB(NOW(), INTERVAL %d DAY))', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$interval
@@ -169,7 +185,7 @@ function relevanssi_export_log_data( $user_id, $page ) {
 
 		$item_id     = "relevanssi_logged_search-{$id}";
 		$group_id    = 'relevanssi_logged_searches';
-		$group_label = __( 'Logged seaches', 'relevanssi' );
+		$group_label = __( 'Logged searches', 'relevanssi' );
 		$data        = array(
 			array(
 				'name'  => __( 'Time', 'relevanssi' ),
@@ -278,6 +294,10 @@ function relevanssi_export_log() {
 	$data = $wpdb->get_results( 'SELECT * FROM ' . $relevanssi_variables['log_table'], ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	ob_start();
 	$df = fopen( 'php://output', 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( empty( $data ) ) {
+		fputcsv( $df, array( __( 'No search keywords logged.', 'relevanssi' ) ) );
+		die();
+	}
 	fputcsv( $df, array_keys( reset( $data ) ) );
 	foreach ( $data as $row ) {
 		fputcsv( $df, $row );

@@ -17,7 +17,7 @@ if($day == 1) {
     $day = 4;
 } else if($day == 6) {
     $day = 5;
-} else if($day == 0) {
+} else if($day == 7) {
     $day = 6;
 }
 

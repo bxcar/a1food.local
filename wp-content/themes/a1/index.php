@@ -90,6 +90,8 @@ if (isset($_GET['category_id'])) {
     <?php
     $args = array(
         'posts_per_page' => -1,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
 //            'cat' => $first_cat_id,
         'tax_query' => array(
             array(
@@ -109,7 +111,7 @@ if (isset($_GET['category_id'])) {
             $query->the_post(); ?>
             <div class="product-item animated-background" style="position: relative">
                 <img class="product-item-img"
-                     src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
+                     src="<?= get_the_post_thumbnail_url() ?>">
                 <h2 class="product-item-title"><?php the_title(); ?></h2>
                 <p class="product-item-desc"><?= get_the_content(); ?></p>
                 <div class="product-item-bottom">
@@ -130,7 +132,7 @@ if (isset($_GET['category_id'])) {
                               class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
                     <?php }
                     ?>
-                    <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper"
+                    <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); return true;" class="product-item-price-wrapper"
                        data-id="<?= get_the_ID(); ?>">
                         <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
                         <?php
@@ -162,7 +164,7 @@ if (isset($_GET['category_id'])) {
                     while ($i % 4 != 0) { ?>
                         <div class="product-item" style="position: relative; visibility: hidden; opacity: 0;">
                             <img class="product-item-img"
-                                 src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
+                                 src="<?= get_the_post_thumbnail_url() ?>">
                             <h2 class="product-item-title"><?php the_title(); ?></h2>
                             <p class="product-item-desc"><?= get_the_content(); ?></p>
                             <div class="product-item-bottom">

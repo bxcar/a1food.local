@@ -100,6 +100,8 @@ if (isset($_GET['category_id'])) {
         <?php
         $args = array(
             'posts_per_page' => -1,
+            'orderby' => 'menu_order',
+        	'order' => 'ASC',
             'tax_query' => array(
                 array(
                     'taxonomy' => 'product_cat',
@@ -118,7 +120,7 @@ if (isset($_GET['category_id'])) {
                 $query->the_post(); ?>
                 <div class="product-item animated-background" style="position: relative">
                     <img class="product-item-img"
-                         src="<?= get_template_directory_uri(); ?>/img/product-img.png">
+                         src="<?= get_the_post_thumbnail_url() ?>">
                     <h2 class="product-item-title"><?php the_title(); ?></h2>
                     <p class="product-item-desc"><?= get_the_content(); ?></p>
                     <div class="product-item-bottom">
@@ -171,7 +173,7 @@ if (isset($_GET['category_id'])) {
                         while ($i % 2 != 0) { ?>
                             <div class="product-item" style="position: relative; visibility: hidden; opacity: 0;">
                                 <img class="product-item-img"
-                                     src="<?= get_template_directory_uri(); ?>/img/product-img.png">
+                                     src="<?= get_the_post_thumbnail_url() ?>">
                                 <h2 class="product-item-title"><?php the_title(); ?></h2>
                                 <p class="product-item-desc"><?= get_the_content(); ?></p>
                                 <div class="product-item-bottom">

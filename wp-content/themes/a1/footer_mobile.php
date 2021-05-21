@@ -116,7 +116,7 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
                 $this.find('.product-item-amount').text(parseInt(items_amount) + 1);
                 $('.cart-button-right span').text((data.cart_total) + ' ₽');
                 $('.cart-button-desktop-right span').text((data.cart_total + <?= (int)$delivery_current_time_price ?>) + ' ₽');
-                if (<?= get_the_ID(); ?> == 73
+                if (<?= get_the_ID(); ?> == 357
             )
                 {
                     if ($('.cart-products__item[data-id="' + data_id + '"]').length) {
@@ -140,6 +140,44 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
 </script>
 <!--footer scripts end-->
 <?php wp_footer(); ?>
+<?php
+if (get_field('page_popup')['logic'] && !isset($_SESSION["page_popup_" . get_the_ID()])) {
+    $_SESSION["page_popup_" . get_the_ID()] = 1; ?>
+    <a class="slider__item sl-popup page-popup">
+        <div class="slider__item-left">
+            <span class="slider__title"><?= get_field('page_popup')['message'] ?></span>
+            <span class="slider__text"><?= get_field('page_popup')['desc'] ?></span>
+        </div>
+        <div class="slider__item-right">
+            <img src="<?= get_field('page_popup')['img'] ?>" class="slider__img">
+        </div>
+        <img class="sl-popup__close" src="<?= get_template_directory_uri(); ?>/img/close-popup.svg" alt="close">
+    </a>
+    <div class="overlay-sl-popup page-popup"></div>
+<?php }
+?>
+<?php
+date_default_timezone_set('Asia/Omsk');
+$day_footer = date('w', strtotime(date('m/d/Y', time())));
+$hour_footer = date('G', time());
+$delivery_current_time_price_footer = get_field('delivery_price_by_hours', 'option')['body'][$day_footer][$hour_footer]['c'];
+
+if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION["popup_non_working_hours"]) && !$delivery_current_time_price_footer) {
+    $_SESSION["popup_non_working_hours"] = 1; ?>
+    <a class="slider__item sl-popup hours-popup">
+        <div class="slider__item-left">
+            <span class="slider__title"><?= get_field('popup_non_working_hours', 'option')['message'] ?></span>
+            <span class="slider__text"><?= get_field('popup_non_working_hours', 'option')['desc'] ?></span>
+        </div>
+        <div class="slider__item-right">
+            <img src="<?= get_field('popup_non_working_hours', 'option')['img'] ?>" class="slider__img">
+        </div>
+        <img class="sl-popup__close" src="<?= get_template_directory_uri(); ?>/img/close-popup.svg" alt="close">
+    </a>
+    <div class="overlay-sl-popup hours-popup"></div>
+<?php }
+?>
+
 <form class="contact-popup" enctype="multipart/form-data" action="#">
     <span class="contact-popup__title">Связаться<br>с нами</span>
     <span class="tanks__subtitle" style="display: none;">Ваше сообщение отправлено</span>
@@ -192,5 +230,8 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
     <button type="submit">Отправить</button>
     <img src="<?= get_template_directory_uri(); ?>/img/order-close.svg" class="contact-popup-close">
 </form>
+<?php
+include "custom_files_dm/delete_unpaid_orders_inc.php";
+?>
 </body>
 </html>

@@ -82,7 +82,7 @@ this["wp"] = this["wp"] || {}; this["wp"]["editor"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 438);
+/******/ 	return __webpack_require__(__webpack_require__.s = 443);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -261,7 +261,7 @@ function _assertThisInitialized(self) {
 /***/ 134:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(421);
+module.exports = __webpack_require__(426);
 
 
 /***/ }),
@@ -1388,7 +1388,7 @@ function _unsupportedIterableToArray(o, minLen) {
 
 /***/ }),
 
-/***/ 298:
+/***/ 299:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1420,7 +1420,7 @@ var layout = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEleme
 
 /***/ }),
 
-/***/ 302:
+/***/ 307:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1840,7 +1840,7 @@ function isShallowEqual( a, b, fromIndex ) {
 
 /***/ }),
 
-/***/ 421:
+/***/ 426:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2006,7 +2006,7 @@ function separateState(state) {
 
 /***/ }),
 
-/***/ 438:
+/***/ 443:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7466,7 +7466,7 @@ function EditorNotices(_ref) {
 var library_close = __webpack_require__(154);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/layout.js
-var layout = __webpack_require__(298);
+var layout = __webpack_require__(299);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/page.js
 
@@ -7484,7 +7484,7 @@ var page_page = Object(external_this_wp_element_["createElement"])(external_this
 /* harmony default export */ var library_page = (page_page);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/grid.js
-var grid = __webpack_require__(302);
+var grid = __webpack_require__(307);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/block-default.js
 var block_default = __webpack_require__(202);
@@ -10377,7 +10377,7 @@ function PostScheduleLabel(_ref) {
 
   var settings = Object(external_this_wp_date_["__experimentalGetSettings"])();
 
-  return date && !isFloating ? Object(external_this_wp_date_["dateI18n"])("".concat(settings.formats.date, " ").concat(settings.formats.time), date) : Object(external_this_wp_i18n_["__"])('Immediately');
+  return date && !isFloating ? Object(external_this_wp_date_["format"])("".concat(settings.formats.date, " ").concat(settings.formats.time), date) : Object(external_this_wp_i18n_["__"])('Immediately');
 }
 /* harmony default export */ var post_schedule_label = (Object(external_this_wp_data_["withSelect"])(function (select) {
   return {

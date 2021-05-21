@@ -137,6 +137,23 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
                 console.log(data);
             }
         });
+
+        window.dataLayer.push({
+		    "ecommerce": {
+		        "add": {
+		            "products": [
+		                {
+		                    "id": $(this).data('id'),
+		                    "name": "Тест",
+		                    "price": 111.11,
+		                    "category": "Пицца",
+		                    "quantity": 1
+		                }
+		            ]
+		        }
+		    }
+		});
+		
     });
 
     $(".payment2__owl-carousel-cards").owlCarousel({
@@ -235,5 +252,8 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
     <button type="submit">Отправить</button>
     <img src="<?= get_template_directory_uri(); ?>/img/order-close.svg" class="contact-popup-close">
 </form>
+<?php
+include "custom_files_dm/delete_unpaid_orders_inc.php";
+?>
 </body>
 </html>

@@ -66,20 +66,20 @@ body, html {
     padding: 0;
     margin: 0;
     font-family: Proxima Nova Rg, sans-serif;
-    background: #090909
+    background: #090909;
 }
 
 body {
     background: #090909;
-    background: url(../img/desk-bg.png) no-repeat;
-    background-size: cover;
+    /*background: url(../img/desk-bg.png) no-repeat;
+    background-size: cover;*/
     position: relative;
     min-height: 100vh;
 }
 
 body[data-type="text-page"] {
-    background: url(../img/desk-text-bg.png) repeat;
-    background-size: contain;
+    /*background: url(../img/desk-text-bg.png) repeat;
+    background-size: contain;*/
 }
 
 .container {
@@ -927,7 +927,8 @@ ol, ul {
     width: 48.7%;
 }
 
-.delivery-form__time .delivery-form__date-subfields {
+.delivery-form__time .delivery-form__date-subfields,
+.delivery-form__date .delivery-form__date-subfields {
     max-height: 245px;
     overflow-y: scroll;
 }
@@ -986,6 +987,26 @@ ol, ul {
     color: #b4b4b4;
 }
 
+.delivery-form__date-main-field-text .plain-text {
+    color: #fff;
+    font-weight: bold;
+}
+
+.delivery-form__date-main-field-text .plain-date {
+    color: #B4B4B4;
+}
+
+.delivery-form__date-main-field-text-desc {
+    margin-left: 15px;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.delivery-form__date-subfield .delivery-form__date-main-field-text-desc {
+    position: relative;
+    top: 2px;
+}
+
 .delivery-form__date-main-field-right-img {
     transform: rotate(-90deg);
     width: 13px;
@@ -1002,7 +1023,8 @@ ol, ul {
 }
 
 .delivery-form__date-subfields {
-    visibility: hidden
+    visibility: hidden;
+    border-top: 1px solid #323232;
 }
 
 .delivery-form__date-main-field.active + .delivery-form__date-subfields {
@@ -1014,16 +1036,20 @@ ol, ul {
     line-height: 35px;
     color: #b4b4b4;
     position: relative;
-    padding-left: 85px;
+    padding-left: 68px;
     width: 100%;
     box-sizing: border-box;
-    height: 35px;
+    height: 43px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
     align-items: center;
     background: #262626;
     border-bottom: 1px solid #323232
+}
+
+.delivery-form__date-subfield .plain-date {
+    display: none;
 }
 
 .delivery-form__date-subfield:last-child {
@@ -1048,7 +1074,8 @@ ol, ul {
     height: 5px;
     border-radius: 50%;
     border: 1px solid #909090;
-    left: 69px
+    left: 69px;
+    display: none;
 }
 
 .delivery-form__date-time-wrapper {
@@ -1393,12 +1420,56 @@ ol, ul {
     display: none;
 }
 
-.orders__item-address {
+.orders__item-middle-line {
     font-size: 14px;
     line-height: 20px;
     color: #bfbfbf;
     display: block;
-    margin-bottom: 27px
+    margin-bottom: 13px
+}
+
+.orders__item-middle-line-top-item {
+    margin-bottom: 4px;
+}
+
+.orders__item-middle-line-top-item:nth-child(2) {
+    margin-bottom: 15px;
+}
+
+.orders__item-middle-line-status {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    margin-bottom: 13px;
+    border-bottom: 1px solid #3E3E3E;
+}
+
+.orders__item-middle-line-status-title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+.orders__item-middle-line-list-item {
+    margin-bottom: 10px;
+}
+
+.orders__item-middle-line-list-item-title {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    margin-bottom: 2px;
+}
+
+.orders__item-middle-line-list-item-desc {
+    display: block;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #BFBFBF;
 }
 
 .orders__item-bottom-line {
@@ -1450,30 +1521,30 @@ ol, ul {
     margin-left: 7px
 }
 
-.orders__item-check span, .orders__item-status {
+.orders__item-check span, .orders__item-middle-line-status-time {
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
     color: #fff
 }
 
-.orders__item-status {
+.orders__item-middle-line-status-time {
     text-align: right
 }
 
-.orders__item-status.blue {
+.orders__item-middle-line-status-time.blue {
     color: #5BD4FB;
 }
 
-.orders__item-status.green {
+.orders__item-middle-line-status-time.green {
     color: #45d880
 }
 
-.orders__item-status.yellow {
+.orders__item-middle-line-status-time.yellow {
     color: #ffc000
 }
 
-.orders__item-status.red {
+.orders__item-middle-line-status-time.red {
     color: #ed3838
 }
 
@@ -1482,7 +1553,9 @@ ol, ul {
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    display: none
+    display: none;
+    padding-top: 16px;
+    border-top: 1px solid #3E3E3E;
 }
 
 .order-success .orders__item-rating {
@@ -2148,7 +2221,7 @@ input[type=number] {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 263px;
-    height: 400px;
+    height: 445px;
     background: #1e1e1e;
     border-radius: 10px;
     margin-bottom: 30px
@@ -2156,7 +2229,11 @@ input[type=number] {
 
 .product-item-img {
     display: block;
-    margin-bottom: 25px
+    margin-bottom: 25px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    min-height: 178px;
+    object-fit: cover;
 }
 
 .product-item-bottom-i-wrapper {
@@ -2273,7 +2350,11 @@ input[type=number] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-    align-items: center
+    align-items: center;
+    position: absolute;
+    bottom: 27px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .product-item-price-crossed-out {
@@ -2573,7 +2654,7 @@ input[type=number] {
     background: #1E1E1E;
     border-radius: 15px;
     width: 360px;
-    height: 221px;
+    height: 311px;
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;

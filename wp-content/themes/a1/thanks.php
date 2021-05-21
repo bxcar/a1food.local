@@ -31,7 +31,7 @@ if(!is_user_logged_in()) { ?>
 <div class="payment3">
     <img src="<?= get_template_directory_uri(); ?>/img/payment3_logo.svg" class="payment3__logo">
     <h1 class="payment3__title">Спасибо, что выбрали нас!</h1>
-    <span class="payment3__text1">Ваш заказ уже в работе</span>
+    <span class="payment3__text1">Ваш заказ принят.</span>
     <span class="payment3__text2">Статус заказа Вы можете<br>отслеживать в личном кабинете</span>
 </div>
 

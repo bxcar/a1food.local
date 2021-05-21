@@ -1,4 +1,23 @@
 $(document).ready(function () {
+	function checkCookie(){
+	    var cookieEnabled = navigator.cookieEnabled;
+	    if (!cookieEnabled){ 
+	        document.cookie = "testcookie";
+	        cookieEnabled = document.cookie.indexOf("testcookie")!=-1;
+	    }
+	    return cookieEnabled || showCookieFail();
+	}
+
+	function showCookieFail(){
+	  alert('Для корректной работы сайта необходимо включить cookie-файлы');
+	  location.reload();
+	}
+
+
+	// within a window load,dom ready or something like that place your:
+	checkCookie();
+
+
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
     let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
@@ -100,14 +119,28 @@ $(document).ready(function () {
 
     $('.header__menu-button').on('click', function () {
         $('.overlay').fadeIn(200);
+        $('.overlay').addClass('burger-menu-ov');
+
+        $('.overlay.burger-menu-ov').on('click', function () {
+            if($('.contact-popup').css('display') != 'block') {
+                $(this).fadeOut(200);
+                $(this).removeClass('burger-menu-ov');
+                $('.burger-menu').css('left', '-272px');
+                enableScroll();
+            }
+        });
+
         $('.burger-menu').css('left', 0);
         disableScroll();
     });
 
     $('.burger-menu__close').on('click', function () {
-        $('.overlay').fadeOut(200);
-        $('.burger-menu').css('left', '-272px');
-        enableScroll();
+        if($('.contact-popup').css('display') != 'block') {
+            $('.overlay').fadeOut(200);
+            $('.overlay.burger-menu-ov').removeClass('burger-menu-ov');
+            $('.burger-menu').css('left', '-272px');
+            enableScroll();    
+        }
     });
 
     //here was the code for checkout, moved to js/checkout-js.php
@@ -184,7 +217,9 @@ $(document).ready(function () {
 
     function close_contact_form() {
         $('.contact-popup').fadeOut(400);
-        $('.overlay').fadeOut(400);
+        if(!$('.overlay').hasClass('burger-menu-ov')) {
+           $('.overlay').fadeOut(400); 
+        }
 
         setTimeout(function () {
             $('.contact-popup__title').html('Связаться<br>с нами').css('margin-bottom', '35px');

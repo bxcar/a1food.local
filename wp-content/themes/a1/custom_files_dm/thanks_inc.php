@@ -1,5 +1,6 @@
 <?php
-if(isset($_GET['order_id'])) {
+
+if(isset($_GET['order_id']) && empty(get_field('order_number_for_current_customer', $_GET['order_id']))) {
     WC()->cart->empty_cart();
     $order_id = $_GET['order_id'];
 

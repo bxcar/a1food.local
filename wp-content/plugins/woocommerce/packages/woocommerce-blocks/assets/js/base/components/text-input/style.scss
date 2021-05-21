@@ -1,6 +1,7 @@
+.wc-block-components-form .wc-block-components-text-input,
 .wc-block-components-text-input {
 	position: relative;
-	margin-bottom: em($gap-large);
+	margin-top: em($gap-large);
 	white-space: nowrap;
 
 	label {
@@ -12,7 +13,7 @@
 		top: 0;
 		transform-origin: top left;
 		line-height: 1.375; // =22px when font-size is 16px.
-		color: $gray-50;
+		color: $gray-700;
 		transition: transform 200ms ease;
 		margin: 0 0 0 #{$gap + 1px};
 		overflow: hidden;
@@ -20,6 +21,9 @@
 		max-width: calc(100% - #{2 * $gap});
 		cursor: text;
 
+		.has-dark-controls & {
+			color: $input-placeholder-dark;
+		}
 		@media screen and (prefers-reduced-motion: reduce) {
 			transition: none;
 		}
@@ -53,6 +57,18 @@
 
 		&:focus {
 			background-color: #fff;
+			color: $input-text-active;
+		}
+
+		.has-dark-controls & {
+			background-color: $input-background-dark;
+			border-color: $input-border-dark;
+			color: $input-text-dark;
+
+			&:focus {
+				background-color: $input-background-dark;
+				color: $input-text-dark;
+			}
 		}
 	}
 
@@ -64,17 +80,23 @@
 	}
 
 	&.has-error input {
-		border-color: $error-red;
+		&,
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: $alert-red;
+		}
 		&:focus {
-			outline-color: $error-red;
+			outline: 1px dotted $alert-red;
+			outline-offset: 2px;
 		}
 	}
 
 	&.has-error label {
-		color: $error-red;
+		color: $alert-red;
 	}
 
 	&:only-child {
-		margin-bottom: 0;
+		margin-top: 0;
 	}
 }

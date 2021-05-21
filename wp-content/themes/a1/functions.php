@@ -533,3 +533,51 @@ function textpage_func( $atts ){
     return $text;
 }
 
+function getDay($day) {
+    if($day == 1) {
+        $day = 'Пн';
+    } else if($day == 2) {
+        $day = 'Вт';
+    } else if($day == 3) {
+        $day = 'Ср';
+    } else if($day == 4) {
+        $day = 'Чт';
+    } else if($day == 5) {
+        $day = 'Пт';
+    } else if($day == 6) {
+        $day = 'Сб';
+    } else if($day == 0) {
+        $day = 'Вс';
+    }
+    return $day;
+}
+
+function getMonth($date_month) {
+    if($date_month == 1) {
+        $date_month = 'января';
+    } else if($date_month == 2) {
+        $date_month = 'февраля';
+    } else if($date_month == 3) {
+        $date_month = 'марта';
+    } else if($date_month == 4) {
+        $date_month = 'апреля';
+    } else if($date_month == 5) {
+        $date_month = 'мая';
+    } else if($date_month == 6) {
+        $date_month = 'июня';
+    } else if($date_month == 7) {
+        $date_month = 'июля';
+    } else if($date_month == 8) {
+        $date_month = 'августа';
+    } else if($date_month == 9) {
+        $date_month = 'сентября';
+    } else if($date_month == 10) {
+        $date_month = 'октября';
+    } else if($date_month == 11) {
+        $date_month = 'ноября';
+    } else if($date_month == 12) {
+        $date_month = 'декабря';
+    }
+
+    return $date_month;
+}

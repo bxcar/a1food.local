@@ -28,7 +28,7 @@ $smpp->bindTransmitter("a1eda","a1eda");
 $message = 'Ваш код подтверждения регистрации: ' . $code;
 $encodedMessage = $message;
 //$encodedMessage = GsmEncoder::utf8_to_gsm0338($message);
-$from = new SmppAddress('А1 EDA',SMPP::TON_ALPHANUMERIC);
+$from = new SmppAddress('A1EDA',SMPP::TON_ALPHANUMERIC);
 $to = new SmppAddress($phone,SMPP::TON_INTERNATIONAL,SMPP::NPI_E164);
 
 // Send

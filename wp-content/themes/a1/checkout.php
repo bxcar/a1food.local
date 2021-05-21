@@ -53,10 +53,21 @@ the_content();
                             <?php
                             date_default_timezone_set('Asia/Omsk');
                             $current_hour = date('H', time());
+
+                            $date_number = date('j', time());
+                            $date_number_tomorrow = date('j', time() + 86400);
+                            $date_month = date('m', time());
+                            $date_month_tomorrow = date('m', time() + 86400);
+                            $day = date('w', strtotime(date('m/d/Y', time())));
+                            $day_tomorrow = date('w', strtotime(date('m/d/Y', time() + 86400)));
+                            $day = getDay($day);
+                            $day_tomorrow = getDay($day_tomorrow);
+                            $date_month = getMonth($date_month);
+                            $date_month_tomorrow = getMonth($date_month_tomorrow);
                             if($current_hour >= 23) { ?>
-                                <span class="delivery-form__date-main-field-text">Завтра</span>
+                                <span class="delivery-form__date-main-field-text"><span class="plain-text">Завтра</span> <span class="plain-date"><?= $day_tomorrow . ' ' . $date_number_tomorrow . ' ' . $date_month_tomorrow ?></span></span>
                             <?php } else { ?>
-                                <span class="delivery-form__date-main-field-text">Сегодня</span>
+                                <span class="delivery-form__date-main-field-text"><span class="plain-text">Сегодня</span> <span class="plain-date"><?= $day . ' ' . $date_number . ' ' . $date_month ?></span></span>
                             <?php }
                             ?>
                         </div>
@@ -71,52 +82,13 @@ the_content();
                             $date_number = date('j', time() + $time_plus);
                             $date_month = date('m', time() + $time_plus);
                             $day = date('w', strtotime(date('m/d/Y', time() + $time_plus)));
-                            if($day == 1) {
-                                $day = 'Пн';
-                            } else if($day == 2) {
-                                $day = 'Вт';
-                            } else if($day == 3) {
-                                $day = 'Ср';
-                            } else if($day == 4) {
-                                $day = 'Чт';
-                            } else if($day == 5) {
-                                $day = 'Пт';
-                            } else if($day == 6) {
-                                $day = 'Сб';
-                            } else if($day == 0) {
-                                $day = 'Вс';
-                            }
-
-                            if($date_month == 1) {
-                                $date_month = 'января';
-                            } else if($date_month == 2) {
-                                $date_month = 'февраля';
-                            } else if($date_month == 3) {
-                                $date_month = 'марта';
-                            } else if($date_month == 4) {
-                                $date_month = 'апреля';
-                            } else if($date_month == 5) {
-                                $date_month = 'мая';
-                            } else if($date_month == 6) {
-                                $date_month = 'июня';
-                            } else if($date_month == 7) {
-                                $date_month = 'июля';
-                            } else if($date_month == 8) {
-                                $date_month = 'августа';
-                            } else if($date_month == 9) {
-                                $date_month = 'сентября';
-                            } else if($date_month == 10) {
-                                $date_month = 'октября';
-                            } else if($date_month == 11) {
-                                $date_month = 'ноября';
-                            } else if($date_month == 12) {
-                                $date_month = 'декабря';
-                            }
+                            $day = getDay($day);
+                            $date_month = getMonth($date_month);
 
                             if($i == 0) {
-                                $date_echo = 'Сегодня';
+                                $date_echo = '<span class="plain-text">Сегодня</span> <span class="plain-date">' . $day . ' ' . $date_number . ' ' . $date_month . '</span>';
                             } else if($i == 1) {
-                                $date_echo = 'Завтра';
+                                $date_echo = '<span class="plain-text">Завтра</span> <span class="plain-date">' . $day . ' ' . $date_number . ' ' . $date_month . '</span>';
                             } else {
                                 $date_echo = $day . ' ' . $date_number . ' ' . $date_month;
                             }
@@ -160,7 +132,11 @@ the_content();
                         $full_time_line_for_js_in_the_bottom = date('H', time()) . ':'. date('i', time()) . ':' . '00';
 
                         ?>
-                        <span class="delivery-form__date-subfield" data-time="<?php echo date('H', time()) . ":" . date('i', time()) . ":00" ?>">Ближайшее</span>
+                        <span class="delivery-form__date-subfield asap" data-time="<?php echo date('H', time()) . ":" . date('i', time()) . ":00" ?>"><span class="plain-text">Ближайшее</span>
+                            <?php if(get_field('text_asap_time_mob', 'option')) { ?>
+                                <span class="delivery-form__date-main-field-text-desc"><?= get_field('text_asap_time_mob', 'option'); ?></span>
+                            <?php } ?>
+                        </span>
                         <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute:00" ?>"><?php echo "$hour:$minute" ?></span>
                         <?php
                         if($minute == '30') {
@@ -197,7 +173,7 @@ the_content();
         <span class="checkout-notice__text">A1ЕДА доставляет только<br>предоплаченные заказы</span>
     </div>
 
-    <div class="cart-button-wrapper">
+    <div class="cart-button-wrapper" onclick="ym(77765119, 'reachGoal', 'click_pay'); return true;">
         <div class="cart-button cart-button-2 checkout-submit">
             <div class="cart-button-left">
                 <span>Оплатить заказ</span>

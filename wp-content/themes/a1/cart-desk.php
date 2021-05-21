@@ -103,7 +103,7 @@ get_header();
             <input type="submit">
         </form>
     </div>
-    <a style="text-decoration: none;" class="cart-button-desktop animated-background"
+    <a style="text-decoration: none;" onclick="ym(77765119, 'reachGoal', 'click_cart_checkout'); return true;" class="cart-button-desktop animated-background"
         <?php
         if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
             echo 'href=""';
@@ -160,7 +160,7 @@ get_header();
                 $query->the_post(); ?>
                 <div class="product-item animated-background" style="position: relative">
                     <img class="product-item-img"
-                         src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
+                         src="<?= get_the_post_thumbnail_url() ?>">
                     <h2 class="product-item-title"><?php the_title(); ?></h2>
                     <p class="product-item-desc"><?= get_the_content(); ?></p>
                     <div class="product-item-bottom">
@@ -180,7 +180,7 @@ get_header();
                             <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
                         <?php }
                         ?>
-                        <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
+                        <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); return true;" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
                             <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
                             <?php
                             // Usage as a condition in an if statement
@@ -211,7 +211,7 @@ get_header();
                         while($i % 4 != 0) { ?>
                             <div class="product-item" style="position: relative; visibility: hidden; opacity: 0;">
                                 <img class="product-item-img"
-                                     src="<?= get_template_directory_uri(); ?>/img/product-img-desk.png">
+                                     src="<?= get_the_post_thumbnail_url() ?>">
                                 <h2 class="product-item-title"><?php the_title(); ?></h2>
                                 <p class="product-item-desc"><?= get_the_content(); ?></p>
                                 <div class="product-item-bottom">

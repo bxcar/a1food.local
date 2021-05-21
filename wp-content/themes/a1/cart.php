@@ -126,7 +126,131 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
     <!--<div class="cart-recommend">
         <span>Рекомендуем</span>
     </div>-->
-    <a style="text-decoration: none;" class="cart-button-wrapper animated-background"
+
+    <?php if(get_field('rec_products', 'option')) {
+    $myarray = array();
+    foreach (get_field('rec_products', 'option') as $item) {
+        array_push($myarray, $item['product_item']);
+    }
+
+    ?>
+    <div class="cart-recommend animated-background" style="margin-bottom: 13px;">
+        <span>Рекомендуем</span>
+    </div>
+
+    <div class="products">
+        <?php
+        $args = array(
+            'posts_per_page' => -1,
+            'post_type' => 'product',
+            'post__in' => $myarray,
+            'orderby' => 'post__in'
+        );
+
+        $i = 1;
+
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post(); ?>
+                <div class="product-item animated-background" style="position: relative">
+                    <img class="product-item-img"
+                         src="<?= get_the_post_thumbnail_url() ?>">
+                    <h2 class="product-item-title"><?php the_title(); ?></h2>
+                    <p class="product-item-desc"><?= get_the_content(); ?></p>
+                    <div class="product-item-bottom">
+                        <div class="product-item-bottom-i-wrapper">
+                            <img class="product-item-bottom-i"
+                                 src="<?= get_template_directory_uri(); ?>/img/info-icon.svg">
+
+
+                        </div>
+                        <?php
+                        $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
+                        if(get_post_meta(get_the_ID(), '_sale_price', true)) {
+                            $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
+                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <?php } else {
+                            $sale_price = $regular_price; ?>
+                            <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <?php }
+                        ?>
+                        <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); return true;" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
+                            <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
+                            <?php
+                            // Usage as a condition in an if statement
+                            if( 0 < woo_is_in_cart(get_the_ID()) ){ ?>
+                                <span class="product-item-amount"><?= woo_is_in_cart(get_the_ID()) ?></span>
+                            <?php } else { ?>
+                                <span class="product-item-amount" style="display: none;"></span>
+                            <?php } ?>
+                        </a>
+                    </div>
+                    <div class="product-item-bottom-i-desc">
+                        <ul class="product-item-bottom-i-list">
+                            <?php if (get_field('popap')) {
+                                foreach (get_field('popap') as $item) { ?>
+                                    <li>
+                                        <span class="product-item-bottom-i-list-title"><?= $item['title'] ?></span>
+                                        <span class="product-item-bottom-i-list-text"><?= $item['value'] ?></span>
+                                    </li>
+                                <?php }
+                            } ?>
+                        </ul>
+                        <span class="product-item-bottom-i-desc-bottom-text">Пищевая ценность<br> на 100гр. продукта</span>
+                    </div>
+                </div>
+                <?php
+                if($query->found_posts % 4 != 0) {
+                    if($i == $query->found_posts) {
+                        while($i % 4 != 0) { ?>
+                            <div class="product-item" style="position: relative; visibility: hidden; opacity: 0;">
+                                <img class="product-item-img"
+                                     src="<?= get_the_post_thumbnail_url() ?>">
+                                <h2 class="product-item-title"><?php the_title(); ?></h2>
+                                <p class="product-item-desc"><?= get_the_content(); ?></p>
+                                <div class="product-item-bottom">
+                                    <div class="product-item-bottom-i-wrapper">
+                                        <img class="product-item-bottom-i"
+                                             src="<?= get_template_directory_uri(); ?>/img/info-icon.svg">
+
+
+                                    </div>
+                                    <span class="product-item-price-crossed-out">350 ₽</span>
+                                    <div class="product-item-price-wrapper">
+                                        <span class="product-item-price-main">249 ₽</span>
+                                        <span class="product-item-amount">15</span>
+                                    </div>
+                                </div>
+                                <div class="product-item-bottom-i-desc">
+                                    <ul class="product-item-bottom-i-list">
+                                        <?php if (get_field('popap')) {
+                                            foreach (get_field('popap') as $item) { ?>
+                                                <li>
+                                                    <span class="product-item-bottom-i-list-title"><?= $item['title'] ?></span>
+                                                    <span class="product-item-bottom-i-list-text"><?= $item['value'] ?></span>
+                                                </li>
+                                            <?php }
+                                        } ?>
+                                    </ul>
+                                    <span class="product-item-bottom-i-desc-bottom-text">Пищевая ценность<br> на 100гр. продукта</span>
+                                </div>
+                            </div>
+                            <?php $i++;
+                        }
+                    }
+                }
+                $i++; }
+        }
+        // Возвращаем оригинальные данные поста. Сбрасываем $post.
+        wp_reset_postdata();
+        ?>
+
+    </div>
+<?php }?>
+
+    <a style="text-decoration: none;" onclick="ym(77765119, 'reachGoal', 'click_cart_checkout'); return true;" class="cart-button-wrapper animated-background"
         <?php
         if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
             echo 'href=""';

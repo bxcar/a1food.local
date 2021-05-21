@@ -1,0 +1,9 @@
+2021-05-11T12:03:24+00:00 CRITICAL Uncaught Exception: Ошибка в заказе. in /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce/includes/data-stores/abstract-wc-order-data-store-cpt.php:105
+Stack trace:
+#0 /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce/includes/class-wc-data-store.php(159): Abstract_WC_Order_Data_Store_CPT->read(Object(WC_Order))
+#1 /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-order.php(112): WC_Data_Store->read(Object(WC_Order))
+#2 /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce-rbspayment/wc-rbspayment.php(178): WC_Abstract_Order->__construct('923')
+#3 /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce-rbspayment/wc-rbspayment.php(110): WC_RBSPAYMENT->callb()
+#4 /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce/includes/class-wc-payment-gateways.php(94): WC_RBSPAYMENT->__construct()
+#5 /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce/includes/class-wc-paymen в /var/www/u1151754/data/www/a1eda.ru/wp-content/plugins/woocommerce/includes/data-stores/abstract-wc-order-data-store-cpt.php на строке 105
+

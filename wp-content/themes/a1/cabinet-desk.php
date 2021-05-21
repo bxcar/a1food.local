@@ -8,27 +8,27 @@ if(!is_user_logged_in()) { ?>
     </script>
 <?php }
 
-$address_counter = 1;
+// $address_counter = 1;
 
-if (isset($_POST['contact-name'])) {
+/*if (isset($_POST['contact-name'])) {
     update_field('user_name_field', $_POST['contact-name'], 'user_' . get_current_user_id());
-}
+}*/
 
-if (isset($_POST['birth-date'])) {
+/*if (isset($_POST['birth-date'])) {
     update_field('user_birth_date_field', $_POST['birth-date'], 'user_' . get_current_user_id());
-}
+}*/
 
 
-if (isset($_POST['contact-email'])) {
+/*if (isset($_POST['contact-email'])) {
     update_field('user_email_field', $_POST['contact-email'], 'user_' . get_current_user_id());
     $args = array(
         'ID'         => get_current_user_id(),
         'user_email' => $_POST['contact-email']
     );
     wp_update_user( $args );
-}
+}*/
 
-if (isset($_POST['addresses-amount'])) {
+/*if (isset($_POST['addresses-amount'])) {
     $ix = 0;
     for ($i = 1; $i <= $_POST['addresses-amount']; $i++) {
         if (!isset($_POST['address-' . $i])) {
@@ -36,7 +36,7 @@ if (isset($_POST['addresses-amount'])) {
             $ix++;
         }
     }
-}
+}*/
 
 
 ?>
@@ -89,35 +89,12 @@ if (isset($_POST['addresses-amount'])) {
     } ?>
     <input type="hidden" name="addresses-amount" value="<?= $address_counter - 1 ?>">
     <a href="/address" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
-    <button type="submit" class="cabinet__profile-form-add-address animated-background"
+    <!-- <button type="submit" class="cabinet__profile-form-add-address animated-background"
             style="margin-top: 14px; border: none; outline: none;">Сохранить
-    </button>
+    </button> -->
 </form>
 </div>
 
-<script>
-    $('.remove_address').on('click', function (e) {
-        $(this).parent().remove();
-        /*$.ajax({
-            type: 'post',
-            url: '/wp-content/themes/a1/custom_files_dm/remove_address.php',
-            dataType: 'json',
-            data:
-                {
-                    'row_number': $(this).parent().find('input').data('address-number')
-                },
-            success: function (data) {//success callback
-                console.log(data);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });*/
-    });
-
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
-</script>
+<?php include "js/cabinet-js.php"; ?>
 
 <?php get_footer() ?>
