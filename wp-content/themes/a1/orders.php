@@ -38,9 +38,12 @@ if(!is_user_logged_in()) {
             while ($loop->have_posts()) : $loop->the_post();
 
 // The order ID
+                date_default_timezone_set('Asia/Omsk');
+
                 $order_id = $loop->post->ID;
                 $order = wc_get_order($order_id);
                 $order_data = $order->get_data();
+
 
                 $user_phone = get_field('user_phone_field', 'user_' . get_current_user_id());
                 $user_phone = preg_replace('/[^0-9]/', '', $user_phone);
@@ -48,11 +51,54 @@ if(!is_user_logged_in()) {
                 $order_number = $user_phone . '-' . get_field('order_number_for_current_customer', $order_data['id']);
                 $order_address = $order_data['billing']['address_1'];
 
+                $order_address = 'ул. '. $order->get_meta( '_billing_street') . ' ' .  $order->get_meta( '_billing_home');
+                if($order->get_meta( '_billing_pod')) {
+                    $order_address .= ', под. ' . $order->get_meta( '_billing_pod');
+                }
 
-                $date_number = $order_data['date_created']->date('j', time());
+                if($order->get_meta( '_billing_et')) {
+                    $order_address .= ', этаж ' . $order->get_meta( '_billing_et');
+                }
+
+                if($order->get_meta( '_billing_apart')) {
+                    $order_address .= ', кв./офис ' . $order->get_meta( '_billing_apart');
+                }
+
+                $time = strtotime($order->order_date);
+                $date_number = date('j', $time);
+                $date_month = date('m', $time);
+                $date_year_number = date('Y', $time);
+                $day = date('w', strtotime(date('m/d/Y', $time)));
+                $day = getDay($day);
+                $date_month = getMonth($date_month);
+                $time_number = date('H:i', $time);
+
+                $order_time = $date_number . ' ' . $date_month . ' ' . $date_year_number . ' ' . $time_number;
+
+                // if(current_user_can('administrator')) {
+
+                $time = strtotime($order->get_meta( '_billing_date') . ' ' . $order->get_meta( '_billing_time'));
+                $date_number = date('j', $time);
+                $date_month = date('m', $time);
+                $date_year_number = date('Y', $time);
+                $day = date('w', strtotime(date('m/d/Y', $time)));
+                $day = getDay($day);
+                $date_month = getMonth($date_month);
+                $time_number = date('H:i', $time);
+
+                $order_shipping_time = $date_number . ' ' . $date_month . ', ' . $time_number;
+
+                if($order->get_meta( '_billing_asap_time') == '1') {
+                    $order_shipping_time = $date_number . ' ' . $date_month . ', Ближайшее';
+                }
+
+                // }
+
+
+                /*$date_number = $order_data['date_created']->date('j', time());
                 $date_month = get_month_title($order_data['date_created']->date('m', time()));
                 $date_year = $order_data['date_created']->date('Y', time());
-                $order_date = $date_number . ' ' . $date_month . ' ' . $date_year . ' г.';
+                $order_date = $date_number . ' ' . $date_month . ' ' . $date_year . ' г.';*/
 
 
                 $order_status = get_order_status_title($order_data['status']);
@@ -69,14 +115,39 @@ if(!is_user_logged_in()) {
                                  src="<?= get_template_directory_uri(); ?>/img/order-close.svg">
                         </div>
                     </div>
-                    <span class="orders__item-address"><?= $order_address ?>
-                <?php foreach ($order->get_items() as $item_key => $item ) {
-                    $item_name    = $item->get_name(); // Name of the product
-                    $quantity     = $item->get_quantity();
+                    <div class="orders__item-middle-line">
+                        <div class="orders__item-middle-line-top-item"><?= $order_address ?></div>
+                        <div class="orders__item-middle-line-top-item"><?= $order_time ?></div>
+                        <div class="orders__item-middle-line-status">
+                            <span class="orders__item-middle-line-status-title">Статус заказа</span>
+                            <?php if ($order_status == 'Принят') { ?>
+                                <span class="orders__item-middle-line-status-time blue">Принят на <?= $order_shipping_time ?></span>
+                            <?php } else if ($order_status == 'Готовится') { ?>
+                                <span class="orders__item-middle-line-status-time yellow">Готовится на <?= $order_shipping_time ?></span>
+                            <?php } else if ($order_status == 'Доставляется') { ?>
+                                <span class="orders__item-middle-line-status-time yellow">Доставляется на <?= $order_shipping_time ?></span>
+                            <?php } else if ($order_status == 'Доставлен') { ?>
+                                <span class="orders__item-middle-line-status-time green">Доставлен на <?= $order_shipping_time ?></span>
+                            <?php } else { ?>
+                                <span class="orders__item-middle-line-status-time red">Отменен</span>
+                            <?php } ?>
 
-                    echo $item_name . ' x ' . $quantity . 'шт.<br>';
-                } ?></span>
-                    <div class="orders__item-bottom-line">
+                        </div>
+
+                        <div class="orders__item-middle-line-list">
+                            <?php foreach ($order->get_items() as $item_key => $item ) {
+                                $item_name  = $item->get_name(); // Name of the product
+                                $quantity   = $item->get_quantity();
+                                $product_id = $item->get_product_id(); ?>
+
+                                <div class="orders__item-middle-line-list-item">
+                                    <span class="orders__item-middle-line-list-item-title"><?= $item_name ?></span>
+                                    <span class="orders__item-middle-line-list-item-desc"><?= get_field('weight', $product_id); ?> х <?= $quantity ?> шт.</span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="orders__item-bottom-line" style="display: none;">
                         <div class="orders__item-bottom-line-inner-wrapper">
                             <span class="orders__item-date"><?= $order_date ?></span>
                             <!--<span class="orders__item-check"><img

@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	function checkCookie(){
 	    var cookieEnabled = navigator.cookieEnabled;
-	    if (!cookieEnabled){ 
+	    if (!cookieEnabled){
 	        document.cookie = "testcookie";
 	        cookieEnabled = document.cookie.indexOf("testcookie")!=-1;
 	    }
@@ -31,17 +31,6 @@ $(document).ready(function () {
     });
 
     $('.product-item-bottom-i').on('click', function () {
-        /*var check_active_class = false;
-        if($(this).parent().hasClass('active')) {
-            check_active_class = true;
-        } else {
-            check_active_class = false;
-        }
-        $('.product-item-bottom-i-wrapper').removeClass('active');
-        if(!check_active_class) {
-            $(this).parent().addClass('active')
-        }*/
-
         if($(this).parent().hasClass('active')) {
             $('.product-item-bottom-i-desc').removeClass('active');
             $('.product-item-bottom-i-wrapper').removeClass('active');
@@ -55,7 +44,6 @@ $(document).ready(function () {
             $(this).parent().addClass('active');
             $(this).parent().parent().parent().find('.product-item-bottom-i-desc').addClass('active');
         }
-
     });
 
     $('body').click(function(evt){
@@ -139,7 +127,7 @@ $(document).ready(function () {
             $('.overlay').fadeOut(200);
             $('.overlay.burger-menu-ov').removeClass('burger-menu-ov');
             $('.burger-menu').css('left', '-272px');
-            enableScroll();    
+            enableScroll();
         }
     });
 
@@ -218,7 +206,7 @@ $(document).ready(function () {
     function close_contact_form() {
         $('.contact-popup').fadeOut(400);
         if(!$('.overlay').hasClass('burger-menu-ov')) {
-           $('.overlay').fadeOut(400); 
+           $('.overlay').fadeOut(400);
         }
 
         setTimeout(function () {
@@ -276,6 +264,7 @@ $(document).ready(function () {
                     $('.contact-popup__feedback textarea').val('');
                     $('.burger-menu').css('left', '-272px');
                     enableScroll();
+                    $('.overlay').removeClass('burger-menu-ov');
                     $('.contact-popup button[type="submit"]').text('Закрыть').on('click', function (e) {
                         e.preventDefault();
                         close_contact_form();

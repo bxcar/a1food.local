@@ -24,7 +24,11 @@
     </div>
     <div class="burger-menu__button-wrapper">
         <a href="https://mos-digital.com/" target="_blank" class="burger-menu_mos"><?php include "img/crown-mob.svg" ?><span>Построено в MOS-DIGITAL</span></a>
-        <a href="#" class="burger-menu__button contact-popup-button">Обратная связь</a>
+        <?php if(is_user_logged_in()) { ?>
+            <a href="#" class="burger-menu__button contact-popup-button">Обратная связь</a>
+        <?php } else { ?>
+            <a href="/login-mobile" class="burger-menu__button">Обратная связь</a>
+        <?php } ?>
     </div>
 
 </div>

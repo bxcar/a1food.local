@@ -1373,7 +1373,7 @@ header {
 
 .orders__item {
     background: #1e1e1e;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 100%;
     padding: 20px 33px;
     box-sizing: border-box;
@@ -1387,7 +1387,7 @@ header {
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    margin-bottom: 7px
+    margin-bottom: 4px
 }
 
 .orders__item-number {
@@ -1422,12 +1422,57 @@ header {
     display: none;
 }
 
-.orders__item-address {
-    font-size: 10px;
-    line-height: 12px;
+.orders__item-middle-line {
+    font-size: 12px;
+    line-height: 16px;
     color: #bfbfbf;
     display: block;
-    margin-bottom: 20px
+    margin-bottom: 13px
+}
+
+.orders__item-middle-line-top-item {
+    margin-bottom: 2px;
+}
+
+.orders__item-middle-line-top-item:nth-child(2) {
+    margin-bottom: 24px;
+}
+
+.orders__item-middle-line-status {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    margin-bottom: 13px;
+    border-bottom: 1px solid #3E3E3E;
+    align-items: baseline;
+}
+
+.orders__item-middle-line-status-title {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    color: #FFFFFF;
+}
+
+.orders__item-middle-line-list-item {
+    margin-bottom: 10px;
+}
+
+.orders__item-middle-line-list-item-title {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    margin-bottom: 2px;
+}
+
+.orders__item-middle-line-list-item-desc {
+    display: block;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #BFBFBF;
 }
 
 .orders__item-bottom-line {
@@ -1468,30 +1513,30 @@ header {
     margin-left: 7px
 }
 
-.orders__item-check span, .orders__item-status {
+.orders__item-check span, .orders__item-middle-line-status-time {
     font-weight: 700;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 11px;
+    line-height: 13px;
     color: #fff
 }
 
-.orders__item-status {
+.orders__item-middle-line-status-time {
     text-align: right
 }
 
-.orders__item-status.blue {
+.orders__item-middle-line-status-time.blue {
     color: #5BD4FB;
 }
 
-.orders__item-status.green {
+.orders__item-middle-line-status-time.green {
     color: #45d880
 }
 
-.orders__item-status.yellow {
+.orders__item-middle-line-status-time.yellow {
     color: #ffc000
 }
 
-.orders__item-status.red {
+.orders__item-middle-line-status-time.red {
     color: #ed3838
 }
 
@@ -1500,7 +1545,9 @@ header {
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    display: none
+    display: none;
+    padding-top: 16px;
+    border-top: 1px solid #3E3E3E;
 }
 
 .order-success .orders__item-rating {
