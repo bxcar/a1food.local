@@ -64,6 +64,10 @@ if(!is_user_logged_in()) {
                     $order_address .= ', кв./офис ' . $order->get_meta( '_billing_apart');
                 }
 
+                if($order->get_meta( '_billing_comment')) {
+                    $order_address .= ' (' . $order->get_meta( '_billing_comment') . ')';
+                }
+
                 $time = strtotime($order->order_date);
                 $date_number = date('j', $time);
                 $date_month = date('m', $time);

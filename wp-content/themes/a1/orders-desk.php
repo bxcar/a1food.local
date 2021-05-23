@@ -46,7 +46,7 @@ if(!is_user_logged_in()) { ?>
             $user_phone = preg_replace('/[^0-9]/', '', $user_phone);
             $user_phone = substr($user_phone, 1);
             $order_number = $user_phone . '-' . get_field('order_number_for_current_customer', $order_data['id']);
-            $order_address = $order_data['billing']['address_1'];  
+            $order_address = $order_data['billing']['address_1'];
 
             $order_address = 'ул. '. $order->get_meta( '_billing_street') . ' ' .  $order->get_meta( '_billing_home');
             if($order->get_meta( '_billing_pod')) {
@@ -59,6 +59,10 @@ if(!is_user_logged_in()) { ?>
 
             if($order->get_meta( '_billing_apart')) {
                 $order_address .= ', кв./офис ' . $order->get_meta( '_billing_apart');
+            }
+
+            if($order->get_meta( '_billing_comment')) {
+                $order_address .= ' (' . $order->get_meta( '_billing_comment') . ')';
             }
 
             $time = strtotime($order->order_date);
@@ -88,8 +92,8 @@ if(!is_user_logged_in()) { ?>
             if($order->get_meta( '_billing_asap_time') == '1') {
             	$order_shipping_time = $date_number . ' ' . $date_month . ', Ближайшее';
             }
-            
-            // }          
+
+            // }
 
 
             /*$date_number = $order_data['date_created']->date('j', time());
