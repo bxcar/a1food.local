@@ -10,32 +10,6 @@
 <div class="products">
     <?php
 
-    /*$posts_array = array();
-
-    $loop = new WP_Query( array(
-        'post_type' => 'product',
-        'posts_per_page' => -1,
-        'orderby' => 'post_date',
-        's' => 'фил'
-    ));
-
-    $i = 0;
-
-    if ($loop->have_posts()) {
-        while ($loop->have_posts()) {
-            $loop->the_post();
-
-            $posts_array[$i]['title'] = get_the_title();
-            $posts_array[$i]['desc'] = get_the_content();
-            $posts_array[$i]['img'] = get_the_post_thumbnail_url();
-
-            $i++;
-        }
-    }
-
-
-    print_r($posts_array);*/
-
     $i = 1;
 
     if (have_posts()) {

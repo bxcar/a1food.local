@@ -1,5 +1,6 @@
 <script>
     $('.remove_address').on('click', function (e) {
+        var current_address_number = $(this).parent().find('input').data('address-number');
         $(this).parent().remove();
         $.ajax({
             type: 'post',
@@ -10,6 +11,13 @@
                     'row_number': $(this).parent().find('input').data('address-number')
                 },
             success: function (data) {//success callback
+
+                console.log(current_address_number);
+
+                for(let i = current_address_number + 1; i <= <?= $address_counter-1 ?>; i++) {
+                    $('input[data-address-number=' + i + ']').attr('data-address-number', i-1);
+                }
+
                 console.log(data);
             },
             error: function (data) {

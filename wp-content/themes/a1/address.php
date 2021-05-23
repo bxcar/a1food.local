@@ -39,14 +39,17 @@ if(!is_user_logged_in()) {
             <span class="address__form-delivery-city animated-background">Доставка товаров осуществляется<br>только по г.Омск</span>
             <div class="address__form-inner-wrapper">
                 <input type="text" name="street" placeholder="Улица" required class="animated-background">
+            </div>
+            <div class="address__form-inner-wrapper">
                 <input type="text" name="house" placeholder="Дом" required class="animated-background">
-            </div>
-            <div class="address__form-inner-wrapper">
                 <input type="text" name="entrance" placeholder="Подъезд" class="animated-background">
-                <input type="text" name="floor" placeholder="Этаж" class="animated-background">
             </div>
             <div class="address__form-inner-wrapper">
+                <input type="text" name="floor" placeholder="Этаж" class="animated-background">
                 <input type="text" name="apartment" placeholder="Квартира / офис" class="animated-background">
+            </div>
+            <div class="address__form-inner-wrapper">
+                <textarea name="comment" placeholder="Комментарий к доставке" class="animated-background"></textarea>
             </div>
             <button type="submit" class="animated-background">Добавить адрес</button>
         </form>

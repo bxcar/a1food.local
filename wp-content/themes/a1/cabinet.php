@@ -8,9 +8,9 @@ if(!is_user_logged_in()) { ?>
     </script>
 <?php }
 
-/*$address_counter = 1;
+$address_counter = 1;
 
-if (isset($_POST['contact-name'])) {
+/*if (isset($_POST['contact-name'])) {
     update_field('user_name_field', $_POST['contact-name'], 'user_' . get_current_user_id());
 }
 
@@ -64,7 +64,7 @@ if (isset($_POST['addresses-amount'])) {
         </div>
         <?php if (get_field('user_addresses_list_field', 'user_' . get_current_user_id())) {
             foreach (get_field('user_addresses_list_field', 'user_' . get_current_user_id()) as $item) { ?>
-                <div class="cabinet__profile-form-address"><input class="animated-background" type="text" data-address-number="<?= $address_counter ?>" name="address-<?= $address_counter ?>"
+                <div class="cabinet__profile-form-address"><input class="animated-background" type="text" data-address-number="<?= $address_counter ?>" name="address-<?php //$address_counter ?>"
                                                                   placeholder="ул. Фрунзе 308, офис 401"
                                                                   value="<?= 'ул. ' . $item['street'] . ' ' . $item['building'] ?>
 <?php if ($item['entrance']) {
@@ -76,11 +76,14 @@ if (isset($_POST['addresses-amount'])) {
                                                                   if ($item['apartment']) {
                                                                       echo ', кв./офис ' . $item['apartment'];
                                                                   }
+                                                                  if ($item['comment']) {
+                                                                      echo ' (' . $item['comment'] . ')';
+                                                                  }
                                                                   ?>" readonly><span class="remove_address"></span></div>
                 <?php $address_counter++;
             }
         } ?>
-        <input type="hidden" name="addresses-amount" value="<?= $address_counter - 1 ?>">
+<!--        <input type="hidden" name="addresses-amount" value="--><?php //$address_counter - 1 ?><!--">-->
         <a href="/address-mobile" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>
         <!-- <button type="submit" class="cabinet__profile-form-add-address animated-background"
                 style="margin-top: 14px; border: none; outline: none;">Сохранить
