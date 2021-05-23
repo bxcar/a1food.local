@@ -42,7 +42,10 @@ the_content();
                     if ($item['apartment']) {
                         echo ', кв./офис ' . $item['apartment'];
                     }
-                    ?>" readonly data-street="<?= $item['street'] ?>" data-home="<?= $item['building'] ?>" data-pod="<?= $item['entrance'] ?>" data-et="<?= $item['floor'] ?>" data-apart="<?= $item['apartment'] ?>">
+                    if ($item['comment']) {
+                        echo ' (' . $item['comment'] . ')';
+                    }
+                    ?>" readonly data-street="<?= $item['street'] ?>" data-home="<?= $item['building'] ?>" data-pod="<?= $item['entrance'] ?>" data-et="<?= $item['floor'] ?>" data-apart="<?= $item['apartment'] ?>" data-comment="<?= $item['comment'] ?>">
                 <?php $i++; }
             } else { ?>
 <!--                <a style="width: 200px;" href="/address?checkout=true" class="cabinet__profile-form-add-address animated-background">Добавить адрес</a>-->

@@ -2,7 +2,7 @@
     $('.checkout-submit').on('click', function (e) {
         e.preventDefault();
         if((<?php if(get_field('user_email_field', 'user_' . get_current_user_id())) { echo 'true'; } else { echo 'false'; } ?> &&
-        <?php if(get_field('user_addresses_list_field', 'user_' . get_current_user_id())) { echo 'true'; } else { echo 'false'; } ?>) 
+        <?php if(get_field('user_addresses_list_field', 'user_' . get_current_user_id())) { echo 'true'; } else { echo 'false'; } ?>)
         || ($('#temporary-email-field').hasClass('correct') && <?php if(get_field('user_addresses_list_field', 'user_' . get_current_user_id())) { echo 'true'; } else { echo 'false'; } ?>)) {
             $('form.woocommerce-checkout').submit();
         } else {
@@ -69,11 +69,17 @@
     	$('#billing_apart').attr('value', '');
     }
 
+    if($('#address-1').data('comment')) {
+        $('#billing_comment').val($('#address-1').data('comment'));
+    } else {
+        $('#billing_comment').val('');
+    }
+
     $('.delivery-form__address-input').on('click', function (e) {
         // $('#billing_address_1').attr('value', $(this).attr('value'));
         $('#billing_street').attr('value', $(this).data('street'));
         $('#billing_home').attr('value', $(this).data('home'));
-        
+
         if($(this).data('pod')) {
             $('#billing_pod').attr('value', $(this).data('pod'));
         } else {
@@ -90,6 +96,12 @@
             $('#billing_apart').attr('value', $(this).data('apart'));
         } else {
         	$('#billing_apart').attr('value', '');
+        }
+
+        if($(this).data('comment')) {
+            $('#billing_comment').val($(this).data('comment'));
+        } else {
+            $('#billing_comment').val('');
         }
 
     });
@@ -206,7 +218,7 @@
 	    return null;
 	}
 
-	function eraseCookie(name) {   
+	function eraseCookie(name) {
 	    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 

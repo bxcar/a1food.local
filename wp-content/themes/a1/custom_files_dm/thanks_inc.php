@@ -27,6 +27,7 @@ if(isset($_GET['order_id']) && empty(get_field('order_number_for_current_custome
     $order_pod = get_post_meta( $order_id, '_billing_pod', true);
     $order_et = get_post_meta( $order_id, '_billing_et', true);
     $order_apart = get_post_meta( $order_id, '_billing_apart',  true);
+    $order_comment = get_post_meta( $order_id, '_billing_comment',  true);
     $order_date = get_post_meta( $order_id, '_billing_date', true);
     $order_time = get_post_meta( $order_id, '_billing_time', true);
     $order_date_and_time = $order_date . ' ' . $order_time;
@@ -92,6 +93,10 @@ if(isset($_GET['order_id']) && empty(get_field('order_number_for_current_custome
 
     if($order_apart) {
         $data['apart'] = $order_apart;
+    }
+
+    if($order_comment) {
+        $data['descr'] = $order_comment;
     }
 
     if($order_date_and_time) {

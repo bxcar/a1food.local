@@ -32,7 +32,7 @@ if(!is_user_logged_in()) { ?>
             <input type="text" name="apartment" placeholder="Квартира / офис" class="animated-background">
         </div>
         <div class="address__form-inner-wrapper">
-            <textarea name="comment" placeholder="Комментарий к доставке" class="animated-background"></textarea>
+            <textarea maxlength="99" name="comment" placeholder="Комментарий к доставке" class="animated-background"></textarea>
         </div>
         <button type="submit" class="animated-background">Добавить адрес</button>
     </form>
