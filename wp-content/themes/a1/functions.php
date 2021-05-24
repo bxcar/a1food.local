@@ -600,3 +600,36 @@ function tgm_io_cpt_search( $query ) {
     return $query;
 
 }
+
+function getDeliveryPriceNonWorkingHours($delivery_price, $day) {
+    if(empty($delivery_price)) {
+        for ($i = 0; empty($delivery_price); $i++) {
+            if($i == 24) {
+                break;
+            }
+            $delivery_price = get_field('delivery_price_by_hours', 'option')['body'][$day][$i]['c'];
+        }
+    }
+
+    return $delivery_price;
+}
+
+function getDayNumberForTable($day) {
+    if($day == 1) {
+        $day = 0;
+    } else if($day == 2) {
+        $day = 1;
+    } else if($day == 3) {
+        $day = 2;
+    } else if($day == 4) {
+        $day = 3;
+    } else if($day == 5) {
+        $day = 4;
+    } else if($day == 6) {
+        $day = 5;
+    } else if($day == 0) {
+        $day = 6;
+    }
+
+    return $day;
+}

@@ -1,17 +1,25 @@
 <?php
+require_once("../../../../wp-load.php");
 
-WC()->cart->empty_cart();
-/*if(isset($_GET['order_id']) && empty(get_field('order_number_for_current_customer', $_GET['order_id']))) {
-    WC()->cart->empty_cart();
-    $order_id = $_GET['order_id'];
+$test_field = get_field('test_field','option');
 
-    $current_number_of_orders =  get_field('number_of_orders', 'user_' . get_current_user_id());
-    $new_number_of_orders = $current_number_of_orders + 1;
-    if($new_number_of_orders <= 9) {
-        $new_number_of_orders = '0' . $new_number_of_orders;
-    }
-    update_field('number_of_orders', $new_number_of_orders, 'user_' . get_current_user_id());
-    update_field('order_number_for_current_customer', $new_number_of_orders, $order_id);
+if(isset($_GET['orderNumber'])) {
+    $orderId = substr($_GET['orderNumber'], 0, strpos($_GET['orderNumber'], "_"));
+
+    $inf = ' | mdOrder: '. $_GET['mdOrder'] . ', orderNumber: ' . $orderId . ', checksum: ' . $_GET['checksum'] . ', operation: ' . $_GET['operation'] . ', status: ' . $_GET['status'];
+
+    $test_field .= $inf;
+    update_field('test_field', $test_field, 'option');
+} else {
+    $test_field .= ' | else case';
+    update_field('test_field', $test_field, 'option');
+}
+
+if(isset($_GET['orderNumber'])
+    && (($_GET['operation'] == 'deposited') || ($_GET['operation'] == 'approved'))
+    && ($_GET['status'] == '1')
+    && empty(get_field('order_number_for_current_customer', $orderId))) {
+    $order_id = $orderId;
 
     $order = wc_get_order( $order_id );
     //update status to initial
@@ -19,6 +27,15 @@ WC()->cart->empty_cart();
 
     $order_data = $order->get_data();
     $user_id = $order->get_user_id();
+
+    $current_number_of_orders =  get_field('number_of_orders', 'user_' . $user_id);
+    $new_number_of_orders = $current_number_of_orders + 1;
+    if($new_number_of_orders <= 9) {
+        $new_number_of_orders = '0' . $new_number_of_orders;
+    }
+    update_field('number_of_orders', $new_number_of_orders, 'user_' . $user_id);
+    update_field('order_number_for_current_customer', $new_number_of_orders, $order_id);
+
 
     $user_name = get_field('user_name_field', 'user_' . $user_id);
     $user_email = get_field('user_email_field', 'user_' . $user_id);
@@ -155,4 +172,4 @@ WC()->cart->empty_cart();
 //    print_r($response);
 
     update_field('order_id_frontpad', $response->order_id, $order_id);
-}*/
+}
