@@ -92,10 +92,16 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
 <script>
     var cart_formatted_value = '<?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?>';
     var cart_formatted_value_without_delivery = '<?= number_format(((int)$cart_total_price), 0, '.', ' ') ?>';
-    $('.header__cart-button span').text(cart_formatted_value_without_delivery + ' ₽');
-    $('.checkout-cards-right-price span:last-child').text(cart_formatted_value + ' ₽');
+    $('.header__cart-button span').text(cart_formatted_value_without_delivery + '');
+    $('.checkout-cards-right-price span:last-child').text(cart_formatted_value + '');
 </script>
 <script>
+    function numberWithSpaces(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return parts.join(".");
+    }
+
     $('.product-item-price-wrapper').on('click', function (e) {
         e.preventDefault();
         var data_id = $(this).data('id');
@@ -111,16 +117,14 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
                     'product_id': $(this).attr('data-id')
                 },
             success: function (data) {//success callback
-                // console.log('success');
                 $this.find('.product-item-amount').css('display', 'flex');
                 var items_amount = $this.find('.product-item-amount').text();
                 if (!items_amount) {
                     items_amount = 0;
                 }
                 $this.find('.product-item-amount').text(parseInt(items_amount) + 1);
-                //$('.header__cart-button span').text((data.cart_total + <?//= (int)$delivery_current_time_price ?>//) + ' ₽');
-                $('.header__cart-button span').text((data.cart_total) + ' ₽');
-                $('.cart-button-desktop-right span').text((data.cart_total + <?= (int)$delivery_current_time_price ?>) + ' ₽');
+                $('.header__cart-button span').text((numberWithSpaces(data.cart_total)) + '');
+                //$('.cart-button-desktop-right span').text((data.cart_total + <?php //(int)$delivery_current_time_price ?>) + '');
                 if (<?= get_the_ID(); ?> == 73
             )
                 {
@@ -138,7 +142,7 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
             }
         });
 
-        window.dataLayer.push({
+       /* window.dataLayer.push({
 		    "ecommerce": {
 		        "add": {
 		            "products": [
@@ -152,7 +156,7 @@ include "custom_files_dm/calculate_total_price_with_delivery.php";
 		            ]
 		        }
 		    }
-		});
+		});*/
 
     });
 

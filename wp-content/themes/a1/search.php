@@ -31,16 +31,16 @@
                     $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
                     if (get_post_meta(get_the_ID(), '_sale_price', true)) {
                         $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
-                        <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                        <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                     <?php } else {
                         $sale_price = $regular_price; ?>
                         <span style="visibility: hidden; opacity: 0; height: 0;"
-                              class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                              class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                     <?php }
                     ?>
                     <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper"
                        data-id="<?= get_the_ID(); ?>">
-                        <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
+                        <span class="product-item-price-main"><?= $sale_price ?></span>
                         <?php
                         // Usage as a condition in an if statement
                         if (0 < woo_is_in_cart(get_the_ID())) { ?>
@@ -81,9 +81,9 @@
 
 
                                 </div>
-                                <span class="product-item-price-crossed-out">350 ₽</span>
+                                <span class="product-item-price-crossed-out">350</span>
                                 <div class="product-item-price-wrapper">
-                                    <span class="product-item-price-main">249 ₽</span>
+                                    <span class="product-item-price-main">249</span>
                                     <span class="product-item-amount">15</span>
                                 </div>
                             </div>
@@ -229,7 +229,7 @@
                                  entry.product_item_price_crossed_out +
                         '        <a href="<?= get_site_url(); ?>?add-to-cart=' + entry.id +'" class="product-item-price-wrapper"' +
                         '           data-id="' + entry.id +'">' +
-                        '            <span class="product-item-price-main">' + entry.sale_price +' ₽</span>' + entry.product_item_amount +'' +
+                        '            <span class="product-item-price-main">' + entry.sale_price +'</span>' + entry.product_item_amount +'' +
                         '        </a>' +
                         '    </div>' +
                         '    <div class="product-item-bottom-i-desc">' +
@@ -282,7 +282,7 @@
                             }
                             $this.find('.product-item-amount').text(parseInt(items_amount) + 1);
 
-                            $('.header__cart-button span').text((data.cart_total) + ' ₽');
+                            $('.header__cart-button span').text((data.cart_total) + '');
 
                         },
                         error: function (data) {

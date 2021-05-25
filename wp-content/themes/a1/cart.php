@@ -52,7 +52,7 @@ require_once 'header_mobile.php';
                 </div>
                 <div class="cart-products__item-wrapper2">
                     <div class="cart-products__item-price-wrapper">
-                        <span class="cart-products__item-price"><span><?= $total_price ?></span> ₽</span>
+                        <span class="cart-products__item-price"><span><?= $total_price ?></span></span>
                         <div class="cart-products__item-amount-change">
                             <img src="<?= get_template_directory_uri(); ?>/img/less.svg" class="less">
                             <span class="amount"><?= $values['quantity'] ?></span>
@@ -77,7 +77,7 @@ require_once 'header_mobile.php';
             <?php } ?>
         </div>
         <?php if(($cart_total_price < get_field('free_delivery_min_price', 'option')) || !get_field('free_delivery_min_price_logic', 'option')) { ?>
-            <span class="cart-delivery__price"><?= $delivery_current_time_price; ?> ₽</span>
+            <span class="cart-delivery__price"><?= $delivery_current_time_price; ?></span>
         <?php } else { ?>
             <span class="cart-delivery__price">Бесплатно</span>
         <?php } ?>
@@ -157,14 +157,14 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                         $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
                         if(get_post_meta(get_the_ID(), '_sale_price', true)) {
                             $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
-                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                         <?php } else {
                             $sale_price = $regular_price; ?>
-                            <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                            <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                         <?php }
                         ?>
                         <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); return true;" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
-                            <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
+                            <span class="product-item-price-main"><?= $sale_price ?></span>
                             <?php
                             // Usage as a condition in an if statement
                             if( 0 < woo_is_in_cart(get_the_ID()) ){ ?>
@@ -204,9 +204,9 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
 
 
                                     </div>
-                                    <span class="product-item-price-crossed-out">350 ₽</span>
+                                    <span class="product-item-price-crossed-out">350</span>
                                     <div class="product-item-price-wrapper">
-                                        <span class="product-item-price-main">249 ₽</span>
+                                        <span class="product-item-price-main">249</span>
                                         <span class="product-item-amount">15</span>
                                     </div>
                                 </div>
@@ -251,18 +251,12 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                 <span>Оформить заказ</span>
             </div>
             <div class="cart-button-right">
-                <span><?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?> ₽</span>
+                <span><?= number_format(((int)$cart_total_price + (int)$delivery), 0, '.', ' ') ?> руб.</span>
             </div>
         </div>
     </a>
 </div>
     <script>
-        function numberWithSpaces(x) {
-            var parts = x.toString().split(".");
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-            return parts.join(".");
-        }
-
         function calculateDelivery(cartTotal) {
             var cart_total = cartTotal;
 
@@ -273,7 +267,7 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                 var difference_delivery_price = <?= get_field('free_delivery_min_price', 'option') ?> - cart_total;
                 $('.cart-delivery__title-bottom').css('display', 'block');
                 $('.cart-delivery__title-bottom span').text(difference_delivery_price);
-                $('.cart-delivery__price').text("<?= $delivery_current_time_price; ?> ₽");
+                $('.cart-delivery__price').text("<?= $delivery_current_time_price; ?>");
             }
         }
 
@@ -300,8 +294,8 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                         'quantity': parseInt($this.parent().find('.amount').text())
                     },
                 success: function (data) {//success callback
-                    $('.cart-button-right span').text(numberWithSpaces(data.cart_total) + ' ₽');
-                    $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + ' ₽');
+                    $('.cart-button-right span').text(numberWithSpaces(data.cart_total) + ' руб.');
+                    // $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + '');
                     if((data.cart_total < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
                         $('.cart-minimum-order-price').css('display', 'flex');
                         $('.cart-button-wrapper').attr('href', '');
@@ -363,8 +357,8 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                             $('#promo').css('border', '1px solid #3F9B48');
                             $('.promo-success').css('display', 'block');
                             $('.promo-error').css('display', 'none');
-                            $('.cart-button-right span').text(numberWithSpaces(data.cart_total) + ' ₽');
-                            $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + ' ₽');
+                            $('.cart-button-right span').text(numberWithSpaces(data.cart_total) + ' руб.');
+                            $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + '');
                         } else {
                             $('#promo').css('border', '1px solid #FF0303');
                             $('.promo-success').css('display', 'none');

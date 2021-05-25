@@ -134,16 +134,16 @@ if (isset($_GET['category_id'])) {
                         $regular_price = get_post_meta(get_the_ID(), '_regular_price', true);
                         if (get_post_meta(get_the_ID(), '_sale_price', true)) {
                             $sale_price = get_post_meta(get_the_ID(), '_sale_price', true); ?>
-                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                            <span class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                         <?php } else {
                             $sale_price = $regular_price; ?>
                             <span style="visibility: hidden; opacity: 0; height: 0;"
-                                  class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?> ₽</span>
+                                  class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                         <?php }
                         ?>
                         <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" class="product-item-price-wrapper"
                            data-id="<?= get_the_ID(); ?>">
-                            <span class="product-item-price-main"><?= $sale_price ?> ₽</span>
+                            <span class="product-item-price-main"><?= $sale_price ?></span>
                             <?php
                             // Usage as a condition in an if statement
                             if (0 < woo_is_in_cart(get_the_ID())) { ?>
@@ -183,9 +183,9 @@ if (isset($_GET['category_id'])) {
 
 
                                     </div>
-                                    <span class="product-item-price-crossed-out">350 ₽</span>
+                                    <span class="product-item-price-crossed-out">350</span>
                                     <div class="product-item-price-wrapper">
-                                        <span class="product-item-price-main">249 ₽</span>
+                                        <span class="product-item-price-main">249</span>
                                         <span class="product-item-amount">15</span>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@ if (isset($_GET['category_id'])) {
                 <span>Корзина</span>
             </div>
             <div class="cart-button-right">
-                <span>0 ₽</span>
+                <span>0</span>
             </div>
         </div>
     </a>

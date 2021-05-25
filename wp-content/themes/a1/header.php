@@ -110,7 +110,7 @@ window.dataLayer = window.dataLayer || [];
             <?php } ?>
             <a href="/cart" class="header__cart-button animated-background">
                 <img src="<?= get_template_directory_uri(); ?>/img/cart-icon.svg">
-                <span>0 ₽</span>
+                <span>0</span>
             </a>
         </div>
     </header>
