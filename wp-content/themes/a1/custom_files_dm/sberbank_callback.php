@@ -4,9 +4,13 @@ require_once("../../../../wp-load.php");
 $test_field = get_field('test_field','option');
 
 if(isset($_GET['orderNumber'])) {
-    $orderId = substr($_GET['orderNumber'], 0, strpos($_GET['orderNumber'], "_"));
+    if (strpos($_GET['orderNumber'], '_') !== false) {
+        $orderId = substr($_GET['orderNumber'], 0, strpos($_GET['orderNumber'], "_"));
+    } else {
+        $orderId = $_GET['orderNumber'];
+    }
 
-    $inf = ' | mdOrder: '. $_GET['mdOrder'] . ', orderNumber: ' . $orderId . ', checksum: ' . $_GET['checksum'] . ', operation: ' . $_GET['operation'] . ', status: ' . $_GET['status'];
+    $inf = "\r\n" . '| mdOrder: '. $_GET['mdOrder'] . ', orderNumber: ' . $orderId . ', checksum: ' . $_GET['checksum'] . ', operation: ' . $_GET['operation'] . ', status: ' . $_GET['status'];
 
     $test_field .= $inf;
     update_field('test_field', $test_field, 'option');
@@ -20,6 +24,8 @@ if(isset($_GET['orderNumber'])
     && ($_GET['status'] == '1')
     && empty(get_field('order_number_for_current_customer', $orderId))) {
     $order_id = $orderId;
+
+    echo $order_id . 'test';
 
     $order = wc_get_order( $order_id );
     //update status to initial
@@ -172,4 +178,10 @@ if(isset($_GET['orderNumber'])
 //    print_r($response);
 
     update_field('order_id_frontpad', $response->order_id, $order_id);
+} else if(isset($_GET['orderNumber'])
+    && (($_GET['operation'] == 'declinedByTimeout') || ($_GET['operation'] == 'reversed') || ($_GET['operation'] == 'refunded'))) {
+
+    $order_id = $orderId;
+    wp_delete_post($order_id,true);
+
 }

@@ -257,8 +257,5 @@ if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION[
     <button type="submit">Отправить</button>
     <img src="<?= get_template_directory_uri(); ?>/img/order-close.svg" class="contact-popup-close">
 </form>
-<?php
-include "custom_files_dm/delete_unpaid_orders_inc.php";
-?>
 </body>
 </html>
