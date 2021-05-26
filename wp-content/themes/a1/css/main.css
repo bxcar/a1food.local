@@ -680,7 +680,8 @@ ol, ul {
     cursor: pointer
 }
 
-.cart-delivery {
+.cart-delivery,
+.cart-gift {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -696,14 +697,20 @@ ol, ul {
     margin-bottom: 20px
 }
 
-.cart-delivery__left-wrapper {
+.cart-gift {
+    margin-top: -15px;
+}
+
+.cart-delivery__left-wrapper,
+.cart-gift__left-wrapper {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column
 }
 
-.cart-delivery__title {
+.cart-delivery__title,
+.cart-gift__title {
     font-family: Proxima Nova Lt, sans-serif;
     font-weight: 600;
     font-size: 12px;
@@ -711,13 +718,15 @@ ol, ul {
     color: #fff
 }
 
-.cart-delivery__title-bottom {
+.cart-delivery__title-bottom,
+.cart-gift__title-bottom {
     font-size: 10px;
     line-height: 13px;
     color: #b1b1b1
 }
 
-.cart-delivery__price {
+.cart-delivery__price,
+.cart-gift__price {
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;

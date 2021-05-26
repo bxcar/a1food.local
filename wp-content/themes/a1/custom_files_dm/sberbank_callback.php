@@ -77,6 +77,13 @@ if(isset($_GET['orderNumber'])
     $products_quantity_array[] = 1;
     $products_prices_array[] = $order_data['shipping_total'];
 
+    if($order->get_subtotal() >= get_field('option_upsale', 'option')
+    && get_field('option_upsale_logic', 'option')) {
+        $products_array[] = 8888;
+        $products_quantity_array[] = 1;
+        $products_prices_array[] = 0;
+    }
+
     $order_statuses_array = array(1,4,10,11,12);
 
     $data = array(

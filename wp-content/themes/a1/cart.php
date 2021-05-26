@@ -82,6 +82,27 @@ require_once 'header_mobile.php';
             <span class="cart-delivery__price">Бесплатно</span>
         <?php } ?>
     </div>
+
+<?php if(get_field('option_upsale_logic', 'option')) { ?>
+    <div class="cart-gift animated-background">
+        <div class="cart-gift__left-wrapper">
+            <span class="cart-gift__title">Подарок: <?= get_field('option_upsale_gift', 'option') ?></span>
+            <?php if($cart_total_price < get_field('option_upsale', 'option')) {
+                $difference = get_field('option_upsale', 'option') - $cart_total_price; ?>
+                <span class="cart-gift__title-bottom">Закажите еще на <span><?= $difference ?></span>р, чтобы получить подарок</span>
+            <?php } else { ?>
+                <span class="cart-gift__title-bottom" style="display: none;">Закажите еще на <span></span>р, чтобы получить подарок</span>
+            <?php } ?>
+        </div>
+        <?php if($cart_total_price < get_field('option_upsale', 'option')) { ?>
+            <span class="cart-gift__price"><img src="<?= get_template_directory_uri() ?>/img/no-gift.svg"></span>
+        <?php } else { ?>
+            <span class="cart-gift__price"><img src="<?= get_template_directory_uri() ?>/img/gift-check.svg"></span>
+        <?php } ?>
+    </div>
+<?php } ?>
+
+
     <div class="cart-promo">
         <div class="cart-promo__title animated-background">Введите промокод если есть:</div>
         <form method="post" action="#" class="cart-promo-form animated-background">
@@ -100,7 +121,7 @@ require_once 'header_mobile.php';
         <span><img src="<?/*= get_template_directory_uri(); */?>/img/cart-i.svg">Минимальная сумма заказа 500р</span>
     </div>-->
 <?php
-if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) { ?>
+if((($cart_total_price) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) { ?>
     <div class="cart-minimum-order-price" style="display: flex">
         <span><img src="<?= get_template_directory_uri(); ?>/img/cart-i.svg">Минимальная сумма заказа <?= get_field('min_order_price', 'option'); ?>р</span>
     </div>
@@ -239,7 +260,7 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
 
     <a style="text-decoration: none;" onclick="ym(77765119, 'reachGoal', 'click_cart_checkout'); return true;" class="cart-button-wrapper animated-background"
         <?php
-        if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
+        if((($cart_total_price) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
             echo 'href=""';
         } else {
             echo 'href="/checkout-mobile"';
@@ -271,6 +292,20 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
             }
         }
 
+        function calculateGift(cartTotal) {
+            var cart_total = cartTotal;
+
+            if(cart_total >= <?= get_field('option_upsale', 'option') ?>) {
+                $('.cart-gift__title-bottom').css('display', 'none');
+                $('.cart-gift__price').html('<img src="<?= get_template_directory_uri() ?>/img/gift-check.svg">');
+            } else {
+                var difference_gift_price = <?= get_field('option_upsale', 'option') ?> - cart_total;
+                $('.cart-gift__title-bottom').css('display', 'block');
+                $('.cart-gift__title-bottom span').text(difference_gift_price);
+                $('.cart-gift__price').html('<img src="<?= get_template_directory_uri() ?>/img/no-gift.svg">');
+            }
+        }
+
         function calculateTotalItemPrice(amount='more', product_quantity = 0, $this) {
             var current_total_price = parseInt($this.parent().parent().find('.cart-products__item-price span').text());
             var current_item_price = current_total_price/product_quantity;
@@ -296,7 +331,7 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                 success: function (data) {//success callback
                     $('.cart-button-right span').text(numberWithSpaces(data.cart_total) + ' руб.');
                     // $('.header__cart-button span').text(numberWithSpaces(data.cart_total) + '');
-                    if((data.cart_total < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
+                    if((data.cart_total_without_delivery < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
                         $('.cart-minimum-order-price').css('display', 'flex');
                         $('.cart-button-wrapper').attr('href', '');
                     } else {
@@ -304,6 +339,7 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                         $('.cart-button-wrapper').attr('href', '/checkout-mobile');
                     }
                     calculateDelivery(data.cart_total_without_delivery);
+                    calculateGift(data.cart_total_without_delivery);
                 },
                 error: function (data) {
                     console.log(data);
@@ -365,7 +401,7 @@ if((($cart_total_price + $delivery) < get_field('min_order_price', 'option')) &&
                             $('.promo-error').css('display', 'block');
                         }
                         calculateDelivery(data.cart_total_without_delivery);
-                        if((data.cart_total < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
+                        if((data.cart_total_without_delivery < <?= get_field('min_order_price', 'option'); ?>) && '<?= get_field('min_order_price_logic', 'option'); ?>') {
                             $('.cart-minimum-order-price').css('display', 'flex');
                             $('.cart-button-wrapper').attr('href', '');
                         } else {

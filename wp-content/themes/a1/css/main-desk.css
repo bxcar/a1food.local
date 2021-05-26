@@ -699,7 +699,8 @@ ol, ul {
     height: 9px;
 }
 
-.cart-delivery {
+.cart-delivery,
+.cart-gift {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -712,17 +713,23 @@ ol, ul {
     padding-left: 20px;
     padding-right: 20px;
     box-sizing: border-box;
-    margin-bottom: 40px
+    margin-bottom: 40px;
 }
 
-.cart-delivery__left-wrapper {
+.cart-gift {
+    margin-top: -29px;
+}
+
+.cart-delivery__left-wrapper,
+.cart-gift__left-wrapper {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column
 }
 
-.cart-delivery__title {
+.cart-delivery__title,
+.cart-gift__title {
     font-family: Proxima Nova Lt, sans-serif;
     font-weight: 600;
     font-size: 16px;
@@ -730,13 +737,15 @@ ol, ul {
     color: #fff
 }
 
-.cart-delivery__title-bottom {
+.cart-delivery__title-bottom,
+.cart-gift__title-bottom {
     font-size: 14px;
     line-height: 20px;
     color: #b1b1b1
 }
 
-.cart-delivery__price {
+.cart-delivery__price,
+.cart-gift__price {
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
