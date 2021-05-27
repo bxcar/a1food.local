@@ -8,7 +8,7 @@
             dataType: 'json',
             data:
                 {
-                    'row_number': $(this).parent().find('input').data('address-number')
+                    'row_number': current_address_number
                 },
             success: function (data) {//success callback
 
