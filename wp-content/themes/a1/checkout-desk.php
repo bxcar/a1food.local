@@ -14,6 +14,7 @@ if(!is_user_logged_in()) {
 </style>
 <?php
 the_content();
+$non_working_hours_array = getNonWorkingHours();
 ?>
 
     <div class="cabinet__title-wrapper animated-background">
@@ -75,7 +76,7 @@ the_content();
                             $date_month = getMonth($date_month);
                             $date_month_tomorrow = getMonth($date_month_tomorrow);
 
-                            if($current_hour >= 23) { ?>
+                            if($current_hour > $non_working_hours_array['lastHour']) { ?>
                                 <span class="delivery-form__date-main-field-text"><span class="plain-text">Завтра</span> <span class="plain-date"><?= $day_tomorrow . ' ' . $date_number_tomorrow . ' ' . $date_month_tomorrow ?></span></span>
                             <?php } else { ?>
                                 <span class="delivery-form__date-main-field-text"><span class="plain-text">Сегодня</span> <span class="plain-date"><?= $day . ' ' . $date_number . ' ' . $date_month ?></span></span>
@@ -104,7 +105,7 @@ the_content();
                                 $date_echo = $day . ' ' . $date_number . ' ' . $date_month;
                             }
 
-                            if(!($i == 0 && $current_hour >= 23)) { ?>
+                            if(!($i == 0 && $current_hour > $non_working_hours_array['lastHour'])) { ?>
                                 <span class="delivery-form__date-subfield" data-date="<?= date('Y-m-d', time() + $time_plus) ?>"><?= $date_echo ?></span>
                             <?php }
 
@@ -130,9 +131,11 @@ the_content();
                     <div class="delivery-form__date-subfields">
                         <?php
                         $hour = date('H', time()+7200);
+                        $current_hour = date('H', time());
+
                         $min = date('i', time()+7200);
-                        if($hour < 12) {
-                            $hour = 12;
+                        if($hour <= $non_working_hours_array['startHour']) {
+                            $hour = $non_working_hours_array['startHour'] + 1;
                             $minute = '00';
                         } else {
                             if ($min<=30) {
@@ -147,12 +150,15 @@ the_content();
                         $full_time_line_for_js_in_the_bottom = date('H', time()) . ':'. date('i', time()) . ':' . '00';
 
                         ?>
-                        <!--<span class="delivery-form__date-subfield" data-time="<?php /*echo "$hour:$minute:00" */?>">Ближайшее</span>-->
-                        <span class="delivery-form__date-subfield" data-time="<?php echo date('H', time()) . ":" . date('i', time()) . ":00" ?>"><span class="plain-text">Ближайшее</span>
+
+                        <?php if($current_hour <= $non_working_hours_array['lastHour'] && $current_hour >= $non_working_hours_array['startHour']) { ?>
+                            <span class="delivery-form__date-subfield" data-time="<?php echo date('H', time()) . ":" . date('i', time()) . ":00" ?>"><span class="plain-text">Ближайшее</span>
                     		<?php if(get_field('text_asap_time', 'option')) { ?>
-                        		<span class="delivery-form__date-main-field-text-desc"><?= get_field('text_asap_time', 'option'); ?></span>
-                    		<?php } ?>
-                		</span>
+                                <span class="delivery-form__date-main-field-text-desc"><?= get_field('text_asap_time', 'option'); ?></span>
+                            <?php } ?>
+                		    </span>
+                        <?php } ?>
+
                         <span class="delivery-form__date-subfield" data-time="<?php echo "$hour:$minute:00" ?>"><?php echo "$hour:$minute" ?></span>
                         <?php
                         if($minute == '30') {
@@ -165,7 +171,7 @@ the_content();
                         }
 
                         $i = 0;
-                        while($hour < 23) {
+                        while($hour <= $non_working_hours_array['lastHour'] + 1) {
                             if($i % 2 == 0) {
                                 $minute_current = $minute;
                             } else {
@@ -176,7 +182,11 @@ the_content();
                             $hour_current =(int)$hour;
                             ?>
                             <span class="delivery-form__date-subfield"  data-time="<?php echo "$hour_current:$minute_current:00" ?>"><?php echo "$hour_current:$minute_current" ?></span>
-                        <?php $i++; } ?>
+                        <?php $i++;
+                            if($hour == $non_working_hours_array['lastHour'] + 1) {
+                                break;
+                            }
+                        } ?>
                     </div>
                 </div>
             </div>

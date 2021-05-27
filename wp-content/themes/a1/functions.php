@@ -633,3 +633,23 @@ function getDayNumberForTable($day) {
 
     return $day;
 }
+
+function getNonWorkingHours() {
+    $day = date('w', strtotime(date('m/d/Y', time())));
+    $day = getDayNumberForTable($day);
+
+    $table = get_field('delivery_price_by_hours', 'option')['body'][$day];
+
+    $start_hour = '';
+    $last_hour = '';
+
+    for($i = 1; $i <= 24; $i++) {
+        if(!empty($table[$i]['c']) && empty($start_hour)) {
+            $start_hour = $i;
+        } else if(!empty($table[$i]['c'])) {
+            $last_hour = $i;
+        }
+    }
+
+    return array('startHour' => $start_hour, 'lastHour' => $last_hour);
+}

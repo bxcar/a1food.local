@@ -114,8 +114,10 @@
 
     $('#billing_phone').attr('value', '<?= get_field('user_phone_field', 'user_' . get_current_user_id()); ?>');
     $('#billing_date').attr('value', '<?php
-        if($current_hour >= 23) {
-            echo date('Y-m-d', time()+3600);
+        if($current_hour > $non_working_hours_array['lastHour']) {
+            $diff = 24 - $non_working_hours_array['lastHour'] + 1;
+            $diff_sec = $diff * 3600;
+            echo date('Y-m-d', time()+$diff_sec);
         } else {
             echo date('Y-m-d', time());
         } ?>');
@@ -143,15 +145,16 @@
         if($(this).find('.plain-text').text() != 'Сегодня') {
             // console.log($(this).find('.plain-text').text());
             if(($('.delivery-form__time .delivery-form__date-main-field-text .plain-text').text() == 'Ближайшее') && !getCookie('billing_time')) {
-                $('.delivery-form__time .delivery-form__date-main-field-text').text('12:00');
-                $('#billing_time').attr('value', '12:00:00');
-                document.cookie = "billing_time=12:00:00";
+                let hour = <?= $non_working_hours_array['startHour'] ?> + 1;
+                $('.delivery-form__time .delivery-form__date-main-field-text').text(hour + ':00');
+                $('#billing_time').attr('value', hour + ':00:00');
+                document.cookie = "billing_time=" + hour + ":00:00";
             }
             $('.delivery-form__time .delivery-form__date-subfields').empty();
-            var hour = 12;
+            var hour = <?= $non_working_hours_array['startHour'] ?> + 1;
             var min = 0;
             var current_min = 0;
-            for(var i = 0; i < 23; i++) {
+            for(var i = 0; i <= <?= $non_working_hours_array['lastHour'] ?>; i++) {
                 if(min === 0) {
                     current_min = '00';
                 } else {
@@ -174,12 +177,11 @@
             	if ($('.delivery-form__time .delivery-form__date-subfield[data-time="' + getCookie('billing_time') + '"]').length > 0) {
             		$('.delivery-form__time .delivery-form__date-subfield[data-time="' + getCookie('billing_time') + '"]').trigger('click');
 		    		$('.delivery-form__time .delivery-form__date-main-field.active').removeClass('active');
-		    		console.log('1');
 				} else {
-					$('.delivery-form__time .delivery-form__date-main-field-text').text('12:00');
-                	$('#billing_time').attr('value', '12:00:00');
-                	document.cookie = "billing_time=12:00:00";
-                	console.log('2');
+                    let hour = <?= $non_working_hours_array['startHour'] ?> + 1;
+					$('.delivery-form__time .delivery-form__date-main-field-text').text(hour + ':00');
+                	$('#billing_time').attr('value', hour + ':00:00');
+                	document.cookie = "billing_time=" + hour + ":00:00";
 				}
 		    }
 
@@ -189,6 +191,7 @@
         }
 
     });
+
 
     $('.delivery-form__time .delivery-form__date-subfield').on('click', function () {
         $('.delivery-form__time .delivery-form__date-main-field-text').html($(this).html());
@@ -221,6 +224,20 @@
 	function eraseCookie(name) {
 	    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
+
+    <?php
+    if(!($current_hour <= $non_working_hours_array['lastHour'] && $current_hour >= $non_working_hours_array['startHour'])) { ?>
+        if($('.delivery-form__time .delivery-form__date-main-field-text').text() === 'Ближайшее') {
+            $('.delivery-form__time .delivery-form__date-subfield:first-child').trigger('click');
+        }
+    <?php } ?>
+
+    let billing_date_cookie = new Date(getCookie('billing_date'));
+    let first_actual_date = new Date($('.delivery-form__date .delivery-form__date-subfield:first-child').attr('data-date'));
+
+    if(billing_date_cookie < first_actual_date) {
+        document.cookie = "billing_date=" + $('.delivery-form__date .delivery-form__date-subfield:first-child').attr('data-date');
+    }
 
     if(getCookie('billing_date') && (getCookie('billing_date_text') != 'Сегодня')) {
     	$('.delivery-form__date .delivery-form__date-subfield[data-date="' + getCookie('billing_date') + '"]').trigger('click');
