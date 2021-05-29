@@ -137,7 +137,15 @@
         $('#billing_date').attr('value', $(this).data('date'));
         $('#billing_asap_time').attr('value', '0');
         document.cookie = "billing_date=" + $(this).data('date');
-        document.cookie = "billing_date_text=" + $(this).find('.plain-text').text();
+
+        let billing_date_text = $(this).find('.plain-text').text();
+        if(billing_date_text === 'Сегодня') {
+            billing_date_text = 'Today';
+        } else if(billing_date_text === 'Завтра') {
+            billing_date_text = 'Tomorrow';
+        }
+
+        document.cookie = "billing_date_text=" + billing_date_text;
         /*if($('#billing_time').attr('value') === 'Ближайшее') {
             $('#billing_time').attr('value', '12:00');
         }*/
@@ -188,6 +196,7 @@
         } else {
         	// eraseCookie('billing_time');
             // setTimeout(function(){location.reload();},10);
+            // location.reload();
             function refresh() {
                 var url = location.origin;
                 var pathname = location.pathname;
@@ -247,12 +256,12 @@
         document.cookie = "billing_date=" + $('.delivery-form__date .delivery-form__date-subfield:first-child').attr('data-date');
     }
 
-    if(getCookie('billing_date') && (getCookie('billing_date_text') != 'Сегодня')) {
+    if(getCookie('billing_date') && (getCookie('billing_date_text') != 'Today')) {
     	$('.delivery-form__date .delivery-form__date-subfield[data-date="' + getCookie('billing_date') + '"]').trigger('click');
     	$('.delivery-form__date .delivery-form__date-main-field.active').removeClass('active');
     }
 
-    if(getCookie('billing_time') && (getCookie('billing_date_text') == 'Сегодня')) {
+    if(getCookie('billing_time') && (getCookie('billing_date_text') == 'Today')) {
     	$('.delivery-form__time .delivery-form__date-subfield[data-time="' + getCookie('billing_time') + '"]').trigger('click');
     	$('.delivery-form__time .delivery-form__date-main-field.active').removeClass('active');
     }

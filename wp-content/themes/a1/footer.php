@@ -191,9 +191,13 @@ $day_footer = getDayNumberForTable($day_footer);
 $hour_footer = date('G', time());
 
 $delivery_current_time_price_footer = get_field('delivery_price_by_hours', 'option')['body'][$day_footer][$hour_footer]['c'];
+
+$delivery_current_time_price_footer_for_popup = $delivery_current_time_price_footer;
+
 $delivery_current_time_price_footer = getDeliveryPriceNonWorkingHours($delivery_current_time_price_footer, $day_footer);
 
-if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION["popup_non_working_hours"]) && !$delivery_current_time_price_footer) {
+
+if (get_field('popup_non_working_hours', 'option')['logic'] && !isset($_SESSION["popup_non_working_hours"]) && !$delivery_current_time_price_footer_for_popup) {
     $_SESSION["popup_non_working_hours"] = 1; ?>
     <a class="slider__item sl-popup hours-popup">
         <div class="slider__item-left">
