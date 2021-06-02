@@ -2460,7 +2460,7 @@ input[type=number] {
 
 .slider {
     width: 100%;
-    background: #FFC000;
+    /*background: #FFC000;*/
     margin-bottom: 20px;
     overflow: hidden;
 }

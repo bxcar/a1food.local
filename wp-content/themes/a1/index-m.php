@@ -5,7 +5,7 @@ require_once 'header_mobile.php';
     <header class="header">
         <div class="header_inner_wrapper animated-background">
             <img class="header__menu-button" src="<?= get_template_directory_uri(); ?>/img/burger-menu-icon.svg">
-            <img class="header__logo" src="<?= get_template_directory_uri(); ?>/img/logo.svg">
+            <img class="header__logo" style="max-width: 93px;" src="<?= get_field('logo_field', 'option') ?>">
         </div>
 
         <?php if(is_user_logged_in()) { ?>
@@ -26,6 +26,22 @@ require_once 'header_mobile.php';
             </a>
         <?php } ?>
     </header>
+<?php if (get_field('slider_logic', 'option')) { ?>
+    <div class="slider owl-carousel animated-background" id="slider">
+        <?php foreach (get_field('slider', 'option') as $item) { ?>
+            <a href="<?= $item['link'] ?>" class="slider__item">
+                <!-- <div class="slider__item-left">
+                    <span class="slider__title"><?/*= $item['title'] */?></span>
+                    <span class="slider__text"><?/*= $item['text'] */?></span>
+                </div>-->
+                <!--<div class="slider__item-right">
+                    <img src="<?/*= $item['img'] */?>" class="slider__img">
+                </div>-->
+                <img src="<?= $item['img'] ?>" class="slider__img">
+            </a>
+        <?php } ?>
+    </div>
+<?php } ?>
 <?php
 if (get_field('search_line', 'option')) { ?>
     <div class="search animated-background">

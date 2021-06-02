@@ -8,7 +8,7 @@ if (is_user_logged_in()) { ?>
 <?php }
 ?>
 
-    <img class="login__logo" src="<?= get_template_directory_uri(); ?>/img/payment3_logo.svg">
+    <img class="login__logo" style="max-width: 93px;" src="<?= get_field('logo_field', 'option') ?>">
     <span class="login__title">Пожалуйста, укажите номер телефона</span>
 
     <form action="#" method="post" class="login__form1" autocomplete="off">

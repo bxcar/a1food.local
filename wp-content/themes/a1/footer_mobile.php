@@ -2,7 +2,7 @@
 <div class="burger-menu">
     <div class="burger-menu__header">
         <img src="<?= get_template_directory_uri(); ?>/img/burger-close.svg" class="burger-menu__close">
-        <a href="/"><img src="<?= get_template_directory_uri(); ?>/img/burger-logo.svg" class="burder-menu__logo"></a>
+        <a href="/"><img style="max-width: 93px;" src="<?= get_field('logo_field', 'option') ?>" class="burder-menu__logo"></a>
     </div>
     <div class="burger-menu__content">
         <?php if(is_user_logged_in()) { ?>

@@ -65,7 +65,7 @@ session_start();
                 <a href="/m" class="header-in__back"><img src="<?= get_template_directory_uri(); ?>/img/header-in-back.svg"></a>
                 <span class="header-in__title"><?= str_replace(" моб", "",get_the_title()); ?></span>
             </div>
-            <a href="/m"><img class="header-in__logo" src="<?= get_template_directory_uri(); ?>/img/header-in-logo.svg"></a>
+            <a href="/m"><img class="header-in__logo" style="max-width: 79px;" src="<?= get_field('logo_field', 'option') ?>"></a>
         </header>
     <?php } ?>
 

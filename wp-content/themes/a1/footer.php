@@ -14,7 +14,7 @@
 <div class="footer animated-background">
     <div class="footer__container">
         <div class="footer__wrapper1">
-            <img src="<?= get_template_directory_uri(); ?>/img/logo.svg">
+            <img src="<?= get_field('logo_field', 'option') ?>">
             <span>(с) Все права защищены</span>
             <a href="https://mos-digital.com/" target="_blank" class="footer_mos"><?php include "img/crown.svg" ?><span>Построено в MOS-DIGITAL</span></a>
         </div>
@@ -79,7 +79,7 @@
         loop: true,
         nav: false,
         dots: false,
-        autoplay: false,
+        autoplay: true,
         autoplayTimeout: <?= get_field('slider_interval', 'options') ?>,
         autoplayHoverPause: true,
         items: 1

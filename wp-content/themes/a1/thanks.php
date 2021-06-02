@@ -16,7 +16,7 @@ if(!is_user_logged_in()) { ?>
             <a href="/m" class="header-in__back"><img src="<?= get_template_directory_uri(); ?>/img/header-in-back.svg"></a>
             <span class="header-in__title">Оплата</span>
         </div>
-        <img class="header-in__logo" src="<?= get_template_directory_uri(); ?>/img/header-in-logo.svg">
+        <img class="header-in__logo" style="max-width: 79px;" src="<?= get_field('logo_field', 'option') ?>">
     </header>
 
 
@@ -29,7 +29,7 @@ if(!is_user_logged_in()) { ?>
     </div>
 </div>
 <div class="payment3">
-    <img src="<?= get_template_directory_uri(); ?>/img/payment3_logo.svg" class="payment3__logo">
+    <img style="max-width: 93px;" src="<?= get_field('logo_field', 'option') ?>" class="payment3__logo">
     <h1 class="payment3__title">Спасибо, что выбрали нас!</h1>
     <span class="payment3__text1">Ваш заказ принят.</span>
     <span class="payment3__text2">Статус заказа Вы можете<br>отслеживать в личном кабинете</span>
