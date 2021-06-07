@@ -2491,7 +2491,7 @@ input[type=number] {
 }
 
 .slider__item-left {
-    padding-right: 50px;
+    padding-right: 10px;
     box-sizing: border-box;
 }
 
@@ -2518,6 +2518,9 @@ input[type=number] {
 .slider__item.sl-popup {
     position: fixed;
     width: 95%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

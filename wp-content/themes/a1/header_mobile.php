@@ -38,6 +38,10 @@ session_start();
             // console.log(window.mobileAndTabletCheck());
 
             if(!window.mobileAndTabletCheck()) {
+                var d = new Date();
+                d.setTime(d.getTime() + (86400*1000));
+                var expires = "expires="+ d.toUTCString();
+                document.cookie = "redirected=true;" + expires + ";path=/";
                 window.location.href = '/';
             }
         </script>

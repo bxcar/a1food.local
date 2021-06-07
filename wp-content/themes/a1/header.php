@@ -18,7 +18,17 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="<?= get_template_directory_uri(); ?>/img/favicon.png"/>
-    <title><?php the_title() ?> - A1</title>
+
+    <?php if(get_field('meta_title')) { ?>
+        <title><?= get_field('meta_title') ?></title>
+    <?php } else { ?>
+        <title><?php the_title() ?> - A1 ЕДА</title>
+    <?php } ?>
+
+    <?php if(get_field('meta_description')) { ?>
+        <meta name="description" content="<?= get_field('meta_description') ?>">
+    <?php } ?>
+
 
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -41,6 +51,7 @@ window.dataLayer = window.dataLayer || [];
 <!-- /Yandex.Metrika counter -->
 
     <script>
+
         window.mobileAndTabletCheck = function () {
             let check = false;
             (function (a) {
@@ -53,6 +64,10 @@ window.dataLayer = window.dataLayer || [];
 
         if (window.mobileAndTabletCheck()) {
             if(location.pathname !== '/thanks/')  {
+                var d = new Date();
+                d.setTime(d.getTime() + (86400*1000));
+                var expires = "expires="+ d.toUTCString();
+                document.cookie = "redirected=true;" + expires + ";path=/";
                 window.location.href = '/m';
             } else {
                 var head = document.getElementsByTagName('head')[0];
