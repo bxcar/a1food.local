@@ -1,9 +1,18 @@
 <?php
+session_start();
+
 require_once 'smpp/smppclient.class.php';
 require_once 'smpp/gsmencoder.class.php';
 require_once 'smpp/sockettransport.class.php';
 
-$code = $_POST['code'];
+function UniqueRandomNumbersWithinRange($min, $max, $quantity) {
+    $numbers = range($min, $max);
+    shuffle($numbers);
+    return array_slice($numbers, 0, $quantity);
+}
+
+$code = UniqueRandomNumbersWithinRange(100,999,1)[0];
+$_SESSION['authcode'] = $code;
 $phone = $_POST['phone'];
 
 if(substr($phone, 1, 1) != 9) {

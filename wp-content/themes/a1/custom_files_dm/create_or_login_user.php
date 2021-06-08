@@ -1,8 +1,16 @@
 <?php
 require_once("../../../../wp-load.php");
 
+session_start();
+
 $user_name = $_POST['user_phone'];
 $user_phone_format = $_POST['user_phone_format'];
+$authcode = $_SESSION['authcode'];
+$usercode = $_POST['usercode'];
+
+if($authcode != $usercode) {
+    exit();
+}
 
 if(!username_exists( $user_name )) {
     wp_create_user( $user_name, 'standard_user');
