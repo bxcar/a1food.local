@@ -66,11 +66,15 @@
         return /\d/.test(myString);
     }
 
-    $("#phone").mask("(999) 999-99-99").on('click', function () {
+    $.mask.definitions['~']='[9]';
+
+    $("#phone").mask("(~99) 999-99-99").on('click', function () {
         if (!hasNumber($(this).val())) {
             $(this).selectRange(1);
         }
     });
+
+
     // .mask('999-999-9999', { autoclear: false, 'placeholder': '' });
     $("#phone-cabinet").mask("+7 (999) 999-99-99");
     $("#birth-date").mask("99.99.9999");

@@ -64,7 +64,9 @@
         return /\d/.test(myString);
     }
 
-    $("#phone").mask("(999) 999-99-99").on('click', function () {
+    $.mask.definitions['~']='[9]';
+
+    $("#phone").mask("(~99) 999-99-99").on('click', function () {
         if (!hasNumber($(this).val())) {
             $(this).selectRange(1);
         }

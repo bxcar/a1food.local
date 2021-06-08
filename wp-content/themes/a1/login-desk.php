@@ -72,6 +72,7 @@ if(is_user_logged_in()) { ?>
                 console.log('success');
             },
             error: function (data) {
+                $('.login__form1 button').text('Ошибка').prop('disabled', true);
                 console.log(data);
             }
         });

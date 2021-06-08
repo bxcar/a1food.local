@@ -6,6 +6,10 @@ require_once 'smpp/sockettransport.class.php';
 $code = $_POST['code'];
 $phone = $_POST['phone'];
 
+if(substr($phone, 1, 1) != 9) {
+    exit();
+}
+
 // Construct transport and client
 $transport = new SocketTransport(array('smpp.smsaero.ru'),2775);
 $transport->setRecvTimeout(10000);
