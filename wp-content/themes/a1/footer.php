@@ -200,6 +200,7 @@ $delivery_current_time_price_footer_for_popup = $delivery_current_time_price_foo
 
 $delivery_current_time_price_footer = getDeliveryPriceNonWorkingHours($delivery_current_time_price_footer, $day_footer);
 
+
 if (get_field('popup_non_working_hours', 'option')['logic'] && (!isset($_SESSION["popup_non_working_hours"]) || $_COOKIE['redirected']) && !$delivery_current_time_price_footer_for_popup) {
     $_SESSION["popup_non_working_hours"] = 1;
     unset($_COOKIE['redirected']); ?>

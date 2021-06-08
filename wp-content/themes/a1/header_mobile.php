@@ -9,7 +9,18 @@ session_start();
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="<?= get_template_directory_uri(); ?>/img/favicon.png"/>
-        <title><?= str_replace(" моб", "",get_the_title()); ?> - A1</title>
+
+        <?php if(get_field('meta_title')) { ?>
+            <title><?= get_field('meta_title') ?></title>
+        <?php } else { ?>
+            <title><?= str_replace(" моб", "",get_the_title()); ?> - A1 ЕДА</title>
+        <?php } ?>
+
+        <?php if(get_field('meta_description')) { ?>
+            <meta name="description" content="<?= get_field('meta_description') ?>">
+        <?php } ?>
+
+        <meta name="facebook-domain-verification" content="6rmfm7qjhnycrjex75ez8fciz636ld" />
 
             <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -58,6 +69,28 @@ session_start();
         <script src="https://api-maps.yandex.ru/2.1/?apikey=e215db02-6068-4965-8f36-3b1b1b18a6f1
 &lang=ru_RU" type="text/javascript">
         </script>
+
+        <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?169",t.onload=function(){VK.Retargeting.Init("VK-RTRG-984660-6KnSx"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-984660-6KnSx" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+        <!-- Facebook Pixel Code -->
+        <script>
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1159356594570637');
+            fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+                       src="https://www.facebook.com/tr?id=1159356594570637&ev=PageView&noscript=1"
+            /></noscript>
+        <!-- End Facebook Pixel Code -->
+
+
         <?php wp_head(); ?>
     </head>
 <body <?php if(get_page_template_slug( get_the_ID() ) == 'text-desk.php') { echo 'data-type="text-page"'; }//body_class(); ?>>

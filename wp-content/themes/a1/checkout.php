@@ -186,7 +186,7 @@ $non_working_hours_array = getNonWorkingHours();
         <span class="checkout-notice__text">A1ЕДА доставляет только<br>предоплаченные заказы</span>
     </div>
 
-    <div class="cart-button-wrapper" onclick="ym(77765119, 'reachGoal', 'click_pay'); return true;">
+    <div class="cart-button-wrapper" onclick="ym(77765119, 'reachGoal', 'click_pay'); fbq('track', 'Purchase'); return true;">
         <div class="cart-button cart-button-2 checkout-submit">
             <div class="cart-button-left">
                 <span>Оплатить заказ</span>

@@ -29,6 +29,8 @@ session_start();
         <meta name="description" content="<?= get_field('meta_description') ?>">
     <?php } ?>
 
+    <meta name="facebook-domain-verification" content="6rmfm7qjhnycrjex75ez8fciz636ld" />
+
 
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -95,6 +97,28 @@ window.dataLayer = window.dataLayer || [];
     </script>
     <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/owl.theme.default.css">
+
+    <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?169",t.onload=function(){VK.Retargeting.Init("VK-RTRG-984660-6KnSx"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-984660-6KnSx" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1159356594570637');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=1159356594570637&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+
     <?php wp_head(); ?>
 </head>
 <body <?php if(get_page_template_slug( get_the_ID() ) == 'text-desk.php') { echo 'data-type="text-page"'; }//body_class(); ?>>

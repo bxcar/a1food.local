@@ -28,29 +28,6 @@ if(is_user_logged_in()) { ?>
 </div>
 
 <script>
-    function setCookie(cname, cvalue, exmin) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exmin*60*1000));
-        var expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
     $('.login__form1').on('submit', function (e) {
         e.preventDefault();
         $('.login__form1 button').text('Ожидайте смс').prop('disabled', true);
@@ -90,6 +67,8 @@ if(is_user_logged_in()) { ?>
                     'usercode': usercode
                 },
             success: function (data) {//success callback
+                fbq('track', 'CompleteRegistration');
+
                 var url_string = window.location.href;
                 var url = new URL(url_string);
                 // var order = url.searchParams.get("order");

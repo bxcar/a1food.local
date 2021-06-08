@@ -212,7 +212,7 @@ $non_working_hours_array = getNonWorkingHours();
         <?php if(get_field('user_email_field', 'user_' . get_current_user_id())) { ?>
 
         <?php } ?>
-        <span class="checkout-desk-bottom-submit checkout-submit animated-background" onclick="ym(77765119, 'reachGoal', 'click_pay'); return true;">Оплатить</span>
+        <span class="checkout-desk-bottom-submit checkout-submit animated-background" onclick="ym(77765119, 'reachGoal', 'click_pay'); fbq('track', 'Purchase'); return true;">Оплатить</span>
         <span class="checkout-desk-bottom-text animated-background">А1 доставляет только<br>предоплаченные заказы</span>
     </div>
 </div>

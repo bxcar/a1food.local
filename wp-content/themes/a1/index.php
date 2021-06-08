@@ -132,7 +132,7 @@ if (isset($_GET['category_id'])) {
                               class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                     <?php }
                     ?>
-                    <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); return true;" class="product-item-price-wrapper"
+                    <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); fbq('track', 'AddToCart'); return true;" class="product-item-price-wrapper"
                        data-id="<?= get_the_ID(); ?>">
                         <span class="product-item-price-main"><?= $sale_price ?></span>
                         <?php

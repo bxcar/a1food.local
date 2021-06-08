@@ -184,7 +184,7 @@ if((($cart_total_price) < get_field('min_order_price', 'option')) && get_field('
                             <span style="visibility: hidden; opacity: 0; height: 0;" class="product-item-price-crossed-out"><?= get_post_meta(get_the_ID(), '_regular_price', true) ?></span>
                         <?php }
                         ?>
-                        <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); return true;" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
+                        <a href="<?= get_site_url(); ?>?add-to-cart=<?= get_the_ID(); ?>" onclick="ym(77765119, 'reachGoal', 'click_add_cart'); fbq('track', 'AddToCart'); return true;" class="product-item-price-wrapper" data-id="<?= get_the_ID(); ?>">
                             <span class="product-item-price-main"><?= $sale_price ?></span>
                             <?php
                             // Usage as a condition in an if statement
@@ -258,7 +258,7 @@ if((($cart_total_price) < get_field('min_order_price', 'option')) && get_field('
     </div>
 <?php }?>
 
-    <a style="text-decoration: none;" onclick="ym(77765119, 'reachGoal', 'click_cart_checkout'); return true;" class="cart-button-wrapper animated-background"
+    <a style="text-decoration: none;" onclick="ym(77765119, 'reachGoal', 'click_cart_checkout'); fbq('track', 'InitiateCheckout'); return true;" class="cart-button-wrapper animated-background"
         <?php
         if((($cart_total_price) < get_field('min_order_price', 'option')) && get_field('min_order_price_logic', 'option')) {
             echo 'href=""';
