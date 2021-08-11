@@ -29,7 +29,7 @@ require_once 'header_mobile.php';
 <?php if (get_field('slider_logic', 'option')) { ?>
     <div class="slider owl-carousel animated-background" id="slider">
         <?php foreach (get_field('slider', 'option') as $item) { ?>
-            <a href="<?= $item['link'] ?>" class="slider__item">
+            <a target="_blank" href="<?= $item['link'] ?>" class="slider__item">
                 <!-- <div class="slider__item-left">
                     <span class="slider__title"><?/*= $item['title'] */?></span>
                     <span class="slider__text"><?/*= $item['text'] */?></span>
